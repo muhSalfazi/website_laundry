@@ -172,18 +172,6 @@ if (!function_exists('showAlert')) {
                             </table>
                         </div>
 
-                        <!-- Modal Edit -->
-                        <div class='modal fade' id='editModal' tabindex='-1' aria-labelledby='editModalLabel'
-                            aria-hidden='true'>
-                            <!-- Isi modal edit -->
-                        </div>
-
-                        <!-- Modal Delete -->
-                        <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModalLabel'
-                            aria-hidden='true'>
-                            <!-- Isi modal delete -->
-                        </div>
-
                         </tbody>
                         </table>
 
@@ -203,7 +191,7 @@ if (!function_exists('showAlert')) {
 require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>
 <?php
-echo"
+echo "
 <script>
 function confirmDelete(id_pelanggan) {
     Swal.fire({

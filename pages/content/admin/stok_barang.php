@@ -14,26 +14,7 @@ include( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
 ?>
 
 <main id='main' class='main'>
-    <?php
 
-function showAlert( $icon, $title, $message, $redirect = null ) {
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    " . ( $redirect ? "window.location.href = '$redirect';" : '' ) . "
-                });
-            });
-        </script>
-        ";
-}
-?>
     <!--create-->
 
     <?php
@@ -78,6 +59,9 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
                             </i>
                             Add Barang
                         </a>
+
+                        <!-- Small Modal -->
+
                         <p>Data ini terdiri dari semua stok barang laundry yang tersedia dalam aplikasi. <b>De'Ungu
                                 Laundry</b>.</p>
                         <!--table reponsif-->
