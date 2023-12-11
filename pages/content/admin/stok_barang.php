@@ -127,7 +127,7 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
                                             echo "</tr>";
 
                                             // Modal Edit untuk setiap data
-                                         echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
+                                            echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
                                             echo "<div class='modal-dialog modal-sm'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
@@ -144,21 +144,26 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
 
                                                 // Formulir Edit
                                                 echo "<div class='modal-body'>";
-                                                echo "<form action='../backend/edit_pengguna.php' method='POST'>";
-                                                echo "<input type='hidden' name='id_pelanggan' value='" . $stok_barang['id_stok_barang'] . "'>";
+                                                echo "<form action='../backend/edit_stok_barang.php' method='POST'>";
+                                                echo "<input type='hidden' name='id_stok_barang' value='" . $stok_barang['id_stok_barang'] . "'>";
                                                 echo "<div class='mb-3'>";
-                                                echo "<label for='nama_lengkap' class='form-label'>Nama Barang</label>";
-                                                echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $stok_barang['nama_barang'] . "' required>";
+                                                echo "<label for='nama_barang' class='form-label'>Nama Barang</label>";
+                                                echo "<input type='text' class='form-control' id='nama_barang' name='nama_barang' value='" . $stok_barang['nama_barang'] . "' >";
                                                 echo "</div>";
                                                 echo "<div class='mb-3'>";
                                                 echo "<label for='no_telp' class='form-label'>Jumlah Barang</label>";
-                                                echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $stok_barang['total_barang'] . "' required>";
+                                                echo "<input type='number' class='form-control' id='total_barang' name='total_barang' value='" . $stok_barang['total_barang'] . "' >";
                                                 echo "</div>";
-                                               
+
+                                                echo "<div class='mb-3'>";
+                                                echo " <label  class='form-label' for='image'>Gambar produk:</label>";
+                                                echo " <input type='file' name='image' class='form-control-file'>";
+                                                echo "</div>";
+
 
                                                 // Footer Modal Edit
                                                 echo "<div class='modal-footer'>";
-                                                echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+                                                echo "<button type='button' class='btn btn-secondary ' data-bs-dismiss='modal'>Close</button>";
                                                 echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
                                                 echo "</div>";
 
@@ -205,5 +210,6 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+include '../../core/footer.php'
+;
 ?>
