@@ -5,7 +5,8 @@ if ( $_SESSION[ 'role' ] != 'admin' ) {
     header( 'Location:../../../index.php' );
     exit( session_destroy() );
 }
-?><?php
+?>
+<?php
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath( dirname( __FILE__ ) . $ds . '../../../' ) . $ds;
 require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
@@ -14,7 +15,27 @@ include( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
 ?>
 
 <main id='main' class='main'>
+    <?php
 
+function showAlert( $icon, $title, $message, $redirect = null )
+ {
+    echo "
+        <script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: '$icon',
+                    title: '$title',
+                    html: '<p class=\"p-popup\">$message</p>',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => {
+                    " . ( $redirect ? "window.location.href = '$redirect';" : '' ) . "
+                });
+            });
+        </script>
+        ";
+}
+?>
     <!--create-->
 
     <?php
@@ -59,9 +80,6 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
                             </i>
                             Add Barang
                         </a>
-
-                        <!-- Small Modal -->
-
                         <p>Data ini terdiri dari semua stok barang laundry yang tersedia dalam aplikasi. <b>De'Ungu
                                 Laundry</b>.</p>
                         <!--table reponsif-->
@@ -83,77 +101,84 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
                                 <tbody>
                                     <?php
 
-    $no = 0;
-    // Check if there are rows to fetch
-    if (mysqli_num_rows($stokBarang ) > 0) {
-        while ($row = mysqli_fetch_array($stokBarang )) {
-            $no++;
-            echo "<tr>";
-            echo "<th scope='row'>" . $no . "</th>";
-            echo "<td>" . $row['nama_barang'] . "</td>";
-            echo "<td>" . $row['kode_barang'] . "</td>";
-            echo "<td>" . $row['total_barang'] . "</td>";
- echo "<td><a href='" . $row['image'] . "' target='_blank'>Unduh</a></td>";
-            // Kolom aksi dengan ikon edit dan delete
-            echo "<td class='text-center '>";
-                                        echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#smallModal" . $no . "'>
-                                        <i class='bi bi-pencil-fill'>edit</i>
-                                        </a>";
-            echo "<a href='#' class='btn btn-danger btn-sm delete-btn ml-2' data-bs-toggle='modal' data-bs-target='#deleteModal' title='Delete'>
+                                    $no = 0;
+                                    // Check if there are rows to fetch
+                                    if (mysqli_num_rows($stokBarang) > 0) {
+                                        while ($row = mysqli_fetch_array($stokBarang)) {
+                                            $no++;
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $no . "</th>";
+                                            echo "<td>" . $row['nama_barang'] . "</td>";
+                                            echo "<td>" . $row['kode_barang'] . "</td>";
+                                            echo "<td>" . $row['total_barang'] . "</td>";
+                                            echo "<td><a href='" . $row['image'] . "' target='_blank'>Unduh</a></td>";
+                                            // Kolom aksi dengan ikon edit dan delete
+                                            echo "<td class='text-center '>";
+
+                                            //edit
+                                            echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#smallModal" . $no . "'>
+            <i class='bi bi-pencil-fill'>edit</i>
+            </a>";
+                                            echo "<a href='#' class='btn btn-danger btn-sm delete-btn ml-2' data-bs-toggle='modal' data-bs-target='#deleteModal' title='Delete'>
                     <i class='bi bi-trash-fill'>delete</i>
                 </a>";
-            echo "</td>";
-  // Modal Edit untuk setiap data
-  echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
-  echo "<div class='modal-dialog modal-sm'>";
-  echo "<div class='modal-content'>";
-  echo "<div class='modal-header'>";
-  echo "<h5 class='modal-title'>Edit Pelanggan</h5>";
-  echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-  echo "</div>";
+                                            echo "</td>";
 
-  // Ambil data pengguna berdasarkan ID
-  $id_pelanggan = $row['id_pelanggan'];
-  $result = mysqli_query($db_connect, "SELECT * FROM pelanggan WHERE id_pelanggan = $id_pelanggan");
+                                            echo "</tr>";
 
-  if ($result) {
-      $pelanggan = mysqli_fetch_assoc($result);
+                                            // Modal Edit untuk setiap data
+                                         echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
+                                            echo "<div class='modal-dialog modal-sm'>";
+                                            echo "<div class='modal-content'>";
+                                            echo "<div class='modal-header'>";
+                                            echo "<h5 class='modal-title'>Edit Stok Barang </h5>";
+                                            echo "<button type='button' class='btn-close'data-bs-dismiss='modal' aria-label='Close'></button>";
+                                            echo "</div>";
 
-      // Formulir Edit
-      echo "<div class='modal-body'>";
-      echo "<form action='../backend/edit_pengguna.php' method='POST'>";
-      echo "<input type='hidden' name='id_pelanggan' value='" . $pelanggan['id_pelanggan'] . "'>";
-      echo "<div class='mb-3'>";
-      echo "<label for='nama_lengkap' class='form-label'>Nama Lengkap</label>";
-      echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $pelanggan['nama_lengkap'] . "' required>";
-      echo "</div>";
-      echo "<div class='mb-3'>";
-      echo "<label for='no_telp' class='form-label'>No Handphone</label>";
-      echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $pelanggan['no_telp'] . "' required>";
-      echo "</div>";
-      echo "<div class='mb-3'>";
-      echo "<label for='alamat' class='form-label'>Alamat</label>";
-      echo "<input type='text' class='form-control' id='alamat' name='alamat' value='" . $pelanggan['alamat'] . "' required>";
-      echo "</div>";
+                                            // Ambil data pengguna berdasarkan ID
+                                            $id_stok_barang = $row['id_stok_barang'];
+                                            $result = mysqli_query($db_connect, "SELECT * FROM stok_barang WHERE id_stok_barang = $id_stok_barang");
 
-      // Footer Modal Edit
-      echo "<div class='modal-footer'>";
-      echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
-      echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
-      echo "</div>";
+                                            if ($result) {
+                                                $stok_barang = mysqli_fetch_assoc($result);
 
-      // Akhir Formulir Edit
-      echo "</form>";
-      echo "</div>";
-            echo "</tr>";
-            
-  }
-}
-    } else {
-        echo "<tr><td colspan='4'>No data available</td></tr>";
-    }
+                                                // Formulir Edit
+                                                echo "<div class='modal-body'>";
+                                                echo "<form action='../backend/edit_pengguna.php' method='POST'>";
+                                                echo "<input type='hidden' name='id_pelanggan' value='" . $stok_barang['id_stok_barang'] . "'>";
+                                                echo "<div class='mb-3'>";
+                                                echo "<label for='nama_lengkap' class='form-label'>Nama Barang</label>";
+                                                echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $stok_barang['nama_barang'] . "' required>";
+                                                echo "</div>";
+                                                echo "<div class='mb-3'>";
+                                                echo "<label for='no_telp' class='form-label'>Jumlah Barang</label>";
+                                                echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $stok_barang['total_barang'] . "' required>";
+                                                echo "</div>";
+                                               
 
-?>
+                                                // Footer Modal Edit
+                                                echo "<div class='modal-footer'>";
+                                                echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+                                                echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
+                                                echo "</div>";
+
+                                                // Akhir Formulir Edit
+                                                echo "</form>";
+                                                echo "</div>";
+                                            } else {
+                                                echo "Error mengambil data pelanggan.";
+                                            }
+
+                                            echo "</div>";
+                                            echo "</div>";
+                                            echo "</div>";
+                                            echo "</div>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='4'>No data available</td></tr>";
+                                    }
+
+                                    ?>
 
 
 
@@ -180,11 +205,5 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
 </main><!-- End #main -->
 
 <?php
-require_once( " {
-    $base_dir}
-    pages {
-        $ds}
-        core {
-            $ds}
-            footer.php" );
-            ?>
+require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+?>
