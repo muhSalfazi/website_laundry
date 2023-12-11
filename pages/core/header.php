@@ -47,7 +47,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
-
+ <img src="../../../assets/img/logo.jpg" alt="" rel="icon" class="rounded-circle" width="30" height="30">
                 <span class="d-none d-lg-block">De'ungu laundry</span>
             </a>
             <i class='bi bi-list toggle-sidebar-btn'></i>
@@ -76,8 +76,7 @@ if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( 
                 <li class='nav-item dropdown'>
                     <a class="nav-link nav-profile d-flex  bi bi-person-circle align-items-center pe-0 show" href=""
                         data-bs-toggle='dropdown'>
-                        <img src="../../../assets/img/logo.jpg" alt="" rel="icon" class="rounded-circle" width="30"
-                            height="30">
+                     
                         <!-- <i class="bi bi-person-circle"></i> -->
                         <span class="d-none d-md-block dropdown-toggle ps-2 show" ::after>
                             <?php echo  $username.PHP_EOL;
