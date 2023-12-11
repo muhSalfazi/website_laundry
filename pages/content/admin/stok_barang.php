@@ -3,7 +3,7 @@ session_start();
 if ( $_SESSION[ 'role' ] != 'admin' ) {
 
     header( 'Location:../../../index.php' );
-    exit(session_destroy());
+    exit( session_destroy() );
 }
 ?><?php
 $ds = DIRECTORY_SEPARATOR;
@@ -96,16 +96,59 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
  echo "<td><a href='" . $row['image'] . "' target='_blank'>Unduh</a></td>";
             // Kolom aksi dengan ikon edit dan delete
             echo "<td class='text-center '>";
-            echo "<a href='edit_pengguna.php' class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#editModal' title='Edit'>
-                    <i class='bi bi-pencil-fill'>edit</i>
-                </a>";
+                                        echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#smallModal" . $no . "'>
+                                        <i class='bi bi-pencil-fill'>edit</i>
+                                        </a>";
             echo "<a href='#' class='btn btn-danger btn-sm delete-btn ml-2' data-bs-toggle='modal' data-bs-target='#deleteModal' title='Delete'>
                     <i class='bi bi-trash-fill'>delete</i>
                 </a>";
             echo "</td>";
+  // Modal Edit untuk setiap data
+  echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
+  echo "<div class='modal-dialog modal-sm'>";
+  echo "<div class='modal-content'>";
+  echo "<div class='modal-header'>";
+  echo "<h5 class='modal-title'>Edit Pelanggan</h5>";
+  echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+  echo "</div>";
 
+  // Ambil data pengguna berdasarkan ID
+  $id_pelanggan = $row['id_pelanggan'];
+  $result = mysqli_query($db_connect, "SELECT * FROM pelanggan WHERE id_pelanggan = $id_pelanggan");
+
+  if ($result) {
+      $pelanggan = mysqli_fetch_assoc($result);
+
+      // Formulir Edit
+      echo "<div class='modal-body'>";
+      echo "<form action='../backend/edit_pengguna.php' method='POST'>";
+      echo "<input type='hidden' name='id_pelanggan' value='" . $pelanggan['id_pelanggan'] . "'>";
+      echo "<div class='mb-3'>";
+      echo "<label for='nama_lengkap' class='form-label'>Nama Lengkap</label>";
+      echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $pelanggan['nama_lengkap'] . "' required>";
+      echo "</div>";
+      echo "<div class='mb-3'>";
+      echo "<label for='no_telp' class='form-label'>No Handphone</label>";
+      echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $pelanggan['no_telp'] . "' required>";
+      echo "</div>";
+      echo "<div class='mb-3'>";
+      echo "<label for='alamat' class='form-label'>Alamat</label>";
+      echo "<input type='text' class='form-control' id='alamat' name='alamat' value='" . $pelanggan['alamat'] . "' required>";
+      echo "</div>";
+
+      // Footer Modal Edit
+      echo "<div class='modal-footer'>";
+      echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+      echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
+      echo "</div>";
+
+      // Akhir Formulir Edit
+      echo "</form>";
+      echo "</div>";
             echo "</tr>";
-        }
+            
+  }
+}
     } else {
         echo "<tr><td colspan='4'>No data available</td></tr>";
     }
@@ -119,17 +162,7 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
                             </table>
                         </div>
 
-                        <!-- Modal Edit -->
-                        <div class='modal fade' id='editModal' tabindex='-1' aria-labelledby='editModalLabel'
-                            aria-hidden='true'>
-                            <!-- Isi modal edit -->
-                        </div>
 
-                        <!-- Modal Delete -->
-                        <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModalLabel'
-                            aria-hidden='true'>
-                            <!-- Isi modal delete -->
-                        </div>
 
                         </tbody>
                         </table>
@@ -147,5 +180,11 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
-?>
+require_once( " {
+    $base_dir}
+    pages {
+        $ds}
+        core {
+            $ds}
+            footer.php" );
+            ?>

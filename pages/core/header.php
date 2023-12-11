@@ -74,11 +74,11 @@ if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( 
     ?>
                     <div class='flex-row-reverse'>
                 <li class='nav-item dropdown'>
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0 show" href=""
+                    <a class="nav-link nav-profile d-flex  bi bi-person-circle align-items-center pe-0 show" href=""
                         data-bs-toggle='dropdown'>
                         <img src="../../../assets/img/logo.jpg" alt="" rel="icon" class="rounded-circle" width="30"
                             height="30">
-
+                        <!-- <i class="bi bi-person-circle"></i> -->
                         <span class="d-none d-md-block dropdown-toggle ps-2 show" ::after>
                             <?php echo  $username.PHP_EOL;
     ?></span>
