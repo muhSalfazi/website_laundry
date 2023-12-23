@@ -151,10 +151,11 @@ if (!function_exists('showAlert')) {
                                                             <i class='bi bi-pencil-fill'></i>
                                                             </a>";
                                                 ?>
-                                                            <!-- delete -->
-                                                            <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan' onclick="deleteConfirmation(<?= $row['id_order'] ?>, 'order')">
-                                                                <i class='bi bi-x-circle'></i>
-                                                            </a>
+                                                <!-- delete -->
+                                                <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan'
+                                                    onclick="deletepesanan(<?= $row['id_order'] ?>, 'order')">
+                                                    <i class='bi bi-x-circle'></i>
+                                                </a>
 
                                                 <?php
                                                             echo '</td>';

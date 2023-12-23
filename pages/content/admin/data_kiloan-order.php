@@ -125,7 +125,7 @@ if (!function_exists('showAlert')) {
                                                 ?>
                                                 <!-- delete -->
                                                 <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan'
-                                                    onclick="deleteConfirmation(<?= $row['id_order'] ?>, 'order')">
+                                                    onclick="deletepesanan(<?= $row['id_order'] ?>, 'order')">
                                                     <i class='bi bi-x-circle'></i>
                                                 </a>
 

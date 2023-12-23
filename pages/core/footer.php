@@ -65,7 +65,25 @@ document.getElementById("logoutButton").addEventListener("click", function() {
 </script>
 
 
+<script>
+function deletepesanan(id, type) {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
 
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, TOLAK!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect ke delete.php dengan menyertakan parameter ID dan type
+            window.location.href = `../../content/backend/delete.php?id_${type}=${id}`;
+        }
+    });
+};
+</script>
 
 
 
