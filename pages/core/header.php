@@ -95,44 +95,43 @@ if (isset($_SESSION['id_register'])) {
                     ?>
                     <div class='flex-row-reverse'>
                 <li class='nav-item dropdown'>
-                    <a class='nav-link nav-profile d-flex align-items-center pe-0 show' href=''
-                        data-bs-toggle='dropdown'>
+                    <a class='nav-link nav-profile d-flex align-items-center pe-3 ' href='' data-bs-toggle="dropdown">
                         <img src='../../../assets/img/user.jpg' alt='' rel='icon' class='rounded-circle'>
-                        <span class='d-none d-md-block dropdown-toggle ps-2 show' ::after>
+                        <span class='d-none d-md-block dropdown-toggle ps-2 show'>
                             <?php echo $username . PHP_EOL;
                             ?>
                         </span>
                     </a>
-                    <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'
+                    <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile show'
                         data-popper-placement='bottom-end'
-                        style='position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-16px, 38px, 0px);'>
-                        <li class='dropdown-header'>
-                            <h6>
-                                <?php echo $nama_lengkap;
+                        style="position: absolute; inset: 1px 1px auto auto; margin: 1px; transform: translate3d(-16px, 38px, 0px);"'>
+                        <li class=' dropdown-header'>
+                        <h6>
+                            <?php echo $nama_lengkap;
                                 ?>
-                            </h6>
-                            <span>
-                                <?php echo $_SESSION['role'];
+                        </h6>
+                        <span>
+                            <?php echo $_SESSION['role'];
                                 ?>
-                            </span>
-                        </li>
-                        <li>
-                            <hr class='dropdown-divider'>
-                        </li>
-                        <li id='logoutButton' class='dropdown-item d-flex align-items-center'>
-                            <i class='bi bi-box-arrow-right'></i>
-                            <span>Logout</span>
-                        </li>
-                    </ul>
+                        </span>
                 </li>
-                </div>
-                <?php } else {
+                <li>
+                    <hr class='dropdown-divider'>
+                </li>
+                <li id='logoutButton' class='dropdown-item d-flex align-items-center'>
+                    <i class='bi bi-box-arrow-right'></i>
+                    <span>Logout</span>
+                </li>
+            </ul>
+            </li>
+            </div>
+            <?php } else {
                         header('Location:../../../index');
                         exit(session_destroy());
                     };
             ?>
 
-                </li><!-- End Profile Nav -->
+            </li><!-- End Profile Nav -->
 
             </ul>
         </nav><!-- End Icons Navigation -->

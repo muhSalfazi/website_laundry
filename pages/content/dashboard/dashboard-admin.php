@@ -105,7 +105,7 @@ $dashboardData = getDashboardData($filter);
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Pesanan Order<span>| <?php echo ucfirst($filter); ?></span></h5>
+                            <h5 class="card-title">Pesanan Order<span> | <?php echo ucfirst($filter); ?></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i class="bi bi-cart"></i>
@@ -138,7 +138,7 @@ $dashboardData = getDashboardData($filter);
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Pendapatan<span>| <?php echo ucfirst($filter); ?></span></h5>
+                            <h5 class="card-title">Pendapatan<span> | <?php echo ucfirst($filter); ?></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i class="bi bi-currency-dollar"></i>
@@ -170,7 +170,7 @@ $dashboardData = getDashboardData($filter);
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Customers <span>| <?php echo ucfirst($filter); ?></span></h5>
+                            <h5 class="card-title">Customers <span> | <?php echo ucfirst($filter); ?></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i class="bi bi-people"></i>
