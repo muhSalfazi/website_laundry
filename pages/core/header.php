@@ -93,45 +93,45 @@ if (isset($_SESSION['id_register'])) {
 
                         // Tampilkan data di dalam HTML
                     ?>
-                    <div class='flex-row-reverse'>
-                <li class='nav-item dropdown'>
-                    <a class='nav-link nav-profile d-flex align-items-center pe-3 ' href='' data-bs-toggle="dropdown">
-                        <img src='../../../assets/img/user.jpg' alt='' rel='icon' class='rounded-circle'>
-                        <span class='d-none d-md-block dropdown-toggle ps-2 show'>
-                            <?php echo $username . PHP_EOL;
-                            ?>
-                        </span>
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="../../../assets/img/user.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $username . PHP_EOL;
+                            ?></span>
                     </a>
-                    <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile show'
-                        data-popper-placement='bottom-end'
-                        style="position: absolute; inset: 1px 1px auto auto; margin: 1px; transform: translate3d(-16px, 38px, 0px);"'>
+
+                    <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'>
+
                         <li class=' dropdown-header'>
-                        <h6>
-                            <?php echo $nama_lengkap;
+                            <h6>
+                                <?php echo $nama_lengkap;
                                 ?>
-                        </h6>
-                        <span>
-                            <?php echo $_SESSION['role'];
+                            </h6>
+                            <span>
+                                <?php echo $_SESSION['role'];
                                 ?>
-                        </span>
+                            </span>
+                        </li>
+                        <li>
+                            <hr class='dropdown-divider'>
+                        </li>
+                        <li>
+                            <a id='logoutButton' class='dropdown-item d-flex align-items-center'>
+                                <i class='bi bi-box-arrow-right'></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <hr class='dropdown-divider'>
-                </li>
-                <li id='logoutButton' class='dropdown-item d-flex align-items-center'>
-                    <i class='bi bi-box-arrow-right'></i>
-                    <span>Logout</span>
-                </li>
-            </ul>
-            </li>
-            </div>
-            <?php } else {
+
+
+                <?php } else {
                         header('Location:../../../index');
                         exit(session_destroy());
                     };
             ?>
 
-            </li><!-- End Profile Nav -->
+                </li><!-- End Profile Nav -->
 
             </ul>
         </nav><!-- End Icons Navigation -->
