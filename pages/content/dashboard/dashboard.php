@@ -1,5 +1,9 @@
 <?php
+session_start();
 
+if ($_SESSION['role'] != 'pelanggan') {
+    header('Location: ../../../');
+}
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath( dirname( __FILE__ )  . $ds . '../../../' ) . $ds;
 require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );

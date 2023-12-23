@@ -1,7 +1,8 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf;
@@ -64,21 +65,19 @@ class Renderer extends AbstractRenderer
 
         $style = $frame->get_style();
 
-        if (in_array($style->visibility, ["hidden", "collapse"], true)) {
+        if (in_array($style->visibility, ["hidden", "collapse"])) {
             return;
         }
 
         $display = $style->display;
-        $transformList = $style->transform;
-        $hasTransform = $transformList !== [];
 
         // Starts the CSS transformation
-        if ($hasTransform) {
+        if ($style->transform && is_array($style->transform)) {
             $this->_canvas->save();
             list($x, $y) = $frame->get_padding_box();
             $origin = $style->transform_origin;
 
-            foreach ($transformList as $transform) {
+            foreach ($style->transform as $transform) {
                 list($function, $values) = $transform;
                 if ($function === "matrix") {
                     $function = "transform";
@@ -180,8 +179,8 @@ class Renderer extends AbstractRenderer
             $z_index = 0;
 
             if ($child_z_index !== "auto") {
-                $z_index = $child_z_index + 1;
-            } elseif ($child_style->float !== "none" || $child->is_positioned()) {
+                $z_index = intval($child_z_index) + 1;
+            } elseif ($child_style->float !== "none" || $child->is_positionned()) {
                 $z_index = 1;
             }
 
@@ -201,7 +200,7 @@ class Renderer extends AbstractRenderer
             $this->_canvas->clipping_end();
         }
 
-        if ($hasTransform) {
+        if ($style->transform && is_array($style->transform)) {
             $this->_canvas->restore();
         }
 
@@ -224,11 +223,13 @@ class Renderer extends AbstractRenderer
 
         if (isset($this->_callbacks[$event])) {
             $fs = $this->_callbacks[$event];
-            $canvas = $this->_canvas;
-            $fontMetrics = $this->_dompdf->getFontMetrics();
+            $info = [
+                0 => $this->_canvas, "canvas" => $this->_canvas,
+                1 => $frame,         "frame"  => $frame
+            ];
 
             foreach ($fs as $f) {
-                $f($frame, $canvas, $fontMetrics);
+                $f($info);
             }
         }
     }

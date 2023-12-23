@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-if ( $_SESSION[ 'role' ] != 'admin' ) {
+if ($_SESSION['role'] != 'admin') {
 
-    header( 'Location:../../../index.php' );
-    exit( session_destroy() );
+    header('Location:../../../');
+    exit(session_destroy());
 }
 ?><?php
-$ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ ) . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+    $ds = DIRECTORY_SEPARATOR;
+    $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
+    require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+    require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-?>
+    ?>
 
 <main id='main' class='main'>
     <div class='pagetitle'>
@@ -37,8 +37,7 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
                             <p>pilih jenis menu Data pesanan <b>De'Ungu Laundry</b>.</p>
                             <div class='row '>
                                 <div class='col-md-6 mt-4'>
-                                    <a href='./data_satuan-order' class='btn btn-primary col-12 md-3'
-                                        data-toggle='modal'>
+                                    <a href='./data_satuan-order' class='btn btn-primary col-12 md-3' data-toggle='modal'>
                                         <i fill='currentColor'>
                                         </i>
                                         SATUAN
@@ -46,8 +45,7 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
                                 </div>
                                 <div class='col-md-6 mt-4'>
                                     <!--stokbarang-->
-                                    <a href='./data_kiloan-order' class='btn btn-primary col-12 md-6'
-                                        data-toggle='modal'>
+                                    <a href='./data_kiloan-order' class='btn btn-primary col-12 md-6' data-toggle='modal'>
                                         <i fill='currentColor'>
                                         </i>
                                         KILOAN
@@ -67,5 +65,5 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>

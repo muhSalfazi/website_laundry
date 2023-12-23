@@ -1,7 +1,8 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameDecorator;
@@ -42,9 +43,7 @@ class TableRowGroup extends AbstractFrameDecorator
         }
 
         // Remove child & all subsequent rows from the cellmap
-        /** @var Table $parent */
-        $parent = $this->get_parent();
-        $cellmap = $parent->get_cellmap();
+        $cellmap = $this->get_parent()->get_cellmap();
         $iter = $child;
 
         while ($iter) {

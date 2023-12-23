@@ -1,7 +1,8 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameReflower;
@@ -72,8 +73,7 @@ class TableCell extends Block
                 $style->border_bottom_width],
             $h);
 
-        $cb_w = $w - $left_space - $right_space;
-        $style->set_used("width", $cb_w);
+        $style->width = $cb_w = $w - $left_space - $right_space;
 
         $content_x = $x + $left_space;
         $content_y = $line_y = $y + $top_space;
@@ -103,12 +103,9 @@ class TableCell extends Block
         // Determine our height
         $style_height = (float)$style->length_in_pt($style->height, $h);
 
-        /** @var FrameDecorator\TableCell */
-        $frame = $this->_frame;
+        $this->_frame->set_content_height($this->_calculate_content_height());
 
-        $frame->set_content_height($this->_calculate_content_height());
-
-        $height = max($style_height, (float)$frame->get_content_height());
+        $height = max($style_height, (float)$this->_frame->get_content_height());
 
         // Let the cellmap know our height
         $cell_height = $height / count($cells["rows"]);
@@ -121,8 +118,7 @@ class TableCell extends Block
             $cellmap->set_row_height($i, $cell_height);
         }
 
-        $style->set_used("height", $height);
-
+        $style->height = $height;
         $this->_text_align();
         $this->vertical_align();
 

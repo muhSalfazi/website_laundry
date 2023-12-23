@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-if ( $_SESSION[ 'role' ] != 'pelanggan' ) {
-    header( 'Location:../../../index.php' );
-    exit( session_destroy() );
+if ($_SESSION['role'] != 'pelanggan') {
+    header('Location:../../../');
+    exit(session_destroy());
 }
 
 $ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ ) . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+$base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
+require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
 require '../../core/connection.php';
 ?>
@@ -50,8 +50,7 @@ require '../../core/connection.php';
 
                         </div>
                         <div class='col-12 mt-3'>
-                            <a href='karpet' type='submit' name='submit' class='btn btn-primary w-100'
-                                data-bs-toggle='modal' data-bs-target='#smallModal2'>KARPET</a>
+                            <a href='karpet' type='submit' name='submit' class='btn btn-primary w-100' data-bs-toggle='modal' data-bs-target='#smallModal2'>KARPET</a>
 
                         </div>
                     </div>
@@ -67,7 +66,7 @@ require '../../core/connection.php';
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>
 <!-- cuci+strika -->
 <div class='modal fade' id='smallModal' tabindex='-1'>
@@ -128,7 +127,7 @@ require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
                     <div class='mb-3'>
                         <label for='validationCustom02' class='form-label'>Nama Pelanggan</label>
                         <input type='text' class='form-control' name='nama_produk' value="<?php echo $nama_lengkap;
-                        ?>" required readonly>
+                                                                                            ?>" required readonly>
 
                     </div>
                     <div class='mb-3'>
@@ -174,7 +173,7 @@ require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
                     <div class='mb-3'>
                         <label for='validationCustom02' class='form-label'>Nama Pelanggan</label>
                         <input type='text' class='form-control' name='nama_produk' value="<?php echo $nama_lengkap;
-                        ?>" required readonly>
+                                                                                            ?>" required readonly>
 
                     </div>
                     <div class='mb-3'>

@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SESSION['role'] != 'admin') {
-    header('Location: ../../../index.php');
+    header('Location: ../../../');
     session_destroy();
 }
 ?>
@@ -147,15 +147,14 @@ if (!function_exists('showAlert')) {
                                                             // Kolom aksi dengan ikon edit dan delete
                                                             echo "<td class='text-center '>";
                                                             //edit
-                                                            echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#largemodal" . $no . "'>
-<i class='bi bi-pencil-fill'></i>
-</a>";
+                                                            echo "<a class='btn btn-warning btn-sm edit-btn' title='Edit Pesanan'data-bs-toggle='modal' data-bs-target='#largemodal" . $no . "'>
+                                                            <i class='bi bi-pencil-fill'></i>
+                                                            </a>";
                                                 ?>
-                                                <!-- delete -->
-                                                <a class='btn btn-danger btn-sm delete-btn ml-2' title='Delete'
-                                                    onclick="deleteConfirmation(<?= $row['id_order'] ?>, 'order')">
-                                                    <i class='bi bi-trash-fill'></i>
-                                                </a>
+                                                            <!-- delete -->
+                                                            <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan' onclick="deleteConfirmation(<?= $row['id_order'] ?>, 'order')">
+                                                                <i class='bi bi-x-circle'></i>
+                                                            </a>
 
                                                 <?php
                                                             echo '</td>';

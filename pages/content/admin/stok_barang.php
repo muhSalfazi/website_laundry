@@ -1,26 +1,26 @@
 <?php
 session_start();
-if ( $_SESSION[ 'role' ] != 'admin' ) {
+if ($_SESSION['role'] != 'admin') {
 
-    header( 'Location:../../../index.php' );
-    exit( session_destroy() );
+    header('Location:../../../');
+    exit(session_destroy());
 }
 ?>
 <?php
-require_once'../../core/config.php';
+require_once '../../core/config.php';
 $ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ ) . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-include( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+$base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
+require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
 ?>
 
 <main id='main' class='main'>
     <?php
 
-function showAlert( $icon, $title, $message, $redirect = null )
- {
-    echo "
+    function showAlert($icon, $title, $message, $redirect = null)
+    {
+        echo "
         <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
                 Swal.fire({
@@ -30,50 +30,50 @@ function showAlert( $icon, $title, $message, $redirect = null )
                     showConfirmButton: false,
                     timer: 2000
                 }).then(() => {
-                    " . ( $redirect ? "window.location.href = '$redirect';" : '' ) . "
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
                 });
             });
         </script>
         ";
-}
-?>
+    }
+    ?>
     <!--create-->
 
     <?php
 
-// mengecek di tambahkan
-if ( isset( $_GET[ 'berhasil' ] ) ) {
-    $berhasil = $_GET[ 'berhasil' ];
-    if ( $berhasil === 'add_berhasil' ) {
-        showAlert( 'success', 'Berhasil', ' data barang berhasil di ditambahkan.' );
+    // mengecek di tambahkan
+    if (isset($_GET['berhasil'])) {
+        $berhasil = $_GET['berhasil'];
+        if ($berhasil === 'add_berhasil') {
+            showAlert('success', 'Berhasil', ' data barang berhasil di ditambahkan.');
+        }
     }
-}
-?>
+    ?>
     <?php
-// mengecek di tambahkan
-if ( isset( $_GET[ 'berhasil' ] ) ) {
-    $berhasil = $_GET[ 'berhasil' ];
-    if ( $berhasil === 'edit_berhasil' ) {
-        showAlert( 'success', 'Berhasil', ' data barang berhasil di update beserta gambar.' );
+    // mengecek di tambahkan
+    if (isset($_GET['berhasil'])) {
+        $berhasil = $_GET['berhasil'];
+        if ($berhasil === 'edit_berhasil') {
+            showAlert('success', 'Berhasil', ' data barang berhasil di update beserta gambar.');
+        }
     }
-}
 
-// mengecek di tambahkan
-if ( isset( $_GET[ 'sukses' ] ) ) {
-    $berhasil = $_GET[ 'sukses' ];
-    if ( $berhasil === 'edit_berhasil' ) {
-        showAlert( 'success', 'Berhasil', ' data barang berhasil di UPDATE .' );
+    // mengecek di tambahkan
+    if (isset($_GET['sukses'])) {
+        $berhasil = $_GET['sukses'];
+        if ($berhasil === 'edit_berhasil') {
+            showAlert('success', 'Berhasil', ' data barang berhasil di UPDATE .');
+        }
     }
-}
 
-// mengecek di hapus
-if ( isset( $_GET[ 'hapus' ] ) ) {
-    $berhasil = $_GET[ 'hapus' ];
-    if ( $berhasil === 'berhasil_dihapus' ) {
-        showAlert( 'success', 'Berhasil', ' data barang berhasil di HAPUS .' );
+    // mengecek di hapus
+    if (isset($_GET['hapus'])) {
+        $berhasil = $_GET['hapus'];
+        if ($berhasil === 'berhasil_dihapus') {
+            showAlert('success', 'Berhasil', ' data barang berhasil di HAPUS .');
+        }
     }
-}
-?>
+    ?>
 
     <div class='pagetitle'>
         <h1>Stok Barang</h1>
@@ -97,11 +97,9 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
                     <div class='card-body'>
                         <h5 class='card-title'>Stok Barang</h5>
                         <a href='./add_barang' class='btn btn-primary' data-toggle='modal'>
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                                class='bi bi-file-plus' viewBox='0 0 16 16'>
+                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-file-plus' viewBox='0 0 16 16'>
                                 <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd'
-                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
+                                <path fill-rule='evenodd' d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
                             </i>
                             Add Barang
                         </a>
@@ -136,12 +134,10 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
                                             echo "<td class='tex-center' scope='row'>" . $row['nama_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
-                                            ?>
-                                    <td class="text-center"><a
-                                            href="<?= BASEURL.'/coding_web/project_smstr3/pages/content/'.$row['image']; ?>"
-                                            target="_blank">Unduh</a>
-                                    </td>
-                                    <?php
+                                    ?>
+                                            <td class="text-center"><a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>" target="_blank">Unduh</a>
+                                            </td>
+                                            <?php
                                             // Kolom aksi dengan ikon edit dan delete
                                             echo "<td class='text-center'>";
 
@@ -152,11 +148,10 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
                                         </a>";
                                             ?>
 
-                                    <!-- delete -->
-                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
-                                        onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </a>
+                                            <!-- delete -->
+                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
 
                                     <?php
                                             echo "</td>";
@@ -164,7 +159,7 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
                                             echo "</tr>";
 
                                             // ...
-                                    
+
                                             // Modal Edit untuk setiap data
                                             echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
                                             echo "<div class='modal-dialog modal-sm'>";
@@ -223,7 +218,7 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
                                             echo "</div>";
 
                                             // ...
-                                    
+
                                         }
                                     } else {
                                         echo "<tr><td colspan='4'>No data available</td></tr>";
@@ -254,6 +249,5 @@ if ( isset( $_GET[ 'hapus' ] ) ) {
 </main>
 
 <?php
-include '../../core/footer.php'
-;
+include '../../core/footer.php';
 ?>

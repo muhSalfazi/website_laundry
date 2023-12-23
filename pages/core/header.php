@@ -1,8 +1,8 @@
 <?php
 // Jika pengguna sudah login, arahkan ke halaman dashboard atau halaman lainnya
-if ( isset( $_SESSION[ 'id_register' ] ) ) {
-    if ( $_SESSION[ 'role' ] == 'admin' || $_SESSION[ 'role' ] == 'pelanggan' ) {
-        header( 'Location: ../dashboard/dashboard' );
+if (isset($_SESSION['id_register'])) {
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pelanggan') {
+        header('Location: ../dashboard/dashboard');
         exit();
     }
 }
@@ -66,7 +66,7 @@ if ( isset( $_SESSION[ 'id_register' ] ) ) {
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="../../content/dashboard/dashboard" class="logo d-flex align-items-center">
+            <a class="logo d-flex align-items-center">
                 <img src="../../../assets/img/logo.jpg" alt="" rel="icon" class="rounded-circle">
                 <span class="d-none d-lg-block" style='color:darkslateblue;
 '>De'ungu laundry</span>
@@ -79,20 +79,20 @@ if ( isset( $_SESSION[ 'id_register' ] ) ) {
 
                 <li class='nav-item dropdown pe-3'>
                     <?php
-require 'connection.php';
+                    require 'connection.php';
 
-// Mulai sesi jika belum dimulai
-if ( session_status() == PHP_SESSION_NONE ) {
-    session_start();
-}
+                    // Mulai sesi jika belum dimulai
+                    if (session_status() == PHP_SESSION_NONE) {
+                        session_start();
+                    }
 
-// Periksa apakah pengguna telah login
-if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( $_SESSION[ 'nama_lengkap' ] ) ) {
-    $username = $_SESSION[ 'username' ];
-    $nama_lengkap = $_SESSION[ 'nama_lengkap' ];
+                    // Periksa apakah pengguna telah login
+                    if (isset($_SESSION['username']) && isset($_SESSION['role']) && isset($_SESSION['nama_lengkap'])) {
+                        $username = $_SESSION['username'];
+                        $nama_lengkap = $_SESSION['nama_lengkap'];
 
-    // Tampilkan data di dalam HTML
-    ?>
+                        // Tampilkan data di dalam HTML
+                    ?>
                     <div class='flex-row-reverse'>
                 <li class='nav-item dropdown'>
                     <a class='nav-link nav-profile d-flex align-items-center pe-0 show' href=''
@@ -100,7 +100,7 @@ if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( 
                         <img src='../../../assets/img/user.jpg' alt='' rel='icon' class='rounded-circle'>
                         <span class='d-none d-md-block dropdown-toggle ps-2 show' ::after>
                             <?php echo $username . PHP_EOL;
-    ?>
+                            ?>
                         </span>
                     </a>
                     <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'
@@ -109,11 +109,11 @@ if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( 
                         <li class='dropdown-header'>
                             <h6>
                                 <?php echo $nama_lengkap;
-    ?>
+                                ?>
                             </h6>
                             <span>
-                                <?php echo $_SESSION[ 'role' ];
-    ?>
+                                <?php echo $_SESSION['role'];
+                                ?>
                             </span>
                         </li>
                         <li>
@@ -127,11 +127,10 @@ if ( isset( $_SESSION[ 'username' ] ) && isset( $_SESSION[ 'role' ] ) && isset( 
                 </li>
                 </div>
                 <?php } else {
-        header( 'Location:../../../index' );
-        exit( session_destroy() );
-    }
-    ;
-    ?>
+                        header('Location:../../../index');
+                        exit(session_destroy());
+                    };
+            ?>
 
                 </li><!-- End Profile Nav -->
 

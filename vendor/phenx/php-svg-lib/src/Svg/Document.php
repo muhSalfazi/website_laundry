@@ -53,8 +53,6 @@ class Document extends AbstractTag
     /** @var \Sabberworm\CSS\CSSList\Document[] */
     protected $styleSheets = array();
 
-    public $allowExternalReferences = true;
-
     public function loadFile($filename)
     {
         $this->filename = $filename;
@@ -103,11 +101,6 @@ class Document extends AbstractTag
         return $this->height;
     }
 
-    public function getDiagonal()
-    {
-        return sqrt(($this->width)**2 + ($this->height)**2) / sqrt(2);
-    }
-
     public function getDimensions() {
         $rootAttributes = null;
 
@@ -142,12 +135,12 @@ class Document extends AbstractTag
     public function handleSizeAttributes($attributes){
         if ($this->width === null) {
             if (isset($attributes["width"])) {
-                $width = $this->convertSize($attributes["width"], 400);
+                $width = Style::convertSize($attributes["width"], 400);
                 $this->width  = $width;
             }
 
             if (isset($attributes["height"])) {
-                $height = $this->convertSize($attributes["height"], 300);
+                $height = Style::convertSize($attributes["height"], 300);
                 $this->height = $height;
             }
 

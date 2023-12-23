@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-if ( $_SESSION[ 'role' ] != 'admin' ) {
-    header( 'Location:../../../index.php' );
+if ($_SESSION['role'] != 'admin') {
+    header('Location:../../../');
     exit(session_destroy());
 }
 ?><?php
-$ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ )  . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+    $ds = DIRECTORY_SEPARATOR;
+    $base_dir = realpath(dirname(__FILE__)  . $ds . '../../../') . $ds;
+    require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+    require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-?>
+    ?>
 
 <main id='main' class='main'>
 
@@ -39,20 +39,17 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
                         <h5 class='card-title'>Tambah Stok Barang</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Nama Barang</label>
-                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi'
-                                    required>
+                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan nama Lengkap yang valid.
                                 </div>
                             </div>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Total Barang</label>
-                                <input type='number' class='form-control' name='total_barang'
-                                    placeholder=' silahkan isi' required>
+                                <input type='number' class='form-control' name='total_barang' placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
                                 </div>
@@ -94,5 +91,5 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>

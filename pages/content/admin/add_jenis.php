@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-if ( $_SESSION[ 'role' ] != 'admin' ) {
-    header( 'Location:../../../index.php' );
-    exit( session_destroy() );
+if ($_SESSION['role'] != 'admin') {
+    header('Location:../../../');
+    exit(session_destroy());
 }
 
 $ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ )  . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+$base_dir = realpath(dirname(__FILE__)  . $ds . '../../../') . $ds;
+require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
 ?>
 
@@ -39,8 +39,7 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
                         <h5 class='card-title'>Tambah Jenis Laundry</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add_jenis-proses.php' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add_jenis-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' name='nama_jenis_laundry' required>
@@ -54,16 +53,14 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Nama Produk</label>
-                                <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
-                                    required>
+                                <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
                                 </div>
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Harga</label>
-                                <input type='number' class='form-control' name='harga_perkilo'
-                                    placeholder='silahkan isi' required>
+                                <input type='number' class='form-control' name='harga_perkilo' placeholder='silahkan isi' required>
 
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
@@ -100,5 +97,5 @@ require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>

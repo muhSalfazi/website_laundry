@@ -9,6 +9,5 @@ session_unset();
 session_destroy();
 
 // Setelah menghancurkan sesi, alihkan ke halaman login atau halaman lain yang sesuai
-header( 'Location: ../../../' );
+header('Location: ../../../');
 exit();
-?>

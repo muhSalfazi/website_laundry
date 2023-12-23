@@ -1,7 +1,9 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
+ * @author  Helmut Tischer <htischer@weihenstephan.org>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameDecorator;
@@ -36,6 +38,21 @@ class ListBullet extends AbstractFrameDecorator
      * Indentation from the start of the line as fraction of font size.
      */
     public const MARKER_INDENT = 0.52;
+
+    /**
+     * @deprecated
+     */
+    const BULLET_PADDING = 1;
+
+    /**
+     * @deprecated
+     */
+    const BULLET_DESCENT = 0.3;
+
+    /**
+     * @deprecated
+     */
+    static $BULLET_TYPES = ["disc", "circle", "square"];
 
     /**
      * ListBullet constructor.

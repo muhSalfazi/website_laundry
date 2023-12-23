@@ -1,9 +1,12 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
+
 namespace Dompdf\Positioner;
 
 use Dompdf\FrameDecorator\AbstractFrameDecorator;
@@ -18,7 +21,7 @@ class Fixed extends Absolute
     /**
      * @param AbstractFrameDecorator $frame
      */
-    function position(AbstractFrameDecorator $frame): void
+    function position(AbstractFrameDecorator $frame)
     {
         if ($frame->get_reflower() instanceof Block) {
             parent::position($frame);
@@ -26,7 +29,7 @@ class Fixed extends Absolute
             // Legacy positioning logic for image and table frames
             // TODO: Resolve dimensions, margins, and offsets similar to the
             // block case in the reflowers and use the simplified logic above
-            $style = $frame->get_style();
+            $style = $frame->get_original_style();
             $root = $frame->get_root();
             $initialcb = $root->get_containing_block();
             $initialcb_style = $root->get_style();
@@ -42,13 +45,13 @@ class Fixed extends Absolute
             $margin_left = (float)$initialcb_style->length_in_pt($initialcb_style->margin_left, $initialcb["w"]);
 
             // The needed computed style of the element
-            $height = (float)$style->length_in_pt($style->get_specified("height"), $initialcb["h"]);
-            $width = (float)$style->length_in_pt($style->get_specified("width"), $initialcb["w"]);
+            $height = (float)$style->length_in_pt($style->height, $initialcb["h"]);
+            $width = (float)$style->length_in_pt($style->width, $initialcb["w"]);
 
-            $top = $style->length_in_pt($style->get_specified("top"), $initialcb["h"]);
-            $right = $style->length_in_pt($style->get_specified("right"), $initialcb["w"]);
-            $bottom = $style->length_in_pt($style->get_specified("bottom"), $initialcb["h"]);
-            $left = $style->length_in_pt($style->get_specified("left"), $initialcb["w"]);
+            $top = $style->length_in_pt($style->top, $initialcb["h"]);
+            $right = $style->length_in_pt($style->right, $initialcb["w"]);
+            $bottom = $style->length_in_pt($style->bottom, $initialcb["h"]);
+            $left = $style->length_in_pt($style->left, $initialcb["w"]);
 
             $y = $margin_top;
             if (isset($top)) {
@@ -84,7 +87,8 @@ class Fixed extends Absolute
 
             $frame->set_position($x, $y);
 
-            foreach ($frame->get_children() as $child) {
+            $children = $frame->get_children();
+            foreach ($children as $child) {
                 $child->set_position($x, $y);
             }
         }

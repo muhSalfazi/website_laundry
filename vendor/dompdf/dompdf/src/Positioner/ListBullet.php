@@ -1,9 +1,12 @@
 <?php
 /**
  * @package dompdf
- * @link    https://github.com/dompdf/dompdf
+ * @link    http://dompdf.github.com/
+ * @author  Benj Carson <benjcarson@digitaljunkies.ca>
+ * @author  Helmut Tischer <htischer@weihenstephan.org>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
+
 namespace Dompdf\Positioner;
 
 use Dompdf\FrameDecorator\AbstractFrameDecorator;
@@ -19,7 +22,7 @@ class ListBullet extends AbstractPositioner
     /**
      * @param ListBulletFrameDecorator $frame
      */
-    function position(AbstractFrameDecorator $frame): void
+    function position(AbstractFrameDecorator $frame)
     {
         // List markers are positioned to the left of the border edge of their
         // parent element (FIXME: right for RTL)

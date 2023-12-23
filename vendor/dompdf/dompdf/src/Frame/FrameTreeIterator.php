@@ -1,9 +1,4 @@
 <?php
-/**
- * @package dompdf
- * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
 namespace Dompdf\Frame;
 
 use Iterator;
@@ -14,6 +9,7 @@ use Dompdf\Frame;
  *
  * Returns frames in preorder traversal order (parent then children)
  *
+ * @access private
  * @package dompdf
  */
 class FrameTreeIterator implements Iterator
@@ -74,7 +70,10 @@ class FrameTreeIterator implements Iterator
 
     public function next(): void
     {
-        $b = array_pop($this->_stack);
+        $b = end($this->_stack);
+
+        // Pop last element
+        unset($this->_stack[key($this->_stack)]);
         $this->_num++;
 
         // Push all children onto the stack in reverse order

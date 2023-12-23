@@ -1,24 +1,25 @@
 <?php
 session_start();
 
-if ( $_SESSION[ 'role' ] != 'admin' ) {
+if ($_SESSION['role'] != 'admin') {
 
-    header( 'Location:../../../index.php' );
-    exit( session_destroy() );
+    header('Location:../../../');
+    exit(session_destroy());
 }
 ?><?php
-$ds = DIRECTORY_SEPARATOR;
-$base_dir = realpath( dirname( __FILE__ ) . $ds . '../../../' ) . $ds;
-require_once( "{$base_dir}pages{$ds}core{$ds}header.php" );
-require_once( "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php" );
+    $ds = DIRECTORY_SEPARATOR;
+    $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
+    require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+    require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-?>
+    ?>
 
 <main id='main' class='main'>
     <?php
 
-function showAlert( $icon, $title, $message, $redirect = null ) {
-    echo "
+    function showAlert($icon, $title, $message, $redirect = null)
+    {
+        echo "
         <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
                 Swal.fire({
@@ -28,26 +29,26 @@ function showAlert( $icon, $title, $message, $redirect = null ) {
                     showConfirmButton: false,
                     timer: 2000
                 }).then(() => {
-                    " . ( $redirect ? "window.location.href = '$redirect';" : '' ) . "
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
                 });
             });
         </script>
         ";
-}
-?>
+    }
+    ?>
     <!--create-->
 
     <?php
 
-// mengecek di tambahkan
-if ( isset( $_GET[ 'berhasil' ] ) ) {
-    $berhasil = $_GET[ 'berhasil' ];
-    if ( $berhasil === 'update_berhasil' ) {
-        showAlert( 'success', 'Berhasil', 'Pengguna berhasil di tambahkan.' );
+    // mengecek di tambahkan
+    if (isset($_GET['berhasil'])) {
+        $berhasil = $_GET['berhasil'];
+        if ($berhasil === 'update_berhasil') {
+            showAlert('success', 'Berhasil', 'Pengguna berhasil di tambahkan.');
+        }
     }
-}
 
-?>
+    ?>
 
     <div class='pagetitle'>
         <h1>Stok Investaris</h1>
@@ -99,5 +100,5 @@ if ( isset( $_GET[ 'berhasil' ] ) ) {
 </main><!-- End #main -->
 
 <?php
-require_once( "{$base_dir}pages{$ds}core{$ds}footer.php" );
+require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>
