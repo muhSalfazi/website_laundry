@@ -20,7 +20,7 @@ if ($_SESSION['role'] != 'admin') {
         <h1>Laporan</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class=' breadcrumb-item active'>Laporan</li>
             </ol>
         </nav>
@@ -29,6 +29,63 @@ if ($_SESSION['role'] != 'admin') {
     <section class='section dashboard'>
 
         <!-- End Ngoding Disini -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jumlah Pelanggan & Pesanan</h5>
+
+                    <!-- Doughnut Chart -->
+                    <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        // Fungsi untuk mendapatkan data dari PHP
+                        async function fetchData() {
+                            const response = await fetch('../backend/data_laporan.php');
+                            const data = await response.json();
+
+                            // Update data pada grafik
+                            chart.data.datasets[0].data = [data.total_pelanggan, data
+                                .total_pesanan
+                            ];
+
+                            // Mengupdate grafik
+                            chart.update();
+                        }
+
+                        // Inisialisasi Chart.js
+                        const chart = new Chart(document.querySelector('#doughnutChart'), {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Pelanggan', 'Pesanan'],
+                                datasets: [{
+                                    data: [0,
+                                        0
+                                    ], // Data akan diisi oleh fetchData()
+                                    backgroundColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(54, 162, 235)'
+                                    ],
+                                    hoverOffset: 4
+                                }]
+                            }
+                        });
+
+                        // Panggil fetchData() untuk mengisi data awal
+                        fetchData();
+
+                        // Atur interval untuk mengupdate data setiap bulan
+                        setInterval(() => {
+                            fetchData();
+                        }, 30 * 24 * 60 * 60 * 1000); // 30 hari
+                    });
+                    </script>
+
+                    <!-- End Doughnut CHart -->
+
+                </div>
+            </div>
+        </div>
 
         </div>
     </section>

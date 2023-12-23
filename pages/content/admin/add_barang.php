@@ -19,7 +19,7 @@ if ($_SESSION['role'] != 'admin') {
         <h1>Stok Barang</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/stok_investaris.php'>Stok Inventaris</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/stok_barang'>Stok Barang</a></li>
                 <li class=' breadcrumb-item active'>Add Jenis Laundry </li>
@@ -39,17 +39,20 @@ if ($_SESSION['role'] != 'admin') {
                         <h5 class='card-title'>Tambah Stok Barang</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data'
+                            class='row g-3 needs-validation' novalidate>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Nama Barang</label>
-                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi' required>
+                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi'
+                                    required>
                                 <div class='invalid-feedback'>
                                     Harap berikan nama Lengkap yang valid.
                                 </div>
                             </div>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Total Barang</label>
-                                <input type='number' class='form-control' name='total_barang' placeholder=' silahkan isi' required>
+                                <input type='number' class='form-control' name='total_barang'
+                                    placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
                                 </div>

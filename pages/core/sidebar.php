@@ -4,23 +4,25 @@
 <aside id='sidebar' class='sidebar'>
     <ul class='sidebar-nav' id='sidebar-nav'>
 
-        <li class='nav-item'>
-            <a class='nav-link' href='../dashboard/dashboard'>
-                <i class='bi bi-grid'></i>
-                <span>Dashboard</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
+        <!-- End Dashboard Nav -->
 
-        <li class='nav-heading'>Pages</li>
+
 
         <?php
         // Mulai sesi
-        
+
         // Periksa apakah pengguna memiliki peran 'admin'
         $admin = isset($_SESSION['role']) && $_SESSION['role'] == 'admin';
 
         if ($admin) {
             // Menu hanya ditampilkan jika pengguna memiliki peran 'pemilik'
+            echo " <li class='nav-item'>
+            <a class='nav-link' href='../dashboard/dashboard-admin'>
+                <i class='bi bi-grid'></i>
+                <span>Dashboard</span>
+            </a>
+        </li>";
+            echo "<li class='nav-heading'>Pages</li>";
             echo '
             <li class=\'nav-item\'>
                 <a class=\'nav-link collapsed\' href=\'../../content/admin/Pelanggan\'>
@@ -50,7 +52,6 @@
                 <i class=\'bi bi-clipboard-data-fill\'></i>
             <span>Laporan</span>
             </li>';
-
         }
         ?>
 
@@ -58,8 +59,13 @@
         $pelanggan = isset($_SESSION['role']) && $_SESSION['role'] == 'pelanggan';
 
         if ($pelanggan) {
-
-            // Menu hanya ditampilkan jika pengguna memiliki peran 'pemilik'
+            echo " <li class='nav-item'>
+            <a class='nav-link' href='../dashboard/dashboard'>
+                <i class='bi bi-grid'></i>
+                <span>Dashboard</span>
+            </a>
+        </li>";
+            echo "<li class='nav-heading'>Pages</li>";
             echo '
             <li class=\'nav-item\'>
                 <a class=\'nav-link collapsed\' href=\'../../content/pelanggan/cek_order\'>
@@ -82,7 +88,7 @@
             //         <span>Riwayat Order</span>
             //     </a>
             // </li>';
-        
+
 
         }
         ?>

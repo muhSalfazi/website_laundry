@@ -47,7 +47,7 @@ if (!function_exists('showAlert')) {
         <h1>Data Pesanan Satuan</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/data_pesanan.php'>Data Pesanan</a></li>
                 <li class=' breadcrumb-item active'>Data Pesanan Satuan</li>
             </ol>
@@ -200,10 +200,10 @@ if (!function_exists('showAlert')) {
                                                             echo "<label for='no_telp' class='form-label'>Resi Pesanan</label>";
                                                             echo "<input type='text' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['resi_pesanan'] . "' required readonly  >";
                                                             echo '</div>';
-                                                            //
+                                                                //
 
-                                                            //
-                                                            echo "<div id='total-harga-container' style='display: none;'>" . $jenislaundry['total_harga'] . '</div>';
+                                                                //
+                                                            ;
 
                                                             //
                                                             echo "<div class='mb-3'>";
@@ -229,8 +229,8 @@ if (!function_exists('showAlert')) {
                                                             //
 
                                                             echo "<div class='mb-4'>";
-                                                            echo "<label for='no_telp' class='form-label'>Nama Produk</label>";
-                                                            echo "<input type='text' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['total_harga'] . "' required readonly  >";
+                                                            echo "<label for='no_telp' class='form-label'>Total Bayar</label>";
+                                                            echo "<input type='number' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['total_harga'] . "'  >";
                                                             echo '</div>';
                                                             // Footer Modal Edit
                                                             echo "<div class='modal-footer'>";

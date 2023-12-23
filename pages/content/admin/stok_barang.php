@@ -79,7 +79,7 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
         <h1>Stok Barang</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/User/stok_investaris'>Stok Investaris</a></li>
                 <li class=' breadcrumb-item active'>Stok Barang</li>
             </ol>
@@ -97,9 +97,11 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                     <div class='card-body'>
                         <h5 class='card-title'>Stok Barang</h5>
                         <a href='./add_barang' class='btn btn-primary' data-toggle='modal'>
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-file-plus' viewBox='0 0 16 16'>
+                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
+                                class='bi bi-file-plus' viewBox='0 0 16 16'>
                                 <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd' d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
+                                <path fill-rule='evenodd'
+                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
                             </i>
                             Add Barang
                         </a>
@@ -135,9 +137,11 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                            <td class="text-center"><a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>" target="_blank">Unduh</a>
-                                            </td>
-                                            <?php
+                                    <td class="text-center"><a
+                                            href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                            target="_blank">Unduh</a>
+                                    </td>
+                                    <?php
                                             // Kolom aksi dengan ikon edit dan delete
                                             echo "<td class='text-center'>";
 
@@ -148,10 +152,11 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                         </a>";
                                             ?>
 
-                                            <!-- delete -->
-                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </a>
+                                    <!-- delete -->
+                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
+                                        onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
 
                                     <?php
                                             echo "</td>";

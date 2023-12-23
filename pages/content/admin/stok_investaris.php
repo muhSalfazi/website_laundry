@@ -54,7 +54,7 @@ if ($_SESSION['role'] != 'admin') {
         <h1>Stok Investaris</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard.php'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class=' breadcrumb-item active'>Stok Investaris</li>
             </ol>
         </nav>

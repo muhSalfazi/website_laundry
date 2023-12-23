@@ -19,7 +19,7 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
         <h1>Jenis Laundry</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/stok_investaris.php'>Stok Inventaris</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/jenis_laundry'>Jenis Laundry</a></li>
                 <li class=' breadcrumb-item active'>Add Jenis Laundry </li>
@@ -39,7 +39,8 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                         <h5 class='card-title'>Tambah Jenis Laundry</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add_jenis-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add_jenis-proses.php' method='post' enctype='multipart/form-data'
+                            class='row g-3 needs-validation' novalidate>
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' name='nama_jenis_laundry' required>
@@ -53,14 +54,16 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Nama Produk</label>
-                                <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi' required>
+                                <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
+                                    required>
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
                                 </div>
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Harga</label>
-                                <input type='number' class='form-control' name='harga_perkilo' placeholder='silahkan isi' required>
+                                <input type='number' class='form-control' name='harga_perkilo'
+                                    placeholder='silahkan isi' required>
 
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.

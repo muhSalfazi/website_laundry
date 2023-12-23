@@ -69,7 +69,7 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
         <h1>Jenis Laundry</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
+                <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/stok_investaris'>Stok Investaris</a></li>
                 <li class=' breadcrumb-item active'>Jenis Laundry</li>
             </ol>
@@ -87,9 +87,11 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                     <div class='card-body'>
                         <h5 class='card-title'>Jenis Laundry</h5>
                         <a href='./add_jenis' class='btn btn-primary' data-toggle='modal'>
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-file-plus' viewBox='0 0 16 16'>
+                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
+                                class='bi bi-file-plus' viewBox='0 0 16 16'>
                                 <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd' d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
+                                <path fill-rule='evenodd'
+                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
                             </i>
                             Add Jenis Laundry
                         </a>
@@ -133,10 +135,11 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
             </a>";
                                     ?>
 
-                                            <!-- delete -->
-                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_jenis_laundry'] ?>, 'jenis_laundry')">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </a>
+                                    <!-- delete -->
+                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
+                                        onclick="deleteConfirmation(<?= $row['id_jenis_laundry'] ?>, 'jenis_laundry')">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
 
 
 

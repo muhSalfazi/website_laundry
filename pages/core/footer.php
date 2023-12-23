@@ -1,7 +1,7 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>mhs_UBP_Karawang</span></strong>. Seluruh hak cipta
+        &copy; Copyright <strong><span>mhs.UBP.Karawang</span>/De'unguLaundry</strong>. Seluruh hak cipta
     </div>
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->
