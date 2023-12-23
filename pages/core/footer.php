@@ -59,16 +59,6 @@ document.getElementById("logoutButton").addEventListener("click", function() {
         // Tidak lakukan apa-apa jika pengguna membatalkan logout
     }
 });
-
-// Tambahkan event click untuk menutup dropdown jika diklik di luar dropdown
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-        var dropdowns = document.querySelectorAll('.dropdown-menu');
-        dropdowns.forEach(function(dropdown) {
-            dropdown.classList.remove('show');
-        });
-    }
-});
 </script>
 
 

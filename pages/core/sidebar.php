@@ -25,7 +25,7 @@
             echo "<li class='nav-heading'>Pages</li>";
             echo '
             <li class=\'nav-item\'>
-                <a class=\'nav-link collapsed\' href=\'../../content/admin/Pelanggan\'>
+                <a class=\'nav-link collapsed\' href=\'../../content/admin/pelanggan\'>
                     <i class=\'bi bi-people\'></i>
                     <span>Data Pelanggan</span>
                 </a>

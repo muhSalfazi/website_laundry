@@ -2,7 +2,7 @@
 session_start();
 if ($_SESSION['role'] != 'admin') {
     header('Location:../../../');
-    exit(session_destroy());
+    exit();
 }
 
 function getDashboardData($filter = 'today')
