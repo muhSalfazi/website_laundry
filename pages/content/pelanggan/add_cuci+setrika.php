@@ -89,20 +89,23 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             </div>
 
                             <div class='col-md-4'>
-                                <label for='validationCustom02' class='form-label'>kategori laundry</label>
+                                <label for='validationCustom02' class='form-label'
+                                    title="isi terlebih dahulu jenis laundry">kategori laundry</label>
                                 <select class='form-select' name="nama_produk" id="nama_produk"></select>
                                 <!-- <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
                                     required> -->
+                                <p style="color:red; font-size:smaller; ">isi jenis laundry terlebih dahulu!!</p>
+
                                 <div class='invalid-feedback'>
                                     Harap berikan produk yang valid.
                                 </div>
                             </div>
                             <div class=' col-md-4'>
                                 <label for='validationCustom04' class='form-label'>layanan antar</label>
-                                <select class='form-select' id="alamat_input" name='alamat_input' required>
+                                <select class='form-select' id="layanan_antar" name='layanan_antar' required>
                                     <option selected disabled>pilih...</option>
-                                    <option value='alamat'>Antar Jemput</option>
-                                    <option value='null'>tidak</option>
+                                    <option value='YA'>Antar Jemput</option>
+                                    <option value='TIDAK'>tidak</option>
                                 </select>
                                 <div class='invalid-feedback'>
                                     Silakan pilih jenis bagian yang valid.
@@ -155,7 +158,7 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
             <div class="modal-body">
                 <div class=" table-responsive">
                     <!-- Table with stripped rows -->
-                    <table class="table datatable">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
 
@@ -207,17 +210,20 @@ $(document).ready(function() {
 
         if (jenis == 'kiloan') {
             $("#nama_produk").html(
-                "<option value='jas'>Reguler</option>" +
-                "<option value='jas1stell'>2 hari</option>" +
-                "<option value='seprei'>1 hari</option>" +
-                "<option value='seprei'>8 jam</option>" +
-                "<option value='seprei'>3 jam</option>"
+                "<option value='Reguler'>Reguler</option>" +
+                "<option value='2 hari'>2 hari</option>" +
+                "<option value='1 hari'>1 hari</option>" +
+                "<option value='8 jam'>8 jam</option>" +
+                "<option value='3 jam'>3 jam</option>"
             );
         } else if (jenis == 'satuan') {
             $("#nama_produk").html(
-                "<option value='pakaian'>Pakaian</option>" +
-                "<option value='jas1stell'>Jas 1 Stell</option>" +
-                "<option value='seprei'>Sprei</option>"
+                "<option value='sprey,selimut'>sprey, selimut</option>" +
+                "<option value='jas'>Jas</option>" +
+                "<option value='jas 1 stel'>Jas 1 stel</option>" +
+                "<option value='boneka'>Boneka</option>" +
+                "<option value='boneka besar'>Boneka Besar</option>" +
+                "<option value='boneka'>Boneka</option>"
             );
         } else {
             $("#nama_produk").css("visibility", "hidden");

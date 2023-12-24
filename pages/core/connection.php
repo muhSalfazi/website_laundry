@@ -9,8 +9,8 @@ $DBNAME = 'db_laundry';
 
 $db_connect = mysqli_connect( $DBHOST, $DBUSER, $DBPASSWORD, $DBNAME );
 
-if ( mysqli_connect_errno() ) {
-    echo 'failed connect to mysql ' . mysqli_connect_error();
+if ( mysqli_connect_error() ) {
+    header( 'Location: ../../../pages-error-404.html' );
 }
 
 ?>
