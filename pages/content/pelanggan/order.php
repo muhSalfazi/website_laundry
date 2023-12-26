@@ -50,7 +50,7 @@ require '../../core/connection.php';
 
                         </div>
                         <div class='col-12 mt-3'>
-                            <a href='karpet' type='submit' name='submit' class='btn btn-primary w-100' data-bs-toggle='modal' data-bs-target='#smallModal2'>KARPET</a>
+                            <a href='karpet' type='submit' name='submit' class='btn btn-primary w-100'>KARPET</a>
 
                         </div>
                     </div>

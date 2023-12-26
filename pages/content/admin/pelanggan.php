@@ -122,6 +122,23 @@ if (!function_exists('showAlert')) {
                             Add Pelanggan
                         </a>
                         <p>Data ini adalah data semua pengguna aplikasi <b>De'Ungu Laundry</b>.</p>
+                        <div class='col-lg-12'>
+                            <div class="row">
+                                <div class="col-md-2 ">
+                                    <a href="" class="d-flex align-items-center">
+                                        <span class="fs-3 text-success me-3"><i class="fas fa-file-excel"></i></span>
+                                        <span class="fw-bold text-success">Excel file.</span>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="" class="d-flex align-items-center">
+                                        <span class="fs-3 text-danger me-3"><i class="fas fa-file-pdf"></i></span>
+                                        <span class="fw-bold text-danger">PDF file.</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
                         <!--table reponsif-->
                         <div class="table-responsive">
                             <!-- Table with stripped rows -->

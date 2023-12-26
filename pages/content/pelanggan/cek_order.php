@@ -61,11 +61,13 @@ if (isset($_POST['cek_order'])) {
                         <h5 class='card-title'>CEK ORDER</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation'
+                            novalidate>
 
                             <div class='col-md-12'>
                                 <label for='validationCustom02' class='form-label'>Resi Pesanan</label>
-                                <input type='text' class='form-control' name='resi_pesanan' placeholder="masukan resi anda" required>
+                                <input type='text' class='form-control' name='resi_pesanan'
+                                    placeholder="masukan resi anda" required>
                                 <div class='invalid-feedback'>
                                     Harap Berikan Resi Pesanan Yang Valid
                                 </div>
@@ -145,7 +147,7 @@ if (isset($_POST['cek_order'])) {
                                             echo '</tr>';
                                         }
                                     } else {
-                                        echo "<tr><td style='color:red; font-size:smaller;'colspan='10'>input data resi terlebih dahulu!!</td></tr>";
+                                        echo "<tr><td colspan='10' style='color:red; font-size:smaller;' >input data resi terlebih dahulu!!</td></tr>";
                                     }
                                     ?>
                                 </tbody>

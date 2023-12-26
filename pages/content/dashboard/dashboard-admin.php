@@ -15,7 +15,7 @@ function getDashboardData($filter = 'today')
               FROM `order`
               WHERE DATE(created_at) = CURDATE();";
 
-    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
+    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan   WHERE DATE(created_at) = CURDATE();";
 
     if ($filter === 'this_month') {
         $query = "SELECT 

@@ -45,7 +45,7 @@ if (isset($_SESSION['id_register'])) {
     <!-- Template Main CSS File -->
     <link href="../../../assets/css/style.css" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
     <!-- =======================================================
@@ -97,7 +97,7 @@ if (isset($_SESSION['id_register'])) {
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="../../../assets/img/user.jpg" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $username . PHP_EOL;
-                            ?></span>
+                                                                                    ?></span>
                     </a>
 
                     <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'>
@@ -105,11 +105,11 @@ if (isset($_SESSION['id_register'])) {
                         <li class=' dropdown-header'>
                             <h6>
                                 <?php echo $nama_lengkap;
-                                ?>
+                                    ?>
                             </h6>
                             <span>
                                 <?php echo $_SESSION['role'];
-                                ?>
+                                    ?>
                             </span>
                         </li>
                         <li>
