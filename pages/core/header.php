@@ -47,6 +47,8 @@ if (isset($_SESSION['id_register'])) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap">
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -56,11 +58,73 @@ if (isset($_SESSION['id_register'])) {
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-    <!-- Tambahkan fungsi JavaScript di bagian head -->
 
 </head>
+<style>
+/* Loading Overlay */
+.loading-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    color: darkorchid;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Pacifico', cursive;
+    /* Ganti 'Pacifico' dengan font yang diinginkan */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+</style>
+
+
+
+
 
 <body>
+    <!-- Button spinners -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">~ Loading De'Ungu Laundry ~</div>
+    </div>
+
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">

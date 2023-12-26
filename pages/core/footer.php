@@ -84,7 +84,25 @@ function deletepesanan(id, type) {
 </script>
 
 
+<!-- spinners -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.getElementById('loading-overlay');
 
+    // Sembunyikan overlay loading setelah halaman sepenuhnya dimuat
+    window.addEventListener('load', () => {
+        // Secara opsional, tambahkan penundaan sebelum menyembunyikan overlay
+        setTimeout(() => {
+            loadingOverlay.classList.add('hidden');
+
+            // Secara opsional, tambahkan penundaan sebelum mengatur display menjadi 'none'
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 400);
+        }, 300); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
+    });
+});
+</script>
 
 <!-- Template Main JS File -->
 <script src="../../../assets/js/main.js"></script>
