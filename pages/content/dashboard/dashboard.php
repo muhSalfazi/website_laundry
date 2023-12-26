@@ -23,7 +23,58 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
     </div><!-- End Page Title -->
 
     <section class="section contact">
+        <div class="col-lg-12">
+            <div class="card p-4">
+                <form action="forms/contact.php" method="post" class="php-email-form">
+                    <div class="row gy-4">
 
+
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+
+                            <!-- Slides with indicators -->
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                        data-bs-slide-to="0" class="active" aria-current="true"
+                                        aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                        data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                        data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="../../../assets/img/foto4.jpg" class="d-block w-100" alt="foto1">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../../assets/img/foto2.jpg" class="d-block w-100" alt="foto2">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="../../../assets/img/foto5.jpg" class="d-block w-100" alt="foto3">
+                                    </div>
+                                </div>
+
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+
+                            </div><!-- End Slides with indicators -->
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
         <div class="col-xl-12">
 
             <div class="row">
@@ -75,52 +126,7 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
         </div>
 
 
-        <div class="col-lg-12">
-            <div class="card p-4">
-                <form action="forms/contact.php" method="post" class="php-email-form">
-                    <div class="row gy-4">
 
-
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-
-                            <!-- Slides with indicators -->
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="../../../assets/img/foto4.jpg" class="d-block w-100" alt="foto1">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../../../assets/img/foto2.jpg" class="d-block w-100" alt="foto2">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../../../assets/img/foto5.jpg" class="d-block w-100" alt="foto3">
-                                    </div>
-                                </div>
-
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-
-                            </div><!-- End Slides with indicators -->
-
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-
-        </div>
 
     </section>
 

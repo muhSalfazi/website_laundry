@@ -115,7 +115,11 @@ if (isset($_SESSION['id_register'])) {
 </style>
 
 
-
+<style>
+.hidden {
+    display: none;
+}
+</style>
 
 
 <body>

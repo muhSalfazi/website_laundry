@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Secara opsional, tambahkan penundaan sebelum mengatur display menjadi 'none'
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
-            }, 400);
-        }, 300); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
+            }, 500);
+        }, 400); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
     });
 });
 </script>
