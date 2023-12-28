@@ -123,7 +123,7 @@ if (!function_exists('showAlert')) {
                         </a>
                         <p>Data ini adalah data semua pengguna aplikasi <b>De'Ungu Laundry</b>.</p>
                         <div class='col-lg-12'>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-2 ">
                                     <a href="" class="d-flex align-items-center">
                                         <span class="fs-3 text-success me-3"><i class="fas fa-file-excel"></i></span>
@@ -136,7 +136,7 @@ if (!function_exists('showAlert')) {
                                         <span class="fw-bold text-danger">PDF file.</span>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                         <!--table reponsif-->

@@ -72,7 +72,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>No Handphone</label>
-                                <input type='text' class='form-control' name='alamat' value="<?php echo $no_telp; ?>"
+                                <input type='text' class='form-control' name='no_telp' value="<?php echo $no_telp; ?>"
                                     required readonly>
                             </div>
 
@@ -99,10 +99,10 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             </div>
                             <div class=' col-md-4'>
                                 <label for='validationCustom04' class='form-label'>layanan antar</label>
-                                <select class='form-select' id="alamat_input" name='alamat_input' required>
+                                <select class='form-select' id="alamat_input" name='layanan_antar' required>
                                     <option selected disabled>pilih...</option>
-                                    <option value='alamat'>Antar Jemput</option>
-                                    <option value='null'>tidak</option>
+                                    <option value='antar jemput'>Antar Jemput</option>
+                                    <option value='tidak'>tidak</option>
                                 </select>
                                 <div class='invalid-feedback'>
                                     Silakan pilih jenis bagian yang valid.
@@ -160,9 +160,9 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
                             <tr>
 
                                 <th scope="col">No</th>
-                                <th scope="col">jenis kategori</th>
-
-                                <th scope="col">kategori</th>
+                                <th scope="col">Jenis Layanan</th>
+                                <th scope="col">Jenis Kategori</th>
+                                <th scope="col">Kategori</th>
                                 <th scope="col">Harga</th>
 
                                 <!-- Kolom untuk ikon edit dan delete -->
@@ -175,13 +175,16 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
                             // Check if there are rows to fetch
                             if (mysqli_num_rows($jenisLaundry) > 0) {
                                 while ($row = mysqli_fetch_array($jenisLaundry)) {
-                                    $no++;
-                                    echo "<tr>";
-                                    echo "<th scope='row'>" . $no . "</th>";
-                                    echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
+                                    if ($row['jenis_layanan'] == 'cuci+setrika') {
+                                        $no++;
+                                        echo "<tr>";
+                                        echo "<th scope='row'>" . $no . "</th>";
+                                        echo "<td>" . $row['jenis_layanan'] . "</td>";
+                                        echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
 
-                                    echo "<td>" . $row['nama_produk'] . "</td>";
-                                    echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                        echo "<td>" . $row['nama_produk'] . "</td>";
+                                        echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                    }
                                 }
                             }
 
@@ -205,17 +208,25 @@ $(document).ready(function() {
 
         if (jenis == 'kiloan') {
             $("#nama_produk").html(
-                "<option value='jas'>Reguler</option>" +
-                "<option value='jas1stell'>2 hari</option>" +
-                "<option value='seprei'>1 hari</option>" +
-                "<option value='seprei'>8 jam</option>" +
-                "<option value='seprei'>3 jam</option>"
+                "<option value='Reguler'>Reguler</option>" +
+                "<option value='2 hari'>2 hari</option>" +
+                "<option value='3 hari'>1 hari</option>" +
+                "<option value='4 hari'>8 jam</option>" +
+                "<option value='3 jam'>3 jam</option>"
             );
         } else if (jenis == 'satuan') {
             $("#nama_produk").html(
-                "<option value='pakaian'>Pakaian</option>" +
-                "<option value='jas1stell'>Jas 1 Stell</option>" +
-                "<option value='seprei'>Sprei</option>"
+                "<option value='boneka'>boneka</option>" +
+                "<option value='boneka besar'>boneka besar</option>" +
+                "<option value='boneka jumbo'>boneka jumbo</option>" +
+                "<option value='karpet kecil'>karpet</option>" +
+                "<option value='karpet sedang'>karpet sedang</option>" +
+                "<option value='karpet jumbo'>karpet jumbo</option>" +
+                "<option value='sprey,selimut'>sprey,selimut</option>" +
+                "<option value='bed cover'>bed cover</option>" +
+                "<option value='jas'>jas</option>" +
+                "<option value='jas 1 stel'>jas 1 stel</option>"
+
             );
         } else {
             $("#nama_produk").css("visibility", "hidden");
@@ -235,12 +246,22 @@ $(document).ready(function() {
     $("#alamat_input").on('change', function() {
         var layanan = $(this).val();
 
-        if (layanan == 'alamat') {
+        if (layanan == 'antar jemput') {
             // Tampilkan input alamat jika layanan adalah antar jemput
             $("#alamat_antar_fields").html(
                 // "<div class='col-md-4'>" +
                 "<label for='validationCustom02' class='form-label'>Alamat</label>" +
                 "<input type='text' class='form-control' name='alamat' value='<?php echo $alamat; ?>' required readonly>" +
+                "</div>"
+            );
+
+        }
+        if (layanan == 'tidak') {
+            // Tampilkan input alamat jika layanan adalah antar jemput
+            $("#alamat_antar_fields").html(
+                // "<div class='col-md-4'>" +
+                "<label for='validationCustom02' class='form-label'>Alamat</label>" +
+                "<input type='text' class='form-control' name='alamat' value='--' required readonly>" +
                 "</div>"
             );
         } else {

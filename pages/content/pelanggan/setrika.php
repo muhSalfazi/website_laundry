@@ -28,12 +28,12 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 <main id='main' class='main'>
 
     <div class='pagetitle'>
-        <h1>Cuci + Setrika</h1>
+        <h1>Order jenis layanan Setrika</h1>
         <nav>
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/pelanggan/order'>order</a></li>
-                <li class=' breadcrumb-item active'>Cuci+Setrika </li>
+                <li class=' breadcrumb-item active'>Order Pesanan</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -47,33 +47,27 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 
                 <div class='card'>
                     <div class='card-body'>
-                        <h5 class='card-title'>Order Cuci + Setrika</h5>
-                        <a href='./add_jenis' class='btn btn-primary' data-bs-toggle="modal"
-                            data-bs-target="#modalDialogScrollable">
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                                class='bi bi-bag-check-fill' viewBox='0 0 16 16'>
+                        <h5 class='card-title'>Setrika</h5>
+                        <a href='./add_jenis' class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">
+                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-bag-check-fill' viewBox='0 0 16 16'>
                                 <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd'
-                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
+                                <path fill-rule='evenodd' d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
                             </i>
                             Daftar Kategori Yang Tersedia
                         </a>
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/order' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/order' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Nama Pelanggan</label>
                                 <input type='text' class='form-control' name='nama_pelanggan' value="  <?php echo $nama_lengkap;
-                                                                                                        ?>" required
-                                    readonly>
+                                                                                                        ?>" required readonly>
 
                             </div>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>No Handphone</label>
-                                <input type='text' class='form-control' name='alamat' value="<?php echo $no_telp; ?>"
-                                    required readonly>
+                                <input type='text' class='form-control' name='alamat' value="<?php echo $no_telp; ?>" required readonly>
                             </div>
 
                             <div class=' col-md-4'>
@@ -174,13 +168,15 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
                             // Check if there are rows to fetch
                             if (mysqli_num_rows($jenisLaundry) > 0) {
                                 while ($row = mysqli_fetch_array($jenisLaundry)) {
-                                    $no++;
-                                    echo "<tr>";
-                                    echo "<th scope='row'>" . $no . "</th>";
-                                    echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
+                                    if ($row['jenis_layanan'] == 'setrika') {
+                                        $no++;
+                                        echo "<tr>";
+                                        echo "<th scope='row'>" . $no . "</th>";
+                                        echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
 
-                                    echo "<td>" . $row['nama_produk'] . "</td>";
-                                    echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                        echo "<td>" . $row['nama_produk'] . "</td>";
+                                        echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                    }
                                 }
                             }
 
@@ -198,54 +194,54 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 </div>
 <!-- pilih kategori -->
 <script>
-$(document).ready(function() {
-    $("#jenis").on('change', function() {
-        var jenis = $(this).val();
+    $(document).ready(function() {
+        $("#jenis").on('change', function() {
+            var jenis = $(this).val();
 
-        if (jenis == 'kiloan') {
-            $("#nama_produk").html(
-                "<option value='jas'>Reguler</option>" +
-                "<option value='jas1stell'>2 hari</option>" +
-                "<option value='seprei'>1 hari</option>" +
-                "<option value='seprei'>8 jam</option>" +
-                "<option value='seprei'>3 jam</option>"
-            );
-        } else if (jenis == 'satuan') {
-            $("#nama_produk").html(
-                "<option value='pakaian'>Pakaian</option>" +
-                "<option value='jas1stell'>Jas 1 Stell</option>" +
-                "<option value='seprei'>Sprei</option>"
-            );
-        } else {
-            $("#nama_produk").css("visibility", "hidden");
-        }
+            if (jenis == 'kiloan') {
+                $("#nama_produk").html(
+                    "<option value='jas'>Reguler</option>" +
+                    "<option value='jas1stell'>2 hari</option>" +
+                    "<option value='seprei'>1 hari</option>" +
+                    "<option value='seprei'>8 jam</option>" +
+                    "<option value='seprei'>3 jam</option>"
+                );
+            } else if (jenis == 'satuan') {
+                $("#nama_produk").html(
+                    "<option value='pakaian'>Pakaian</option>" +
+                    "<option value='jas1stell'>Jas 1 Stell</option>" +
+                    "<option value='seprei'>Sprei</option>"
+                );
+            } else {
+                $("#nama_produk").css("visibility", "hidden");
+            }
 
-        // Tambahkan bagian ini untuk memperlihatkan kembali elemen jika jenis bukan satuan atau kiloan
-        if (jenis != 'satuan' && jenis != 'kiloan') {
-            $("#nama_produk").css("visibility", "visible");
-        }
+            // Tambahkan bagian ini untuk memperlihatkan kembali elemen jika jenis bukan satuan atau kiloan
+            if (jenis != 'satuan' && jenis != 'kiloan') {
+                $("#nama_produk").css("visibility", "visible");
+            }
+        });
     });
-});
 </script>
 
 <!-- antarjemput -->
 <script>
-$(document).ready(function() {
-    $("#alamat_input").on('change', function() {
-        var layanan = $(this).val();
+    $(document).ready(function() {
+        $("#alamat_input").on('change', function() {
+            var layanan = $(this).val();
 
-        if (layanan == 'alamat') {
-            // Tampilkan input alamat jika layanan adalah antar jemput
-            $("#alamat_antar_fields").html(
-                // "<div class='col-md-4'>" +
-                "<label for='validationCustom02' class='form-label'>Alamat</label>" +
-                "<input type='text' class='form-control' name='alamat' value='<?php echo $alamat; ?>' required readonly>" +
-                "</div>"
-            );
-        } else {
-            // Sembunyikan input alamat jika layanan bukan antar jemput
-            $("#alamat_antar_fields").html("");
-        }
+            if (layanan == 'alamat') {
+                // Tampilkan input alamat jika layanan adalah antar jemput
+                $("#alamat_antar_fields").html(
+                    // "<div class='col-md-4'>" +
+                    "<label for='validationCustom02' class='form-label'>Alamat</label>" +
+                    "<input type='text' class='form-control' name='alamat' value='<?php echo $alamat; ?>' required readonly>" +
+                    "</div>"
+                );
+            } else {
+                // Sembunyikan input alamat jika layanan bukan antar jemput
+                $("#alamat_antar_fields").html("");
+            }
+        });
     });
-});
 </script>

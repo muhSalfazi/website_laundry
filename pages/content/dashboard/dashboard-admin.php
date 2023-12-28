@@ -5,6 +5,8 @@ if ($_SESSION['role'] != 'admin') {
     exit();
 }
 
+?>
+<?php
 function getDashboardData($filter = 'today')
 {
     global $db_connect;
@@ -105,7 +107,7 @@ $dashboardData = getDashboardData($filter);
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Pesanan Order<span> | <?php echo ucfirst($filter); ?></span></h5>
+                            <h5 class="card-title">Jumlah Pesanan<span> | <?php echo ucfirst($filter); ?></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i class="bi bi-cart"></i>
@@ -144,7 +146,7 @@ $dashboardData = getDashboardData($filter);
                                     <i class="bi bi-currency-dollar"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>$<?php echo $dashboardData['pendapatan']; ?></h6>
+                                    <h6>Rp <?php echo $dashboardData['pendapatan']; ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +172,7 @@ $dashboardData = getDashboardData($filter);
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Customers <span> | <?php echo ucfirst($filter); ?></span></h5>
+                            <h5 class="card-title">Jumlah Pelanggan<span> | <?php echo ucfirst($filter); ?></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i class="bi bi-people"></i>

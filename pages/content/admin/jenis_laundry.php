@@ -87,11 +87,9 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                     <div class='card-body'>
                         <h5 class='card-title'>Jenis Laundry</h5>
                         <a href='./add_jenis' class='btn btn-primary' data-toggle='modal'>
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                                class='bi bi-file-plus' viewBox='0 0 16 16'>
+                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-file-plus' viewBox='0 0 16 16'>
                                 <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd'
-                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
+                                <path fill-rule='evenodd' d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
                             </i>
                             Add Jenis Laundry
                         </a>
@@ -105,9 +103,9 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                     <tr>
 
                                         <th scope="col">No</th>
+                                        <th scope="col">jenis layanan</th>
                                         <th scope="col">jenis produk</th>
-                                        <th scope="col">Kode Produk</th>
-                                        <th scope="col">Nama Produk</th>
+                                        <th scope="col">ketegori Produk</th>
                                         <th scope="col">Harga</th>
                                         <th scope="col">opsi</th>
                                         <!-- Kolom untuk ikon edit dan delete -->
@@ -123,8 +121,8 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                             $no++;
                                             echo "<tr>";
                                             echo "<th scope='row'>" . $no . "</th>";
+                                            echo "<td>" . $row['jenis_layanan'] . "</td>";
                                             echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
-                                            echo "<td>" . $row['kode_produk'] . "</td>";
                                             echo "<td>" . $row['nama_produk'] . "</td>";
                                             echo "<td>" . $row['harga_perkilo'] . "</td>";
                                             // Kolom aksi dengan ikon edit dan delete
@@ -135,11 +133,10 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
             </a>";
                                     ?>
 
-                                    <!-- delete -->
-                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
-                                        onclick="deleteConfirmation(<?= $row['id_jenis_laundry'] ?>, 'jenis_laundry')">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </a>
+                                            <!-- delete -->
+                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_jenis_laundry'] ?>, 'jenis_laundry')">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
 
 
 

@@ -1,8 +1,9 @@
 <?php
 // Jika pengguna sudah login, arahkan ke halaman dashboard atau halaman lainnya
+require_once "connection.php";
 if (isset($_SESSION['id_register'])) {
-    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pelanggan') {
-        header('Location: ../dashboard/dashboard');
+    if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'pelanggan') {
+        header('Location: ../../../');
         exit();
     }
 }
@@ -24,9 +25,7 @@ if (isset($_SESSION['id_register'])) {
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,8 +46,7 @@ if (isset($_SESSION['id_register'])) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap">
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -61,64 +59,64 @@ if (isset($_SESSION['id_register'])) {
 
 </head>
 <style>
-/* Loading Overlay */
-.loading-overlay {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-    color: darkorchid;
-    font-family: 'Roboto', sans-serif;
+    /* Loading Overlay */
+    .loading-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+        color: darkorchid;
+        font-family: 'Roboto', sans-serif;
 
-}
-
-.loading-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 20px;
-}
-
-.loading-text {
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Pacifico', cursive;
-    /* Ganti 'Pacifico' dengan font yang diinginkan */
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
     }
 
-    100% {
-        transform: rotate(360deg);
+    .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
     }
-}
+
+    .loading-spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+    }
+
+    .loading-text {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: 'Pacifico', cursive;
+        /* Ganti 'Pacifico' dengan font yang diinginkan */
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 
 
 <style>
-.hidden {
-    display: none;
-}
+    .hidden {
+        display: none;
+    }
 </style>
 
 
@@ -126,7 +124,7 @@ if (isset($_SESSION['id_register'])) {
     <!-- Button spinners -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">~ Loading De'Ungu Laundry ~</div>
+        <div class="loading-text">~ De'Ungu Laundry ~</div>
     </div>
 
 
@@ -162,44 +160,44 @@ if (isset($_SESSION['id_register'])) {
                         // Tampilkan data di dalam HTML
                     ?>
 
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="../../../assets/img/user.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $username . PHP_EOL;
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <img src="../../../assets/img/user.jpg" alt="Profile" class="rounded-circle">
+                            <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $username . PHP_EOL;
                                                                                     ?></span>
-                    </a>
+                        </a>
 
-                    <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'>
+                        <ul class='dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'>
 
-                        <li class=' dropdown-header'>
-                            <h6>
-                                <?php echo $nama_lengkap;
+                            <li class=' dropdown-header'>
+                                <h6>
+                                    <?php echo $nama_lengkap;
                                     ?>
-                            </h6>
-                            <span>
-                                <?php echo $_SESSION['role'];
+                                </h6>
+                                <span>
+                                    <?php echo $_SESSION['role'];
                                     ?>
-                            </span>
-                        </li>
-                        <li>
-                            <hr class='dropdown-divider'>
-                        </li>
-                        <li>
-                            <a id='logoutButton' class='dropdown-item d-flex align-items-center'>
-                                <i class='bi bi-box-arrow-right'></i>
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
+                                </span>
+                            </li>
+                            <li>
+                                <hr class='dropdown-divider'>
+                            </li>
+                            <li>
+                                <a id='logoutButton' class='dropdown-item d-flex align-items-center'>
+                                    <i class='bi bi-box-arrow-right'></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
                 </li>
 
 
-                <?php } else {
-                        header('Location:../../../index');
-                        exit(session_destroy());
+            <?php } else {
+                        // header('Location:../../pages-error-404.html');
+                        // exit();
                     };
             ?>
 
-                </li><!-- End Profile Nav -->
+            </li><!-- End Profile Nav -->
 
             </ul>
         </nav><!-- End Icons Navigation -->

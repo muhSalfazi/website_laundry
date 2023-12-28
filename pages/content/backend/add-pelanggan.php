@@ -87,7 +87,8 @@ if ( isset( $_POST[ 'submit' ] ) ) {
         // Menampilkan pesan sukses dengan input password asli
         echo "<script> window.location.href = '../admin/pelanggan.php?add=add_berhasil';</script>";
     } else {
-        header( 'Location: ../../../pages-error-404.html' );
+        header('Location: ../../core/pages-error-404.html');
+        exit();
     }
 }
 ?>

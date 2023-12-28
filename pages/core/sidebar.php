@@ -46,12 +46,12 @@
             </li>';
 
 
-            echo '
-            <li class=\'nav-item\'>
-            <a class=\'nav-link collapsed\'href=\'../../content/admin/laporan\'>
-                <i class=\'bi bi-clipboard-data-fill\'></i>
-            <span>Laporan</span>
-            </li>';
+            // echo '
+            // <li class=\'nav-item\'>
+            // <a class=\'nav-link collapsed\'href=\'../../content/admin/laporan\'>
+            //     <i class=\'bi bi-clipboard-data-fill\'></i>
+            // <span>Laporan</span>
+            // </li>';
         }
         ?>
 

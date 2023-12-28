@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
 <!-- Template Main JS File -->
 <script src="../../../assets/js/main.js"></script>
 

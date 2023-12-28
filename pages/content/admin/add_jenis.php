@@ -41,7 +41,7 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                         <!-- Custom Styled Validation -->
                         <form action='../backend/add_jenis-proses.php' method='post' enctype='multipart/form-data'
                             class='row g-3 needs-validation' novalidate>
-                            <div class='col-md-4'>
+                            <div class='col-md-3'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' name='nama_jenis_laundry' required>
                                     <option selected disabled>pilih...</option>
@@ -52,7 +52,19 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                     Silakan pilih role bagian yang valid.
                                 </div>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-3'>
+                                <label for='validationCustom04' class='form-label'>Jenis Layanan</label>
+                                <select class='form-select' name='jenis_layanan' required>
+                                    <option selected disabled>pilih...</option>
+                                    <option value='cuci+setrika'>Cuci+Setrika</option>
+                                    <option value='setrika'>setrika</option>
+                                    <option value='karpet'>karpet</option>
+                                </select>
+                                <div class='invalid-feedback'>
+                                    Silakan pilih role bagian yang valid.
+                                </div>
+                            </div>
+                            <div class='col-md-3'>
                                 <label for='validationCustom02' class='form-label'>Nama Produk</label>
                                 <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
                                     required>
@@ -60,7 +72,7 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                     Harap berikan Email yang valid.
                                 </div>
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-3'>
                                 <label for='validationCustom02' class='form-label'>Harga</label>
                                 <input type='number' class='form-control' name='harga_perkilo'
                                     placeholder='silahkan isi' required>

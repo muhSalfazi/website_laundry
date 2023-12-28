@@ -31,7 +31,7 @@ class DataFetcher
 
     public function getJenisLaundry()
     {
-        $jenisLaundry = mysqli_query($this->db_connect, 'SELECT id_jenis_laundry, nama_jenis_laundry, nama_produk, harga_perkilo, kode_produk, created_at FROM jenis_laundry');
+        $jenisLaundry = mysqli_query($this->db_connect, 'SELECT id_jenis_laundry, nama_jenis_laundry, nama_produk, harga_perkilo, created_at,jenis_layanan FROM jenis_laundry');
 
         if (!$jenisLaundry) {
             header('Location: ../../../pages-error-404.html');

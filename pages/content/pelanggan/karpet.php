@@ -28,12 +28,12 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 <main id='main' class='main'>
 
     <div class='pagetitle'>
-        <h1>Cuci + Setrika</h1>
+        <h1>Order jenis layanan Cuci + Setrika</h1>
         <nav>
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/pelanggan/order'>order</a></li>
-                <li class=' breadcrumb-item active'>Cuci+Setrika </li>
+                <li class=' breadcrumb-item active'>Order Pesanan </li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -139,9 +139,9 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
                             <tr>
 
                                 <th scope="col">No</th>
-                                <th scope="col">jenis kategori</th>
-
-                                <th scope="col">kategori</th>
+                                <th scope="col">Jenis Layanan</th>
+                                <th scope="col">Jenis Kategori</th>
+                                <th scope="col">Kategori</th>
                                 <th scope="col">Harga</th>
 
                                 <!-- Kolom untuk ikon edit dan delete -->
@@ -154,16 +154,18 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
                             // Check if there are rows to fetch
                             if (mysqli_num_rows($jenisLaundry) > 0) {
                                 while ($row = mysqli_fetch_array($jenisLaundry)) {
-                                    $no++;
-                                    echo "<tr>";
-                                    echo "<th scope='row'>" . $no . "</th>";
-                                    echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
+                                    if ($row['jenis_layanan'] == 'karpet') {
+                                        $no++;
+                                        echo "<tr>";
+                                        echo "<th scope='row'>" . $no . "</th>";
+                                        echo "<td>" . $row['jenis_layanan'] . "</td>";
+                                        echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
 
-                                    echo "<td>" . $row['nama_produk'] . "</td>";
-                                    echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                        echo "<td>" . $row['nama_produk'] . "</td>";
+                                        echo "<td>" . $row['harga_perkilo'] . "</td>";
+                                    }
                                 }
                             }
-
                             ?>
                         </tbody>
                     </table>
