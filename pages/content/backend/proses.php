@@ -53,7 +53,7 @@ class DataFetcher
 
     public function getpesananlaundry()
     {
-        $order = mysqli_query($this->db_connect, 'SELECT id_order, nama_pelanggan, jenis_layanan,jenis_laundry,stasus_pembayaran,resi_pesanan, proses_laundry, total_harga ,jumlah_kilo,alamat,layanan_antar FROM `order`');
+        $order = mysqli_query($this->db_connect, 'SELECT id_order, nama_pelanggan, jenis_layanan,jenis_laundry,status_pembayaran,resi_pesanan, proses_laundry, total_harga ,jumlah_kilo,alamat,layanan_antar FROM `order`');
 
         if (!$order) {
             die('Location: ../../../pages-error-404.html ' . mysqli_error($this->db_connect));

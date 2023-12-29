@@ -13,30 +13,40 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
 // Periksa apakah fungsi showAlert sudah ditentukan
-if (!function_exists('showAlert')) {
-    function showAlert($icon, $title, $message, $redirect = null)
-    {
-        echo "
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
         <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
                 Swal.fire({
                     icon: '$icon',
                     title: '$title',
                     html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: true,
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                    }
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => {
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
                 });
             });
         </script>
         ";
+}
+
+?>
+<?php
+// mengecek di edit
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'update_berhasil') {
+        showAlert('success', 'Berhasil', 'pesanan berhasil di proses.');
+    }
+}
+
+//berhasil di hapus
+if (isset($_GET['hapus'])) {
+    $berhasil = $_GET['hapus'];
+    if ($berhasil === 'berhasil_dihapus') {
+        showAlert('success', 'Berhasil', 'Data Pesanan berhasil di HAPUS .');
     }
 }
 ?>
@@ -44,12 +54,12 @@ if (!function_exists('showAlert')) {
 <main id='main' class='main'>
 
     <div class='pagetitle'>
-        <h1>Data Pesanan Kiloan</h1>
+        <h1>Data Pesanan Laundry</h1>
         <nav>
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/data_pesanan.php'>Data Pesanan</a></li>
-                <li class=' breadcrumb-item active'>Data Pesanan Kiloan</li>
+                <li class=' breadcrumb-item active'>Data Pesanan Laundry</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -69,7 +79,7 @@ if (!function_exists('showAlert')) {
 
                             <div class='card'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'>Data Pesanan Jenis Kiloan</h5>
+                                    <h5 class='card-title'>Data Pesanan </h5>
                                     <p>Data ini terdiri dari semua Pesanan masuk laundry yang tersedia dalam aplikasi.
                                         <b>De'Ungu
                                             Laundry</b>.
@@ -114,7 +124,7 @@ if (!function_exists('showAlert')) {
                                                         echo '<td>' . $row['layanan_antar'] . '</td>';
                                                         echo '<td>' . $row['alamat'] . '</td>';
                                                         echo '<td>' . $row['proses_laundry'] . '</td>';
-                                                        echo '<td>' . $row['stasus_pembayaran'] . '</td>';
+                                                        echo '<td>' . $row['status_pembayaran'] . '</td>';
 
                                                         // Kolom aksi dengan ikon edit dan delete
                                                         echo "<td class='text-center '>";
@@ -124,9 +134,10 @@ if (!function_exists('showAlert')) {
 </a>";
                                                 ?>
                                                         <!-- delete -->
-                                                        <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan' onclick="deletepesanan(<?= $row['id_order'] ?>, 'order')">
+                                                        <a class='btn btn-danger btn-sm delete-btn ml-2' title='Tolak Pesanan' onclick="deleteConfirmation(<?= $row['id_order'] ?>, 'order')">
                                                             <i class='bi bi-x-circle'></i>
                                                         </a>
+
 
                                                 <?php
                                                         echo '</td>';
@@ -150,13 +161,13 @@ if (!function_exists('showAlert')) {
 
                                                             // Formulir Edit
                                                             echo "<div class='modal-body'>";
-                                                            echo "<form action='../backend/edit_jenis_laundry.php' method='POST'>";
-                                                            echo "<input type='hidden' name='id_jenis_laundry' value='" . $jenislaundry['id_order'] . "'>";
+                                                            echo "<form action='../backend/proses_pemesanan' method='POST'>";
+                                                            echo "<input type='hidden' name='id_order' value='" . $jenislaundry['id_order'] . "'>";
 
                                                             //
                                                             echo "<div class='mb-4'>";
                                                             echo "<label for='no_telp' class='form-label'>Nama Produk</label>";
-                                                            echo "<input type='text' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['nama_pelanggan'] . "' required readonly >";
+                                                            echo "<input type='text' class='form-control' id='nama_pelanggan' name='nama_pelanggan' value='" . $jenislaundry['nama_pelanggan'] . "' required readonly >";
                                                             echo '</div>';
 
                                                             //
@@ -168,24 +179,24 @@ if (!function_exists('showAlert')) {
 
                                                             echo "<div class='mb-3'>";
                                                             echo "<label for='no_telp' class='form-label'>Resi Pesanan</label>";
-                                                            echo "<input type='text' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['resi_pesanan'] . "' required readonly  >";
+                                                            echo "<input type='text' class='form-control' id='resi_pesanan' name='resi_pesanan' value='" . $jenislaundry['resi_pesanan'] . "' required readonly  >";
                                                             echo '</div>';
                                                             ///
                                                             echo "<div class='mb-4'>";
                                                             echo "<label for='no_telp' class='form-label'>Jumlah Kilo/satuan</label>";
-                                                            echo "<input type='number' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['jumlah_kilo'] . "' >";
+                                                            echo "<input type='number' class='form-control' id='jumlah_kilo' name='jumlah_kilo' value='" . $jenislaundry['jumlah_kilo'] . "' >";
                                                             echo '</div>';
 
                                                             //
                                                             echo "<div class='mb-4'>";
                                                             echo "<label for='no_telp' class='form-label'>Total Harga</label>";
-                                                            echo "<input type='number' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['total_harga'] . "' >";
+                                                            echo "<input type='number' class='form-control' id='total_harga' name='total_harga' value='" . $jenislaundry['total_harga'] . "' >";
                                                             echo '</div>';
                                                             //
 
                                                             echo "<div class='mb-3'>";
                                                             echo "<label for='nama_jenis' class='form-label'>Proses Laundry</label>";
-                                                            echo " <select class='form-select' name='nama_jenis_laundry' required>";
+                                                            echo " <select class='form-select' name='proses_laundry' required>";
                                                             echo '  <option selected disabled>pilih...</option>';
                                                             echo " <option value='menunggu' " . ($jenislaundry['proses_laundry'] == 'menunggu' ? 'selected' : '') . '>Menunggu</option>';
                                                             echo "  <option value='diproses' " . ($jenislaundry['proses_laundry'] == 'diproses' ? 'selected' : '') . '>Di Proses</option>';
@@ -194,12 +205,13 @@ if (!function_exists('showAlert')) {
                                                             echo '</div>';
                                                             //
 
+                                                            //
                                                             echo "<div class='mb-3'>";
                                                             echo "<label for='nama_jenis' class='form-label'>Status Pembayaran</label>";
-                                                            echo " <select class='form-select' id='pembayaran' name='status_pembayaran' required>";
+                                                            echo " <select class='form-select' name='status_pembayaran' required>";
                                                             echo '  <option selected disabled>pilih...</option>';
-                                                            echo " <option value='belumbayar' " . ($jenislaundry['sttus_pembayaran'] == 'belumbayar' ? 'selected' : '') . '>belum bayar</option>';
-                                                            echo "  <option value='DP' " . ($jenislaundry['status_pembayaran'] == 'DP' ? 'selected' : '') . '>Uang muka(DP)</option>';
+                                                            echo " <option value='belumbayar' " . ($jenislaundry['status_pembayaran'] == 'belumbayar' ? 'selected' : '') . '>Belum Bayar</option>';
+                                                            echo "  <option value='DP' " . ($jenislaundry['status_pembayaran'] == 'DP' ? 'selected' : '') . '>Uang Muka(DP)</option>';
                                                             echo "  <option value='lunas' " . ($jenislaundry['status_pembayaran'] == 'lunas' ? 'selected' : '') . '>Lunas</option>';
                                                             echo ' </select>';
                                                             echo '</div>';
@@ -207,7 +219,7 @@ if (!function_exists('showAlert')) {
 
                                                             echo "<div class='mb-4'>";
                                                             echo "<label for='no_telp' class='form-label'>Total Bayar</label>";
-                                                            echo "<input type='number' class='form-control' id='nama_produk' name='nama_produk' value='" . $jenislaundry['jumlah_bayar'] . "' >";
+                                                            echo "<input type='number' class='form-control' id='jumlah_bayar' name='jumlah_bayar' value='" . $jenislaundry['jumlah_bayar'] . "' >";
                                                             echo '</div>';
 
 

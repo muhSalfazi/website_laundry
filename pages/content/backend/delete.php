@@ -33,6 +33,12 @@ class DataDeleter
 
         return $result;
     }
+    public function deleteorder_pesanan($id_order)
+    {
+        $result = mysqli_query($this->db_connect, "DELETE FROM `order` WHERE id_order = $id_order");
+
+        return $result;
+    }
 }
 
 // Usage
@@ -45,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
     if ($result) {
         header("Location: ../admin/pelanggan.php?hapus=berhasil_dihapus");
     } else {
-        header( 'Location: ../../../pages-error-404.html' );
+        header('Location: ../../../pages-error-404.html');
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_jenis_laundry'])) {
     $id_jenis_laundry = $_GET['id_jenis_laundry'];
@@ -56,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
     if ($result) {
         header("Location: ../admin/jenis_laundry.php?hapus=berhasil_dihapus");
     } else {
-        header( 'Location: ../../../pages-error-404.html' );
+        header('Location: ../../../pages-error-404.html');
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_stok_barang'])) {
     $id_stok_barang = $_GET['id_stok_barang'];
@@ -67,7 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
     if ($result) {
         header("Location: ../admin/stok_barang.php?hapus=berhasil_dihapus");
     } else {
-        header( 'Location: ../../../pages-error-404.html' );
+        header('Location: ../../../pages-error-404.html');
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_order'])) {
+    $id_order = $_GET['id_order'];
+
+    $dataDeleter = new DataDeleter($db_connect);
+    $result = $dataDeleter->deleteorder_pesanan($id_order);
+
+    if ($result) {
+        header("Location: ../admin/data_pesanan?hapus=berhasil_dihapus");
+    } else {
+        header('Location: ../../../pages-error-404.html');
     }
 } else {
     echo "Invalid request.";

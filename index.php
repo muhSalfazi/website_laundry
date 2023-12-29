@@ -147,8 +147,6 @@ if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
 session_write_close(); // Tutup session
 ?>
 
-
-
     <main>
         <div class="loading-overlay" id="loading-overlay">
             <div class="loading-spinner"></div>
@@ -206,7 +204,7 @@ session_write_close(); // Tutup session
                                         </div>
                                     </form>
                                     <div class='col-12 mt-3'>
-                                        <a href="lupa_password.html">Lupa Password?</a>
+                                        <a href="lupa_password.php">Lupa Password?</a>
                                     </div>
                                 </div>
                             </div>

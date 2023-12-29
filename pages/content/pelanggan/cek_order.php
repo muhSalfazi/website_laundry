@@ -61,11 +61,13 @@ if (isset($_POST['cek_order'])) {
                         <h5 class='card-title'>CEK ORDER</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation'
+                            novalidate>
 
                             <div class='col-md-12'>
                                 <label for='validationCustom02' class='form-label'>Resi Pesanan</label>
-                                <input type='text' class='form-control' name='resi_pesanan' placeholder="masukan resi anda" required>
+                                <input type='text' class='form-control' name='resi_pesanan'
+                                    placeholder="masukan resi anda" required>
                                 <div class='invalid-feedback'>
                                     Harap Berikan Resi Pesanan Yang Valid
                                 </div>
@@ -109,14 +111,17 @@ if (isset($_POST['cek_order'])) {
                                     <thead>
                                         <tr>
                                             <th scope='col'>No</th>
-                                            <th scope='col'>nama pelanggan</th>
-                                            <th scope='col'>jenis layanan</th>
-                                            <th scope='col'>jenis_laundry</th>
-                                            <th scope='col'>resi pesanan</th>
+                                            <th scope='col'>Nama Pelanggan</th>
+                                            <th scope='col'>Jenis Layanan</th>
+                                            <th scope='col'>Jenis Laundry</th>
+                                            <th scope='col'>Resi Pesanan</th>
+                                            <th scope='col'>Jumlah Kilo/Satuan</th>
+                                            <th scope='col'>Total Harga</th>
                                             <th scope='col'>layanan antar</th>
                                             <th scope='col'>Alamat</th>
                                             <th scope='col'>proses laundry</th>
                                             <th scope='col'>status pembayaran</th>
+                                            <th scope='col'>Total Bayar</th>
 
                                             <!-- Kolom untuk ikon edit dan delete -->
                                         </tr>
@@ -135,10 +140,13 @@ if (isset($_POST['cek_order'])) {
                                                 echo '<td>' . $row['jenis_layanan'] . '</td>';
                                                 echo '<td>' . $row['jenis_laundry'] . '</td>';
                                                 echo '<td>' . $row['resi_pesanan'] . '</td>';
+                                                echo '<td>' . $row['jumlah_kilo'] . '</td>';
+                                                echo '<td>' . $row['total_harga'] . '</td>';
                                                 echo '<td>' . $row['layanan_antar'] . '</td>';
                                                 echo '<td>' . $row['alamat'] . '</td>';
                                                 echo '<td>' . $row['proses_laundry'] . '</td>';
-                                                echo '<td>' . $row['stasus_pembayaran'] . '</td>';
+                                                echo '<td>' . $row['status_pembayaran'] . '</td>';
+                                                echo '<td>' . $row['jumlah_bayar'] . '</td>';
 
                                                 // Kolom aksi dengan ikon edit dan delete
                                                 echo '</tr>';
