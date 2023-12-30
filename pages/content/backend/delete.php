@@ -53,17 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
     } else {
         header('Location: ../../../pages-error-404.html');
     }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_jenis_laundry'])) {
-    $id_jenis_laundry = $_GET['id_jenis_laundry'];
-
-    $dataDeleter = new DataDeleter($db_connect);
-    $result = $dataDeleter->deleteJenisLaundry($id_jenis_laundry);
-
-    if ($result) {
-        header("Location: ../admin/jenis_laundry.php?hapus=berhasil_dihapus");
-    } else {
-        header('Location: ../../../pages-error-404.html');
-    }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_stok_barang'])) {
     $id_stok_barang = $_GET['id_stok_barang'];
 
@@ -71,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
     $result = $dataDeleter->deleteStokBarang($id_stok_barang);
 
     if ($result) {
-        header("Location: ../admin/stok_barang.php?hapus=berhasil_dihapus");
+        header("Location: ../admin/stok_investaris.php?hapus=berhasil_dihapus");
     } else {
         header('Location: ../../../pages-error-404.html');
     }

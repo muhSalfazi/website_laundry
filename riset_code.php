@@ -1,61 +1,5 @@
 <?php
-//lupa_password
-// Import file koneksi ke database
-include './pages/core/connection.php';
-
-// Inisialisasi variabel pesan
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Mendapatkan email dari form
-    $email = $_POST['email'];
-
-    // Query untuk mencari email di database
-    $query = "SELECT * FROM register WHERE email = '$email'";
-    $result = mysqli_query($db_connect, $query);
-
-    if ($result) {
-        // Jika email ditemukan dalam database
-        if (mysqli_num_rows($result) > 0) {
-            // Tampilkan formulir reset password
-            $message = '<div class="modal fade" id="smallModal" tabindex="-1">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Reset Password</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="process_reset_password.php" method="post">
-                                            <div class="form-group">
-                                                <label for="new_password" class="form-label">Password Baru</label>
-                                                <input type="password" name="new_password" class="form-control" id="new_password" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="new_password_again" class="form-label">Password (Again)</label>
-                                                <input type="password" name="new_password_again" class="form-control" id="new_password_again" required />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>';
-        } else {
-            // Jika email tidak ditemukan dalam database
-            $message = 'Email tidak ditemukan dalam database.';
-        }
-    } else {
-        // Jika terjadi kesalahan dalam query
-        die('Location: ../../../pages-error-404.html ' . mysqli_error($db_connect));
-    }
-}
-?>
-<?php
-
+//riset_code.php
 function showAlert($icon, $title, $message, $redirect = null)
 {
     echo "
@@ -74,27 +18,31 @@ function showAlert($icon, $title, $message, $redirect = null)
     </script>
     ";
 }
-?>
-<!--create-->
-
-<?php
 
 // mengecek di tambahkan
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'add_berhasil') {
+        showAlert('success', 'Berhasil', ' Instruksi reset password telah dikirim ke email Anda.');
+    }
+}
 
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'add_gagal') {
-        showAlert('error', 'Gagal', ' Email tidak ditemukan dalam database.');
+        showAlert('error', 'Gagal', ' verification code tidak cocok dalam database');
     }
 }
-
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'kadaluarsa') {
-        showAlert('error', 'gagal', ' Token riset tidak valid atau sudah kadaluwarsa.');
+        showAlert('error', 'Gagal', ' Token Kadaluarsa');
     }
 }
+
 ?>
+<!-- Rest of your HTML code remains unchanged -->
+
 <!DOCTYPE html>
 <html lang="ind">
 
@@ -111,9 +59,7 @@ if (isset($_GET['gagal'])) {
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -146,8 +92,7 @@ if (isset($_GET['gagal'])) {
 <body>
     <main>
         <div class="container">
-            <section
-                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -163,24 +108,21 @@ if (isset($_GET['gagal'])) {
                                 <div class="card-body">
                                     <div class="pt-4 pb-2">
                                         <h5 class="card-title text-center pb-0 fs-4">
-                                            Masukkan email Anda
+                                            Riset Code
                                         </h5>
                                         <p class="text-center small">
-                                            Masukkan nama email Anda untuk memvalidasi akun
+                                            Masukkan verification code untuk memvalidasi akun
                                         </p>
                                     </div>
 
-                                    <form action="./pages/content/backend/reset_password.php" method="post"
-                                        id="validateForm">
+                                    <form action="./pages/content/backend/cek_code.php" method="post" id="validateForm">
                                         <div class="form-group">
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="email" name="email" class="form-control" id="email"
-                                                        required />
+                                                    <input type="text" name="verification_code" class="form-control" id="verification_code" placeholder="Enter Code" required />
                                                     <div class="invalid-feedback">
-                                                        Silakan masukkan alamat email Anda.
+                                                        Silakan masukkan kode verifikasi Anda.
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,6 +133,7 @@ if (isset($_GET['gagal'])) {
                                             </button>
                                         </div>
                                     </form>
+
                                     <div class="col-12 mt-3">
                                         <a href="./">Kembali ke halaman login!</a>
                                     </div>

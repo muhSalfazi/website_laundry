@@ -1,3 +1,4 @@
+<!-- index -->
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -142,6 +143,13 @@ if (isset($_GET['gagal'])) {
 if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
     showAlert($_SESSION['alertType'], $_SESSION['alertTitle'], $_SESSION['alertMessage']);
     $_SESSION['showAlert'] = false; // Setelah menampilkan pesan, set session menjadi false
+}
+
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'add_password') {
+        showAlert('success', 'Berhasil', ' Password berhasil direset.');
+    }
 }
 
 session_write_close(); // Tutup session

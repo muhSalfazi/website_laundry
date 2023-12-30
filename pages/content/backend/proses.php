@@ -29,16 +29,7 @@ class DataFetcher
         return $queryGetListUser;
     }
 
-    public function getJenisLaundry()
-    {
-        $jenisLaundry = mysqli_query($this->db_connect, 'SELECT id_jenis_laundry, nama_jenis_laundry, nama_produk, harga_perkilo, created_at,jenis_layanan FROM jenis_laundry');
-
-        if (!$jenisLaundry) {
-            header('Location: ../../../pages-error-404.html');
-        }
-
-        return $jenisLaundry;
-    }
+   
 
     public function getStokBarang()
     {
@@ -70,7 +61,7 @@ $dataFetcher = new DataFetcher($db_connect);
 $listUser = $dataFetcher->getListUser();
 
 // Get Jenis Laundry
-$jenisLaundry = $dataFetcher->getJenisLaundry();
+
 
 // Get Stok Barang
 $stokBarang = $dataFetcher->getStokBarang();

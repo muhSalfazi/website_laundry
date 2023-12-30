@@ -28,12 +28,12 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 <main id='main' class='main'>
 
     <div class='pagetitle'>
-        <h1>Order Layanan Setrika</h1>
+        <h1>Order Pesanan</h1>
         <nav>
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard'>Home</a></li>
-                <li class='breadcrumb-item'><a href='../../content/pelanggan/order'>order</a></li>
-                <li class=' breadcrumb-item active'>Cuci+Setrika </li>
+
+                <li class=' breadcrumb-item active'>order Pesanan </li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -48,16 +48,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                 <div class='card'>
                     <div class='card-body'>
                         <h5 class='card-title'>Order layanan Setrika</h5>
-                        <a href='' class='btn btn-primary' data-bs-toggle="modal"
-                            data-bs-target="#modalDialogScrollable">
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                                class='bi bi-bag-check-fill' viewBox='0 0 16 16'>
-                                <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd'
-                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
-                            </i>
-                            Daftar Kategori Yang Tersedia
-                        </a>
+
                         <!-- Custom Styled Validation -->
                         <form action='../backend/order' method='post' enctype='multipart/form-data'
                             class='row g-3 needs-validation' novalidate>
@@ -97,30 +88,10 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' id="jenis" name='jenis_laundry' required>
-                                    <?php
-                                    // Fetch jenis laundry from the database
-                                    $jenisLaundryOptions = "";
-                                    while ($row = mysqli_fetch_array($jenisLaundry)) {
-                                        $selected = ($jenis_laundry_input == $row['jenis_layanan']) ? 'selected' : '';
-                                        $jenisLaundryOptions .= "<option value='" . $row['jenis_layanan'] . "' $selected>" . $row['jenis_layanan'] . "</option>";
-                                    }
-                                    echo $jenisLaundryOptions;
-                                    ?>
+
                                 </select>
                                 <div class='invalid-feedback'>
-                                    <?php
-                                    // Tambahkan logika untuk menampilkan pesan kesalahan
-                                    if (isset($_POST['submit'])) {
-                                        $jenis_laundry_input = $_POST['jenis_laundry'];
 
-                                        // Check if the selected jenis laundry is valid
-                                        $validJenisLaundry = mysqli_query($conn, "SELECT * FROM jenis_laundry WHERE jenis_layanan = '$jenis_laundry_input'");
-                                        if (mysqli_num_rows($validJenisLaundry) == 0) {
-                                            $jenisLaundryError = "Silakan pilih jenis laundry yang valid.";
-                                            echo $jenisLaundryError;
-                                        }
-                                    }
-                                    ?>
                                 </div>
                             </div>
 
@@ -133,15 +104,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                                     required> -->
                                 </select>
                                 <div class='invalid-feedback'>
-                                    <?php
-                                    // Tambahkan logika untuk menampilkan pesan kesalahan
-                                    if (isset($_POST['submit'])) {
-                                        $nama_produk = $_POST['nama_produk'];
-                                        if (empty($nama_produk)) {
-                                            echo "Harap berikan produk yang valid.";
-                                        }
-                                    }
-                                    ?>
+
                                 </div>
                             </div>
 
@@ -197,62 +160,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
 <?php
 require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 ?>
-
-<div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><strong>Daftar Katergori Yang tersedia</strong></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class=" table-responsive">
-                    <!-- Table with stripped rows -->
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Jenis Layanan</th>
-                                <th scope="col">Jenis Kategori</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Harga</th>
-
-                                <!-- Kolom untuk ikon edit dan delete -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-
-                            $no = 0;
-                            // Check if there are rows to fetch
-                            if (mysqli_num_rows($jenisLaundry) > 0) {
-                                while ($row = mysqli_fetch_array($jenisLaundry)) {
-                                    if ($row['jenis_layanan'] == 'setrika') {
-                                        $no++;
-                                        echo "<tr>";
-                                        echo "<th scope='row'>" . $no . "</th>";
-                                        echo "<td>" . $row['jenis_layanan'] . "</td>";
-                                        echo "<td>" . $row['nama_jenis_laundry'] . "</td>";
-
-                                        echo "<td>" . $row['nama_produk'] . "</td>";
-                                        echo "<td>" . $row['harga_perkilo'] . "</td>";
-                                    }
-                                }
-                            }
-
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- modal -->
 <!-- pilih layanan -->
 <script>
 $(document).ready(function() {

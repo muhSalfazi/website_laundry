@@ -61,11 +61,10 @@ class StokBarang extends Barang
                 mysqli_query($this->db_connect, "INSERT INTO stok_barang (nama_barang, kode_barang, total_barang, image, created_at)
             VALUES ('$nama', '$resiNumber', '$total', 'upload/$randomFilename', '$created_at')");
 
-                echo "<script>window.location.href = '../admin/stok_barang.php?berhasil=add_berhasil';</script>";
+                echo "<script>window.location.href = '../admin/stok_investaris.php?berhasil=add_berhasil';</script>";
             } else {
                 header('Location: ../../core/pages-error-404.html');
-        exit();
-                
+                exit();
             }
         }
     }

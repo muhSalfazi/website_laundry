@@ -4,6 +4,7 @@ include '../../core/connection.php';
 require '../backend/assets/phpmailer/PHPMailer.php';
 require '../backend/assets/phpmailer/SMTP.php';
 require '../backend/assets/phpmailer/Exception.php';
+
 // PHPMailer/src/PHPMailer.php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -35,11 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Buat token reset password
             $token = bin2hex(random_bytes(32));
 
-            // Simpan token di database (tambahkan ke tabel yang sesuai)
+            // Set waktu kadaluwarsa (misalnya, 5 menit dari sekarang)
+            $expiryTime = date('Y-m-d H:i:s', strtotime('+5 minutes'));
 
-            // Simpan kode verifikasi di database (tambahkan ke tabel yang sesuai)
+            // Simpan kode verifikasi dan waktu kadaluwarsa di database
             $verificationCode = generateRandomCode(6);
-            $updateQuery = "UPDATE `register` SET `verification_code` = '$verificationCode' WHERE `email` = '$email'";
+            $updateQuery = "UPDATE register SET verification_code = '$verificationCode', code_expiry = '$expiryTime' WHERE `email` = '$email'";
             mysqli_query($db_connect, $updateQuery);
 
             // Kirim email reset password ke pengguna menggunakan PHPMailer
@@ -59,24 +61,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->setFrom('salmanfauzi0512@gmail.com', 'DEUnguLaundry'); // Ganti dengan alamat email Anda
                 $mail->addAddress($email);
                 $mail->Subject = 'Reset Password';
-                $mail->Body = "
-                Anda telah menagajukan reset password 
-                silahkan masukan kode berikut
-                untuk verifikasi: $verificationCode";
+                $mail->Body = 'Anda telah mengajukan reset password. Silakan masukkan kode berikut untuk verifikasi: ' . $verificationCode . PHP_EOL . 
+                
+                'Kode verifikasi ini memiliki jangka waktu kadaluwarsa selama 5 menit sejak saat pembuatan.';
+
+
 
                 // Kirim email
                 $mail->send();
-
-                echo "Instruksi reset password telah dikirim ke email Anda.";
+                echo "<script>window.location.href = '../../../riset_code.php?berhasil=add_berhasil';</script>";
             } catch (Exception $e) {
                 echo "Gagal mengirim email. Pesan error: {$mail->ErrorInfo}";
             }
         } else {
-            echo "Email tidak ditemukan dalam database.";
+            echo "<script>window.location.href = '../../../lupa_password.php?gagal=add_gagal';</script>";
         }
     } else {
         // Handle kesalahan eksekusi query
-        echo "Error: " . mysqli_error($connection);
+        echo "Error: " . mysqli_error($db_connect);
     }
 }
-?>
