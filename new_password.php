@@ -1,26 +1,15 @@
 <?php
-// new_password.php
-include './pages/core/connection.php';
+    //new_password
+    // Pastikan untuk memulai sesi di awal skrip
+session_start();
 
-// Mendapatkan email dari URL (Anda mungkin perlu mengamankan input ini)
-$email = $_GET['email'];
-
-// Query untuk memeriksa apakah email telah melakukan riset
-$query = "SELECT * FROM register WHERE email = '$email' AND verification_code IS NOT NULL AND code_expiry >= NOW()";
-$result = mysqli_query($db_connect, $query);
-
-if ($result && mysqli_num_rows($result) > 0) {
-    // Pengguna telah melakukan riset dan token masih berlaku
-    // Tampilkan konten new_password.php
-} else {
-    // Pengguna belum melakukan riset atau token sudah kadaluwarsa
-    // Redirect ke halaman lain atau tampilkan pesan sesuai kebijakan Anda
-
-    echo "<script>window.location.href = 'lupa_password?gagal=kadaluarsa';</script>";
+// Pengecekan apakah verifikasi sudah selesai
+if (!isset($_SESSION['verification_completed']) || !$_SESSION['verification_completed']) {
+    // Redirect ke riset_code.php atau halaman lainnya
+    header("Location: riset_code.php");
     exit();
 }
-?><?php
-    //new_password
+
     function showAlert($icon, $title, $message, $redirect = null)
     {
         echo "

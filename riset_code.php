@@ -1,5 +1,17 @@
 <?php
 //riset_code.php
+
+session_start();
+
+// Setelah verifikasi berhasil, atur variabel sesi
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'add_berhasil') {
+        $_SESSION['verification_completed'] = true;
+        showAlert('success', 'Berhasil', ' Instruksi reset password telah dikirim ke email Anda.');
+    }
+}
+
 function showAlert($icon, $title, $message, $redirect = null)
 {
     echo "
@@ -20,13 +32,6 @@ function showAlert($icon, $title, $message, $redirect = null)
 }
 
 // mengecek di tambahkan
-if (isset($_GET['berhasil'])) {
-    $berhasil = $_GET['berhasil'];
-    if ($berhasil === 'add_berhasil') {
-        showAlert('success', 'Berhasil', ' Instruksi reset password telah dikirim ke email Anda.');
-    }
-}
-
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'add_gagal') {
@@ -59,7 +64,9 @@ if (isset($_GET['gagal'])) {
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -92,7 +99,8 @@ if (isset($_GET['gagal'])) {
 <body>
     <main>
         <div class="container">
-            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -115,12 +123,13 @@ if (isset($_GET['gagal'])) {
                                         </p>
                                     </div>
 
-                                    <form action="./pages/content/backend/cek_code.php" method="post" id="validateForm">
-                                        <div class="form-group">
+                                    <form action="./pages/content/backend/cek_code.php" method="post">
+                                        <div class=" form-group">
                                             <div class="col-12">
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="text" name="verification_code" class="form-control" id="verification_code" placeholder="Enter Code" required />
+                                                    <input type="text" name="verification_code" class="form-control"
+                                                        placeholder="Enter Code" required />
                                                     <div class="invalid-feedback">
                                                         Silakan masukkan kode verifikasi Anda.
                                                     </div>
@@ -145,9 +154,6 @@ if (isset($_GET['gagal'])) {
             </section>
         </div>
     </main>
-    <!-- End #main -->
-
-    <?php echo $message; ?>
 
 </body>
 

@@ -1,60 +1,4 @@
 <?php
-//lupa_password
-// Import file koneksi ke database
-include './pages/core/connection.php';
-
-// Inisialisasi variabel pesan
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Mendapatkan email dari form
-    $email = $_POST['email'];
-
-    // Query untuk mencari email di database
-    $query = "SELECT * FROM register WHERE email = '$email'";
-    $result = mysqli_query($db_connect, $query);
-
-    if ($result) {
-        // Jika email ditemukan dalam database
-        if (mysqli_num_rows($result) > 0) {
-            // Tampilkan formulir reset password
-            $message = '<div class="modal fade" id="smallModal" tabindex="-1">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Reset Password</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="process_reset_password.php" method="post">
-                                            <div class="form-group">
-                                                <label for="new_password" class="form-label">Password Baru</label>
-                                                <input type="password" name="new_password" class="form-control" id="new_password" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="new_password_again" class="form-label">Password (Again)</label>
-                                                <input type="password" name="new_password_again" class="form-control" id="new_password_again" required />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>';
-        } else {
-            // Jika email tidak ditemukan dalam database
-            $message = 'Email tidak ditemukan dalam database.';
-        }
-    } else {
-        // Jika terjadi kesalahan dalam query
-        die('Location: ../../../pages-error-404.html ' . mysqli_error($db_connect));
-    }
-}
-?>
-<?php
 
 function showAlert($icon, $title, $message, $redirect = null)
 {
@@ -66,7 +10,7 @@ function showAlert($icon, $title, $message, $redirect = null)
                 title: '$title',
                 html: '<p class=\"p-popup\">$message</p>',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 2500
             }).then(() => {
                 " . ($redirect ? "window.location.href = '$redirect';" : '') . "
             });
@@ -94,7 +38,16 @@ if (isset($_GET['gagal'])) {
         showAlert('error', 'gagal', ' Token riset tidak valid atau sudah kadaluwarsa.');
     }
 }
+if (isset($_GET['gagal'])) {
+    $berhasil = $_GET['gagal'];
+    if ($berhasil === 'reset_waktu') {
+        showAlert('error', 'gagal', ' Anda sudah melalukan riset Password, anda harus menunggu selama 30 hari sebelum menyetel ulang lagi.');
+    }
+}
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="ind">
 
@@ -145,6 +98,7 @@ if (isset($_GET['gagal'])) {
 
 <body>
     <main>
+
         <div class="container">
             <section
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -204,7 +158,7 @@ if (isset($_GET['gagal'])) {
     </main>
     <!-- End #main -->
 
-    <?php echo $message; ?>
+
 
 </body>
 

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Perbarui password tanpa menggunakan verification_code
-    $query = "UPDATE register SET password = '$hashedPassword'";
+    $query = "UPDATE register SET password = '$hashedPassword' WHERE verification_code = '$verificationCode'";
     $result = mysqli_query($db_connect, $query);
 
     if ($result) {

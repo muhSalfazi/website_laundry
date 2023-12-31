@@ -35,33 +35,27 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                             <!-- Slides with indicators -->
                             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleIndicators"
-                                        data-bs-slide-to="0" class="active" aria-current="true"
-                                        aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators"
-                                        data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators"
-                                        data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="../../../assets/img/foto4.jpg" class="d-block w-100" alt="foto1">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="../../../assets/img/foto2.jpg" class="d-block w-100" alt="foto2">
+                                        <img src="../../../assets/img/daftar_harga.jpg" class="d-block w-100" alt="foto2">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="../../../assets/img/foto5.jpg" class="d-block w-100" alt="foto3">
+                                        <img src="../../../assets/img/logo.jpg" class="d-block w-100" alt="foto3">
                                     </div>
                                 </div>
 
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
@@ -91,16 +85,7 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="info-box card">
-                        <i class="bi bi-star-fill"></i>
-                        <h3>Kualitas Terbaik</h3>
-                        <p>Prioritas kami adalah kebersihan dan kualitas pelayanan.
-                            Menggunakan teknologi dan produk pembersih terkini untuk hasil optimal.<br>
-                            Tim berpengalaman kami berkomitmen memberikan hasil terbaik untuk pakaian dan karpet
-                            Anda.</p>
-                    </div>
-                </div>
+
                 <div class="col-lg-6">
                     <div class="info-box card">
                         <i class="bi bi-tools"></i>
@@ -110,17 +95,17 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                             Memberikan solusi lengkap untuk semua kebutuhan pembersihan Anda.</p>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="info-box card">
-                        <i class="bi bi-headset"></i>
-                        <h3>Pelayanan Penuh</h3>
-                        <p>Tim pelayanan pelanggan yang siap membantu dengan pertanyaan atau permintaan Anda.
-                            Memahami keunikan setiap pelanggan dan memberikan pengalaman pelayanan yang ramah dan
-                            personal.<br>
-                            Kami peduli terhadap kepuasan pelanggan dan berusaha untuk membuat setiap interaksi
-                            menyenangkan.</p>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <h3>Location</h3>
+                        <div class="table-responsive">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.2099833755533!2d107.38805237499157!3d-6.366865493623255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjInMDAuNyJTIDEwN8KwMjMnMjYuMyJF!5e0!3m2!1sid!2sid!4v1703974936514!5m2!1sid!2sid" width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
 
         </div>
