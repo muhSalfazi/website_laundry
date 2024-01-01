@@ -34,7 +34,7 @@ class LaundryProduct
         return $resiNumber;
     }
 
-    private function generateReceipt($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $created_at)
+    private function generateReceipt($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,)
     {
         $pdfOptions = new Options();
         $pdfOptions->set('isHtml5ParserEnabled', true);
@@ -42,7 +42,7 @@ class LaundryProduct
         $pdfOptions->set('isFontSubsettingEnabled', true);
 
         $dompdf = new Dompdf($pdfOptions);
-        $dompdf->loadHtml($this->getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $created_at));
+        $dompdf->loadHtml($this->getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,));
 
         // ( Optional ) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
@@ -56,7 +56,7 @@ class LaundryProduct
         $dompdf->stream($outputFilename);
     }
 
-    private function getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $created_at)
+    private function getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,)
     {
         ob_start();
 ?>
@@ -101,24 +101,26 @@ class LaundryProduct
 
         <body>
             <div class='receipt-container'>
-                <p><strong>Tanggal Order:</strong> <?php echo $created_at; ?></p>
+                <p><?php echo $created_at; ?></p>
                 <h1 style='color: darkorchid'>De'UnguLaundry</h1>
 
                 <p class="text-center align-center">
                     <strong>Terima kasih sudah menggunakan layanan ini</strong>
                 </p>
                 <p><strong>Nama Pelanggan:</strong> <?php echo $nama_pelanggan; ?></p>
+                <p><strong>Jenis Laundry :</strong> <?php echo $jenis_layanan; ?></p>
 
                 <p><strong>Jenis Laundry :</strong> <?php echo $jenis_laundry; ?></p>
 
                 <p><strong>Kategori Laundry:</strong> <?php echo $nama_produk; ?></p>
                 <p><strong>Resi Pesanan:</strong> <?php echo $kode_produk; ?></p>
-
+                <p><strong>Jenis antar :</strong> <?php echo  $layanan_antar; ?></p>
+                <br>
                 <p>
                     Jika Anda menggunakan layanan antar, mohon bersabar untuk staff kami menjemput cucian kotor Anda.
                 </p>
                 <p>
-                    Kami harap untuk dibawa kembali sebagai bukti Anda sudah memesan di <strong>DE'Ungu Laundry</strong>.
+                    Kami harap untuk dibawa kembali sebagai bukti Anda sudah memesan di de'ungu laundry.
                 </p>
             </div>
 
@@ -158,7 +160,7 @@ class LaundryProduct
 
             if ($jenis) {
                 // Generate receipt
-                $this->generateReceipt($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $layanan_antar, $created_at);
+                $this->generateReceipt($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,);
 
                 echo "<script>window.location.href = '../pelanggan/order?add=tambah_berhasil';</script>";
             } else {

@@ -32,18 +32,8 @@ if (isset($_GET['gagal'])) {
     }
 }
 
-if (isset($_GET['gagal'])) {
-    $berhasil = $_GET['gagal'];
-    if ($berhasil === 'kadaluarsa') {
-        showAlert('error', 'gagal', ' Token riset tidak valid atau sudah kadaluwarsa.');
-    }
-}
-if (isset($_GET['gagal'])) {
-    $berhasil = $_GET['gagal'];
-    if ($berhasil === 'reset_waktu') {
-        showAlert('error', 'gagal', ' Anda sudah melalukan riset Password, anda harus menunggu selama 30 hari sebelum menyetel ulang lagi.');
-    }
-}
+
+
 ?>
 
 

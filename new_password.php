@@ -1,18 +1,12 @@
 <?php
-    //new_password
-    // Pastikan untuk memulai sesi di awal skrip
+//new_password
+// Pastikan untuk memulai sesi di awal skrip
 session_start();
 
-// Pengecekan apakah verifikasi sudah selesai
-if (!isset($_SESSION['verification_completed']) || !$_SESSION['verification_completed']) {
-    // Redirect ke riset_code.php atau halaman lainnya
-    header("Location: riset_code.php");
-    exit();
-}
 
-    function showAlert($icon, $title, $message, $redirect = null)
-    {
-        echo "
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
     <script type='text/javascript'>
         document.addEventListener('DOMContentLoaded', () => {
             Swal.fire({
@@ -27,25 +21,25 @@ if (!isset($_SESSION['verification_completed']) || !$_SESSION['verification_comp
         });
     </script>
     ";
-    }
-    ?>
+}
+?>
 <!--create-->
 
 <?php
 
 // mengecek di tambahkan
 
-if (isset($_GET['berhasil'])) {
-    $berhasil = $_GET['berhasil'];
-    if ($berhasil === 'add_berhasil') {
-        showAlert('success', 'Berhasil', ' Code Terverifikasi.');
+if (isset($_GET['gagal'])) {
+    $berhasil = $_GET['gagal'];
+    if ($berhasil === 'kadaluarsa') {
+        showAlert('error', 'Gagal', ' Token Kadaluarsa');
     }
 }
 
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
-    if ($berhasil === 'add_gagal') {
-        showAlert('error', 'Gagal', ' Gagal mereset password.');
+    if ($berhasil === 'password_pendek') {
+        showAlert('error', 'Gagal', ' Validasi panjang minimal password.');
     }
 }
 if (isset($_GET['gagal'])) {
@@ -54,6 +48,22 @@ if (isset($_GET['gagal'])) {
         showAlert('error', 'Gagal', ' Konfirmasi password tidak cocok.');
     }
 }
+
+if (isset($_GET['gagal'])) {
+    $berhasil = $_GET['gagal'];
+    if ($berhasil === 'add_gagal') {
+        showAlert('error', 'Gagal', ' verification code tidak cocok dalam database');
+    }
+}
+
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'add_berhasil') {
+        $_SESSION['verification_completed'] = true;
+        showAlert('success', 'Berhasil', ' Instruksi reset password telah dikirim ke email Anda.');
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ind">
@@ -134,11 +144,12 @@ if (isset($_GET['gagal'])) {
                                         id="validateForm">
                                         <!-- Field password -->
                                         <div class="form-group">
+
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Password Baru</label>
+                                                <label for="confirm_password" class="form-label">Password Baru</label>
                                                 <div class="input-group has-validation">
-                                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="password" name="password" class="form-control"
+                                                    <span class="input-group-text" id="inputGroupPrepend">#</span>
+                                                    <input type="password" name="confirm_password" class="form-control"
                                                         required />
                                                 </div>
                                             </div>
@@ -146,14 +157,23 @@ if (isset($_GET['gagal'])) {
 
                                         <!-- Field konfirmasi password -->
                                         <div class="col-12">
-                                            <label for="confirm_password" class="form-label">Konfirmasi Password</label>
+                                            <label for="password" class="form-label">Konfirmasi Password</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="password" name="confirm_password" class="form-control"
-                                                    required />
+                                                <span class="input-group-text" id="inputGroupPrepend">#</span>
+                                                <input type="password" name="password" class="form-control" required />
                                             </div>
                                         </div>
 
+                                        <div class="col-12  mt-3">
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend">Enter Code</span>
+                                                <input type="text" name="verification_code" class="form-control"
+                                                    placeholder="kode verifikasi" required />
+                                                <div class="invalid-feedback">
+                                                    Silakan masukkan kode verifikasi Anda.
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- Tombol submit -->
                                         <div class="col-12 mt-3">
                                             <button type="submit" id="kode" class="btn btn-primary w-100">
