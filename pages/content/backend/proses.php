@@ -29,7 +29,7 @@ class DataFetcher
         return $queryGetListUser;
     }
 
-   
+
 
     public function getStokBarang()
     {
