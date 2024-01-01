@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($expiryTime >= $currentTime) {
                 $expiryTime = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-                $updateQuery = $db_connect->prepare("UPDATE register SET password = ?, update_password = ? WHERE verification_code = ?");
-                $updateQuery->bind_param("sss", $hashedPassword, $currentTime, $verificationCode);
+                $updateQuery = $db_connect->prepare("UPDATE register SET password = ? WHERE verification_code = ?");
+                $updateQuery->bind_param("ss", $hashedPassword, $verificationCode);
                 $updateQuery->execute();
 
                 echo "<script>window.location.href = '../../../?berhasil=ubah_password';</script>";
