@@ -147,7 +147,7 @@ if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
 
 if (isset($_GET['berhasil'])) {
     $berhasil = $_GET['berhasil'];
-    if ($berhasil === 'add_password') {
+    if ($berhasil === 'ubah_password') {
         showAlert('success', 'Berhasil', ' Password berhasil direset.');
     }
 }

@@ -105,6 +105,12 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                             </i>
                             Add Barang
                         </a>
+                        <a href='../backend/download_pdf.php' class='btn btn-primary' data-toggle='modal'>
+                            <i class='bi bi-file-earmark-pdf-fill' style='font-size: 16px;'></i>
+                            Download Data
+                        </a>
+
+
                         <p>Data ini terdiri dari semua stok barang laundry yang tersedia dalam aplikasi. <b>De'Ungu
                                 Laundry</b>.</p>
                         <!--table reponsif-->
