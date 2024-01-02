@@ -83,9 +83,8 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                     <div class="info-box card">
                         <i class="bi bi-check2-all"></i>
                         <h3>Harga Terjangkau</h3>
-                        <p>Kami mengakui bahwa kebersihan pakaian dan karpet adalah kebutuhan penting.<br>
-                            Menawarkan harga yang bersaing dan terjangkau untuk semua layanan kami.<br>
-
+                        <p>Kami mengakui bahwa kebersihan pakaian dan karpet adalah kebutuhan penting.
+                            Menawarkan harga yang bersaing dan terjangkau untuk semua layanan kami.
                             <strong>Komitmen kami adalah membuat layanan laundry menjadi terjangkau tanpa
                                 mengorbankan
                                 kualitas.</strong>
@@ -97,8 +96,8 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                     <div class="info-box card">
                         <i class="bi bi-tools"></i>
                         <h3>Jasa Penuh</h3>
-                        <p>Menyediakan layanan penuh mulai dari laundry kiloan hingga perawatan khusus karpet. <br>
-                            Perhatian khusus untuk memastikan setiap item kembali bersih dan segar.<br>
+                        <p>Menyediakan layanan penuh mulai dari laundry kiloan hingga perawatan khusus karpet.
+                            Perhatian khusus untuk memastikan setiap item kembali bersih dan segar.
                             Memberikan solusi lengkap untuk semua kebutuhan pembersihan Anda.</p>
                     </div>
                 </div>
@@ -109,7 +108,7 @@ require_once("{$base_dir}pages{$ds}core{$ds}header.php");
                         <div class="table-responsive">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.2099833755533!2d107.38805237499157!3d-6.366865493623255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjInMDAuNyJTIDEwN8KwMjMnMjYuMyJF!5e0!3m2!1sid!2sid!4v1703974936514!5m2!1sid!2sid"
-                                width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                width="1190" height="500" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
