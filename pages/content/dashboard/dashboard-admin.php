@@ -1,9 +1,10 @@
 <?php
 session_start();
 if ($_SESSION['role'] != 'admin') {
-    header('Location: ../../../');
-    exit();
+    header('Location:../../../');
+    exit(session_destroy());
 }
+
 function getDashboardData($filter = 'today')
 {
     global $db_connect;
@@ -14,7 +15,7 @@ function getDashboardData($filter = 'today')
               FROM `order`
               WHERE DATE(created_at) = CURDATE();";
 
-    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan WHERE DATE(created_at) = CURDATE();";
+    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
 
     if ($filter === 'this_month') {
         $query = "SELECT 
@@ -23,53 +24,49 @@ function getDashboardData($filter = 'today')
                   FROM `order`
                   WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
 
-        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
+        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
     } elseif ($filter === 'this_year') {
-        // Menampilkan data satu tahun ke belakang
         $query = "SELECT 
                     SUM(jumlah_bayar) AS pendapatan,
                     COUNT(id_order) AS sales
                   FROM `order`
-                  WHERE YEAR(created_at) BETWEEN YEAR(NOW())-1 AND YEAR(NOW());";
+                  WHERE YEAR(created_at) = YEAR(NOW());";
 
-        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan WHERE YEAR(created_at) BETWEEN YEAR(NOW())-1 AND YEAR(NOW());";
+        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
     }
 
     $result = mysqli_query($db_connect, $query);
     $result2 = mysqli_query($db_connect, $query2);
 
-    if ($result === false || $result2 === false) {
-        echo "Error: " . mysqli_error($db_connect);
+    if ($result && $result2) {
+        $data = [
+            'pendapatan' => 0,
+            'sales' => 0,
+            'pelanggan' => 0,
+        ];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data['pendapatan'] = $row['pendapatan'];
+            $data['sales'] = $row['sales'];
+        }
+
+        while ($row = mysqli_fetch_assoc($result2)) {
+            $data['pelanggan'] = $row['pelanggan'];
+        }
+
+        return $data;
+    } else {
         return false;
     }
-
-    $data = [
-        'pendapatan' => 0,
-        'sales' => 0,
-        'pelanggan' => 0,
-    ];
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data['pendapatan'] = $row['pendapatan'];
-        $data['sales'] = $row['sales'];
-    }
-
-    while ($row = mysqli_fetch_assoc($result2)) {
-        $data['pelanggan'] = $row['pelanggan'];
-    }
-
-    return $data;
 }
-
 
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
-
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'today';
 $dashboardData = getDashboardData($filter);
 ?>
-
 
 
 
