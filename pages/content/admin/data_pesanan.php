@@ -91,37 +91,43 @@ if (isset($_GET['hapus'])) {
                         <p>Data ini terdiri dari semua Pesanan masuk laundry yang tersedia dalam aplikasi.
                             <b>De'Ungu Laundry</b>.
                         </p>
+
                         <form method='GET' action=''>
                             <label for='filter'>Filter by:</label>
                             <select name='filter' id='filter'>
                                 <option value='today' <?php echo ($filter === 'today') ? 'selected' : ''; ?>>Today
                                 </option>
-                                <option value='month' <?php echo ($filter === 'month') ? 'selected' : ''; ?>>This Month
+                                <option value='month' <?php echo ($filter === 'month') ? 'selected' : ''; ?>>This
+                                    Month
                                 </option>
                                 <option value='year' <?php echo ($filter === 'year') ? 'selected' : ''; ?>>This Year
                                 </option>
-                                <option value='all' <?php echo ($filter === 'all') ? 'selected' : ''; ?>>All</option>
+                                <option value='all' <?php echo ($filter === 'all') ? 'selected' : ''; ?>>All
+                                </option>
                             </select>
-                            <button type='submit' class='btn btn-primary'>Tampilkan Data</button>
+                            <div class="mt-2">
+                                <button cltype='submit' class='btn btn-primary'>Tampilkan Data</button>
+                            </div>
                         </form>
-                        <div class=' table-responsive'>
-                            <table class='table datatable'>
-                                <thead>
-                                    <tr>
-                                        <th scope='col'>No</th>
-                                        <th scope='col'>nama pelanggan</th>
-                                        <th scope='col'>jenis layanan</th>
-                                        <th scope='col'>jenis_laundry</th>
-                                        <th scope='col'>resi pesanan</th>
-                                        <th scope='col'>layanan antar</th>
-                                        <th scope='col'>Alamat</th>
-                                        <th scope='col'>proses laundry</th>
-                                        <th scope='col'>status pembayaran</th>
-                                        <th scope='col'>opsi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
+                    </div>
+                    <div class=' table-responsive'>
+                        <table class='table datatable'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>No</th>
+                                    <th scope='col'>nama pelanggan</th>
+                                    <th scope='col'>jenis layanan</th>
+                                    <th scope='col'>jenis_laundry</th>
+                                    <th scope='col'>resi pesanan</th>
+                                    <th scope='col'>layanan antar</th>
+                                    <th scope='col'>Alamat</th>
+                                    <th scope='col'>proses laundry</th>
+                                    <th scope='col'>status pembayaran</th>
+                                    <th scope='col'>opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
                                     $no = 0;
                                     if (mysqli_num_rows($order) > 0) {
                                         while ($row = mysqli_fetch_array($order)) {
@@ -231,12 +237,12 @@ if (isset($_GET['hapus'])) {
                                         echo "<tr><td colspan='4'>No data available</td></tr>";
                                     }
                                     ?>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 

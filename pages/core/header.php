@@ -122,6 +122,7 @@ if (isset($_SESSION['id_register'])) {
 </style>
 
 
+
 <body>
     <!-- Button spinners -->
     <div class="loading-overlay" id="loading-overlay">

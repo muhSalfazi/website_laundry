@@ -56,80 +56,91 @@ class LaundryProduct
         $dompdf->stream($outputFilename);
     }
 
-    private function getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,)
+    private function getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at)
     {
         ob_start();
-?>
-        <!DOCTYPE html>
-        <html lang='en'>
+        ?>
+<!DOCTYPE html>
+<html lang='en'>
 
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>De'Ungu Laundry</title>
-            <style>
-                body {
-                    font-family: 'Arial', sans-serif;
-                    background-color: #f0f0f0;
-                }
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>De'Ungu Laundry</title>
+    <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+    }
 
-                .receipt-container {
-                    width: 80%;
-                    margin: 20px auto;
-                    border: 1px solid #ccc;
-                    padding: 20px;
-                    border-radius: 10px;
-                    background-color: #fff;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                }
+    .receipt-container {
+        width: 80%;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-                h1 {
-                    text-align: center;
-                    color: #333;
-                }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
 
-                p {
-                    margin: 10px 0;
-                    color: #555;
-                }
+    p {
+        margin: 10px 0;
+        color: #555;
+    }
 
-                strong {
-                    color: #333;
-                }
-            </style>
-        </head>
+    strong {
+        color: #333;
+    }
 
-        <body>
-            <div class='receipt-container'>
-                <p><?php echo $created_at; ?></p>
-                <h1 style='color: darkorchid'>De'UnguLaundry</h1>
+    .timestamp {
+        text-align: right;
+        color: #555;
+        font-size: 0.8em;
+    }
 
-                <p class="text-center align-center">
-                    <strong>Terima kasih sudah menggunakan layanan ini</strong>
-                </p>
-                <p><strong>Nama Pelanggan:</strong> <?php echo $nama_pelanggan; ?></p>
-                <p><strong>Jenis Laundry :</strong> <?php echo $jenis_layanan; ?></p>
+    .center-text {
+        text-align: center;
+    }
+    </style>
+</head>
 
-                <p><strong>Jenis Laundry :</strong> <?php echo $jenis_laundry; ?></p>
+<body>
+    <div class='receipt-container'>
 
-                <p><strong>Kategori Laundry:</strong> <?php echo $nama_produk; ?></p>
-                <p><strong>Resi Pesanan:</strong> <?php echo $kode_produk; ?></p>
-                <p><strong>Jenis antar :</strong> <?php echo  $layanan_antar; ?></p>
-                <br>
-                <p>
-                    Jika Anda menggunakan layanan antar, mohon bersabar untuk staff kami menjemput cucian kotor Anda.
-                </p>
-                <p>
-                    Kami harap untuk dibawa kembali sebagai bukti Anda sudah memesan di de'ungu laundry.
-                </p>
-            </div>
+        <h1 style='color: darkorchid'>De'UnguLaundry</h1>
+        <div class="timestamp">
+            <p><?php echo $created_at; ?></p>
+        </div>
+        <p class="text-center align-center">
+            <strong>Terima kasih sudah menggunakan layanan ini</strong>
+        </p>
+        <p><strong>Nama Pelanggan:</strong> <?php echo $nama_pelanggan; ?></p>
+        <p><strong>Jenis Layanan :</strong> <?php echo $jenis_layanan; ?></p>
 
-        </body>
+        <p><strong>Jenis Laundry :</strong> <?php echo $jenis_laundry; ?></p>
 
-        </html>
+        <p><strong>Kategori Laundry:</strong> <?php echo $nama_produk; ?></p>
+        <p><strong>Resi Pesanan:</strong> <?php echo $kode_produk; ?></p>
+        <p><strong>Jenis antar :</strong> <?php echo  $layanan_antar; ?></p>
+        <br>
+        <p class="center-text">
+            Jika Anda menggunakan layanan antar, mohon bersabar untuk staff kami menjemput cucian kotor Anda.
+            Kami harap untuk dibawa kembali sebagai bukti Anda sudah memesan di de'ungu laundry.
+        </p>
+    </div>
+
+</body>
+
+</html>
 <?php
         return ob_get_clean();
     }
+    
 
     public function addLaundry()
     {

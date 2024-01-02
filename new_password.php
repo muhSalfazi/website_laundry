@@ -149,7 +149,8 @@ if (isset($_GET['berhasil'])) {
                                                 <label for="confirm_password" class="form-label">Password Baru</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text" id="inputGroupPrepend">#</span>
-                                                    <input type="password" name="confirm_password" class="form-control"
+                                                    <input type="password" name="confirm_password"
+                                                        placeholder="minimal password 8 karakter" class="form-control"
                                                         required />
                                                 </div>
                                             </div>
@@ -160,7 +161,9 @@ if (isset($_GET['berhasil'])) {
                                             <label for="password" class="form-label">Konfirmasi Password</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">#</span>
-                                                <input type="password" name="password" class="form-control" required />
+                                                <input type="password" name="password"
+                                                    placeholder="minimal password 8 karakter" class="form-control"
+                                                    required />
                                             </div>
                                         </div>
 

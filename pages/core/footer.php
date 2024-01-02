@@ -87,7 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('main').classList.add('animated');
+});
+</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-pAAahXk1u5rwO30vqMvsPHUd2U94v0tE6n2t+RbeX7TlXsFP8h0XMToUO4CQ1+uDNkrA/+g6slCSx8EiDohS9A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+AOS.init();
+</script>
 
 <!-- Template Main JS File -->
 <script src="../../../assets/js/main.js"></script>

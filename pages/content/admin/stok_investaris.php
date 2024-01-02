@@ -80,8 +80,7 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
         <nav>
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
-                <li class=' breadcrumb-item active'>S
-                    tok Investaris</li>
+                <li class=' breadcrumb-item active'>Stok Investaris</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -96,16 +95,12 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                 <div class='card'>
                     <div class='card-body'>
                         <h5 class='card-title'>Stok Investaris</h5>
-                        <a href='./add_barang' class='btn btn-primary' data-toggle='modal'>
-                            <i xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
-                                class='bi bi-file-plus' viewBox='0 0 16 16'>
-                                <path d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6' />
-                                <path fill-rule='evenodd'
-                                    d='M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5' />
-                            </i>
+                        <a href='./add_barang' class="col-md-6">
+                            <i class=" bi bi-file-earmark-plus-fill"></i>
                             Add Barang
                         </a>
-                        <a href='../backend/download_pdf.php' class='btn btn-primary' data-toggle='modal'>
+
+                        <a class="mt-2" href='../backend/download_pdf.php' lass="col-md-6">
                             <i class='bi bi-file-earmark-pdf-fill' style='font-size: 16px;'></i>
                             Download Data
                         </a>
@@ -143,8 +138,7 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                    <td class="text-center"><a
-                                            href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                    <td class="text-center"><a href="<?= BASEURL . 'pages/content/' . $row['image']; ?>"
                                             target="_blank">Unduh</a>
                                     </td>
                                     <?php

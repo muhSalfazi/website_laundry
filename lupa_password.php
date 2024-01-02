@@ -83,11 +83,69 @@ if (isset($_GET['gagal'])) {
     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
+  
     ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  == -->
+    <style>
+    /* Loading Overlay */
+    .loading-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+        color: darkorchid;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .loading-spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+    }
+
+    .loading-text {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: "Pacifico", cursive;
+        /* Ganti 'Pacifico' dengan font yang diinginkan */
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+
 </head>
 
 <body>
     <main>
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">~ De'Ungu Laundry ~</div>
+        </div>
 
         <div class="container">
             <section
@@ -148,7 +206,39 @@ if (isset($_GET['gagal'])) {
     </main>
     <!-- End #main -->
 
+    <!-- Vendor JS Files -->
+    <script src='assets/vendor/apexcharts/apexcharts.min.js'></script>
+    <script src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js'>
+    </script>
+    <script src='assets/vendor/chart.js/chart.umd.js'></script>
+    <script src='assets/vendor/echarts/echarts.min.js'></script>
+    <script src='assets/vendor/quill/quill.min.js'></script>
+    <script src='assets/vendor/simple-datatables/simple-datatables.js'>
+    </script>
+    <script src='assets/vendor/tinymce/tinymce.min.js'></script>
+    <script src='assets/vendor/php-email-form/validate.js'></script>
+    <!-- spinners -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loadingOverlay = document.getElementById("loading-overlay");
 
+        // Sembunyikan overlay loading setelah halaman sepenuhnya dimuat
+        window.addEventListener("load", () => {
+            // Secara opsional, tambahkan penundaan sebelum menyembunyikan overlay
+            setTimeout(() => {
+                loadingOverlay.classList.add("hidden");
+
+                // Secara opsional, tambahkan penundaan sebelum mengatur display menjadi 'none'
+                setTimeout(() => {
+                    loadingOverlay.style.display = "none";
+                }, 500);
+            }, 400); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
+        });
+    });
+    </script>
+
+    <!-- Template Main JS File -->
+    <script src='assets/js/main.js'></script>
 
 </body>
 

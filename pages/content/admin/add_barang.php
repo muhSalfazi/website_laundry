@@ -21,7 +21,7 @@ if ($_SESSION['role'] != 'admin') {
             <ol class='breadcrumb'>
                 <li class='breadcrumb-item'><a href='../../content/dashboard/dashboard-admin'>Home</a></li>
                 <li class='breadcrumb-item'><a href='../../content/admin/stok_investaris.php'>Stok Inventaris</a></li>
-                <li class='breadcrumb-item'><a href='../../content/admin/stok_barang'>Stok Barang</a></li>
+
                 <li class=' breadcrumb-item active'>Add Jenis Laundry </li>
             </ol>
         </nav>
