@@ -41,7 +41,7 @@ if (!function_exists('showAlert')) {
 }
 ?>
 
-<main id='main' class='main'>
+<main id='main' class='main' class='main animated'>
 
 
     <div class='pagetitle'>

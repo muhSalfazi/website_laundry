@@ -53,7 +53,7 @@ if (isset($_GET['gagal'])) {
 }
 ?>
 
-<main id='main' class='main'>
+<main id='main' class='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Add Pelanggan</h1>

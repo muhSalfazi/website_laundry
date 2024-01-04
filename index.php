@@ -11,7 +11,7 @@
     <meta content='' name='keywords'>
 
     <!-- Favicons -->
-    <link href="../../../assets/img/logo-icon.png" rel="icon">
+    <link href="assets/img/logo-icon.png" rel="icon">
 
     <!-- Google Fonts -->
     <link href='https://fonts.gstatic.com' rel='preconnect'>
@@ -87,181 +87,277 @@
     /* Ganti 'Pacifico' dengan font yang diinginkan */
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+
+/* Tambahkan animasi untuk elemen dengan class "animated" */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
     }
 
-    100% {
-        transform: rotate(360deg);
+    to {
+        transform: translateY(0);
     }
+}
+
+.animated {
+    animation: slideInUp 1s ease-in-out;
 }
 </style>
 
 <body>
-    <?php
-session_start();
-
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-        document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire({
-                icon: '$icon',
-                title: '$title',
-                html: '<p class=\"p-popup\">$message</p>',
-                showConfirmButton: false,
-                timer: 3000
-            }).then(() => {
-                " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-            });
-        });
-        </script>
-        ";
-}
-
-if (isset($_GET['gagal'])) {
-    $berhasil = $_GET['gagal'];
-
-    if ($berhasil === 'gagal_login') {
-        $_SESSION['showAlert'] = true;
-        $_SESSION['alertType'] = 'error';
-        $_SESSION['alertTitle'] = 'GAGAL';
-        $_SESSION['alertMessage'] = 'Username atau Password anda <strong>SALAH.</strong>';
-    }
-
-    if ($berhasil === 'gagal_masalah') {
-        $_SESSION['showAlert'] = true;
-        $_SESSION['alertType'] = 'warning';
-        $_SESSION['alertTitle'] = 'GAGAL';
-        $_SESSION['alertMessage'] = 'Terjadi kesalahan DataBase. Silakan coba lagi.';
-    }
-}
-
-// Tambahkan kondisi ini untuk menampilkan pesan hanya sekali setelah redirect atau saat pertama kali akses halaman
-if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
-    showAlert($_SESSION['alertType'], $_SESSION['alertTitle'], $_SESSION['alertMessage']);
-    $_SESSION['showAlert'] = false; // Setelah menampilkan pesan, set session menjadi false
-}
-
-if (isset($_GET['berhasil'])) {
-    $berhasil = $_GET['berhasil'];
-    if ($berhasil === 'ubah_password') {
-        showAlert('success', 'Berhasil', ' Password berhasil direset.');
-    }
-}
-
-session_write_close(); // Tutup session
-?>
-
-    <main>
+    <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="loading-overlay" id="loading-overlay">
             <div class="loading-spinner"></div>
             <div class="loading-text">~ De'Ungu Laundry ~</div>
         </div>
-        <div class='container'>
+        <div class="d-flex align-items-center justify-content-between">
+            <a class="logo d-flex align-items-center">
+                <img src="assets/img/logo.jpg" alt="" rel="icon" class="rounded-circle">
+                <span class="d-none d-lg-block" style='color:darkslateblue;
+'>De'ungu laundry</span>
+            </a>
+            <i class='bi bi-list toggle-sidebar-btn'></i>
+        </div><!-- End Logo -->
 
-            <section
-                class='section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4'>
-                <div class='container'>
-                    <div class='row justify-content-center'>
-                        <div class='col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center'>
+        <nav class='header-nav ms-auto'>
+            <ul class='d-flex align-items-center'>
+                <li class='nav-item dropdown pe-3'>
+                    |
+                </li>
 
-                            <div class='d-flex justify-content-center py-4'>
-                                <a class='logo d-flex align-items-center w-auto'>
-                                    <img class='d-none d-lg-block' src='assets/img/logo.jpg' alt=''>
-                                    <span class='d-none d-lg-block' style='color:darkslateblue;'>De'ungu laundry</span>
-                                </a>
-                            </div><!-- End Logo -->
+                <li class='nav-item dropdown pe-3'>
 
-                            <div class='card mb-3'>
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <a href="./login.php" class="dropdown-item d-flex align-items-center">
+                            <button type="button" class="btn btn-primary btn-sm">
+                                <span>Login</span>
+                            </button>
+                        </a>
+                    </a>
 
-                                <div class='card-body'>
 
-                                    <div class='pt-4 pb-2'>
-                                        <h5 class='card-title text-center pb-0 fs-4'>Masuk ke akun Anda</h5>
-                                        <p class='text-center small'>Masukkan nama pengguna & kata sandi Anda untuk
+                </li>
 
-                                            login</p>
+
+
+
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <aside id='sidebar' class='sidebar'>
+        <ul class='sidebar-nav' id='sidebar-nav'>
+
+            <!-- End Dashboard Nav -->
+
+
+
+            <li class='nav-item'>
+                <a class='nav-link' href='./'>
+                    <i class='bi bi-grid'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+
+            <!-- End Profile Page Nav -->
+
+        </ul>
+    </aside>
+    <main id='main' class='main' class='main animated'>
+
+        <div class='pagetitle' data-aos="fade-up">
+            <h1>Dashboard</h1>
+            <nav>
+                <ol class='breadcrumb'>
+                    <li class='breadcrumb-item'><a href='dashboard.php'>Home</a></li>
+                    <li class='breadcrumb-item active'>Dashboard</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section contact" data-aos="fade-up">
+            <div class="col-lg-12">
+                <div class="card p-4">
+                    <form action="forms/contact.php" method="post" class="php-email-form">
+                        <div class="row gy-4">
+
+
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+
+                                <!-- Slides with indicators -->
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="0" class="active" aria-current="true"
+                                            aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="assets/img/daftar_harga.jpg" class="d-block w-100" alt="foto1">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/img/foto4.jpg" class="d-block w-100" alt="foto2">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/img/logo.jpg" class="d-block w-100" alt="foto3">
+                                        </div>
                                     </div>
 
-                                    <form action='./pages/content/backend/login' method='post'>
-                                        <div class='form-group'>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
 
-                                            <div class='col-12'>
-                                                <label for='yourUsername' class='form-label'>Username</label>
-                                                <div class='input-group has-validation'>
-                                                    <span class='input-group-text' id='inputGroupPrepend'>@</span>
-                                                    <input type='text' name='username' class='form-control'
-                                                        id='yourUsername' required>
-                                                    <div class='invalid-feedback'>Please enter your username.</div>
-                                                </div>
-                                            </div>
+                                </div><!-- End Slides with indicators -->
 
-                                            <div class='col-12'>
-                                                <label for='yourPassword' class='form-label'>Password</label>
-                                                <input type='password' name='password' class='form-control' required>
-                                                <div class='invalid-feedback'>Please enter your password!</div>
-                                            </div>
-                                        </div>
-                                        <div class='col-12 mt-3'>
-                                            <button type='submit' name='submit'
-                                                class='btn btn-primary w-100'>Login</button>
-
-                                        </div>
-                                    </form>
-                                    <div class='col-12 mt-3'>
-                                        <a href="lupa_password.php">Lupa Password?</a>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
 
-            </section>
+            </div>
+            <div class="col-xl-12">
 
-        </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-check2-all"></i>
+                            <h3>Harga Terjangkau</h3>
+                            <p>Kami mengakui bahwa kebersihan pakaian dan karpet adalah kebutuhan penting.
+                                Menawarkan harga yang bersaing dan terjangkau untuk semua layanan kami.
+                                <strong>Komitmen kami adalah membuat layanan laundry menjadi terjangkau tanpa
+                                    mengorbankan
+                                    kualitas.</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-tools"></i>
+                            <h3>Jasa Penuh</h3>
+                            <p>Menyediakan layanan penuh mulai dari laundry kiloan hingga perawatan khusus karpet.
+                                Perhatian khusus untuk memastikan setiap item kembali bersih dan segar.
+                                Memberikan solusi lengkap untuk semua kebutuhan pembersihan Anda.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="info-box card">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <h3>Location</h3>
+                            <div class="table-responsive">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.2099833755533!2d107.38805237499157!3d-6.366865493623255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjInMDAuNyJTIDEwN8KwMjMnMjYuMyJF!5e0!3m2!1sid!2sid!4v1703974936514!5m2!1sid!2sid"
+                                    width="1190" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </section>
+
     </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" class='main animated'>
+        <div class="copyright">
+            &copy; Copyright <strong><span>mhs.UBP.Karawang</span>/De'unguLaundry</strong>.
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            <i class="bi bi-whatsapp"><span><a href="https://wa.me/+6281284733340"
+                        target="_blank">De'unguLaundry</a></span></i>
+        </div>
+    </footer><!-- End Footer -->
 
-    <a href='#' class='back-to-top d-flex align-items-center justify-content-center'><i class='bi bi-x'></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src='assets/vendor/apexcharts/apexcharts.min.js'></script>
-    <script src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js'>
-    </script>
-    <script src='assets/vendor/chart.js/chart.umd.js'></script>
-    <script src='assets/vendor/echarts/echarts.min.js'></script>
-    <script src='assets/vendor/quill/quill.min.js'></script>
-    <script src='assets/vendor/simple-datatables/simple-datatables.js'>
-    </script>
-    <script src='assets/vendor/tinymce/tinymce.min.js'></script>
-    <script src='assets/vendor/php-email-form/validate.js'></script>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+
+
+
+
+
+
+
+
     <!-- spinners -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const loadingOverlay = document.getElementById("loading-overlay");
+    document.addEventListener('DOMContentLoaded', () => {
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         // Sembunyikan overlay loading setelah halaman sepenuhnya dimuat
-        window.addEventListener("load", () => {
+        window.addEventListener('load', () => {
             // Secara opsional, tambahkan penundaan sebelum menyembunyikan overlay
             setTimeout(() => {
-                loadingOverlay.classList.add("hidden");
+                loadingOverlay.classList.add('hidden');
 
                 // Secara opsional, tambahkan penundaan sebelum mengatur display menjadi 'none'
                 setTimeout(() => {
-                    loadingOverlay.style.display = "none";
-                }, 500);
-            }, 400); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
+                    loadingOverlay.style.display = 'none';
+                }, 200);
+            }, 300); // Sesuaikan penundaan ini (dalam milidetik) sesuai kebutuhan
         });
     });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('main').classList.add('animated');
+    });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+        integrity="sha512-pAAahXk1u5rwO30vqMvsPHUd2U94v0tE6n2t+RbeX7TlXsFP8h0XMToUO4CQ1+uDNkrA/+g6slCSx8EiDohS9A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    AOS.init();
+    </script>
 
     <!-- Template Main JS File -->
-    <script src='assets/js/main.js'></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Tambahkan fungsi JavaScript untuk delete -->
+
 
 </body>
+
+
 
 </html>

@@ -103,14 +103,19 @@ if (isset($_SESSION['id_register'])) {
     /* Ganti 'Pacifico' dengan font yang diinginkan */
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
     }
 
-    100% {
-        transform: rotate(360deg);
+    to {
+        transform: translateY(0);
     }
+}
+
+.animated {
+    animation: slideInUp 1s ease-in-out;
 }
 </style>
 

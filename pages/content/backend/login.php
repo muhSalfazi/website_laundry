@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
             }
         } else {
             // Tampilkan pesan kesalahan jika password tidak sesuai
-            header('Location: ../../../?gagal=gagal_login');
+            header('Location: ../../../login?gagal=gagal_login');
 
             exit();
         }

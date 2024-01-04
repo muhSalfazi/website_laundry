@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $updateQuery->bind_param("ss", $hashedPassword, $verificationCode);
                 $updateQuery->execute();
 
-                echo "<script>window.location.href = '../../../?berhasil=ubah_password';</script>";
+                echo "<script>window.location.href = '../../../login?berhasil=ubah_password';</script>";
                 exit();
             } else {
                 echo "<script>window.location.href = '../../../new_password.php?gagal=kadaluarsa';</script>";

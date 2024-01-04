@@ -73,17 +73,7 @@ if (isset($_POST['cek_order'])) {
                                 </div>
                             </div>
 
-                            <div class=' col-12'>
-                                <div class='form-check'>
-                                    <input class='form-check-input' type='checkbox' value='' id='invalidCheck' required>
-                                    <label class='form-check-label' for='invalidCheck'>
-                                        Setuju dengan syarat dan ketentuan
-                                    </label>
-                                    <div class='invalid-feedback'>
-                                        Anda harus menyetujuinya sebelum mengirimkan.
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div class='col-12'>
                                 <button class='btn btn-primary' name='cek_order' type='submit'>check order</button>

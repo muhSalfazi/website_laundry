@@ -68,7 +68,7 @@ if (isset($_GET['hapus'])) {
 
 ?>
 
-<main id='main' class='main'>
+<main id='main' class='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Data Pesanan Laundry</h1>

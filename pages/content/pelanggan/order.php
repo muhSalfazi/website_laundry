@@ -67,6 +67,9 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                                 <label for='validationCustom02' class='form-label'>No Handphone</label>
                                 <input type='text' class='form-control' name='no_telp' value="<?php echo $no_telp; ?>"
                                     required readonly>
+                                <div class='invalid-feedback'>
+
+                                </div>
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Layanan</label>
@@ -79,19 +82,16 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                                 </select>
                                 <div class='invalid-feedback'>
 
-                                    Silakan pilih jenis layanan yang valid
-
-
                                 </div>
                             </div>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' id="jenis" name='jenis_laundry' required>
-
+                                    <option selected disabled>pilih jenis layanan terlebih dahulu</option>
                                 </select>
                                 <div class='invalid-feedback'>
-
+                                    isi jenis layanan terlebih dahulu
                                 </div>
                             </div>
 
@@ -99,12 +99,12 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>kategori laundry</label>
                                 <select class='form-select' name="nama_produk" id="nama_produk" required>
-                                    <option selected disabled>isi jenis Laundry dahulu</option>
+                                    <!-- <option selected disabled>isi jenis Laundry dahulu</option> -->
                                     <!-- <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
                                     required> -->
                                 </select>
                                 <div class='invalid-feedback'>
-
+                                    isi jenis Laundry dahulu
                                 </div>
                             </div>
 
@@ -115,9 +115,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                                     <option value='antar jemput'>Antar Jemput</option>
                                     <option value='tidak'>tidak</option>
                                 </select>
-                                <div class='invalid-feedback'>
-                                    Silakan pilih jenis bagian yang valid.
-                                </div>
+
                             </div>
                             <!-- alamat -->
                             <div class='col-md-12 ' id="alamat_antar_fields">

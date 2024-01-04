@@ -15,7 +15,7 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
 ?>
 
-<main id='main' class='main'>
+<main id='main' class='main' class='main animated'>
     <?php
 
     function showAlert($icon, $title, $message, $redirect = null)
@@ -138,7 +138,8 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                    <td class="text-center"><a href="<?= BASEURL . 'pages/content/' . $row['image']; ?>"
+                                    <td class="text-center"><aE
+                                            href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
                                             target="_blank">Unduh</a>
                                     </td>
                                     <?php
