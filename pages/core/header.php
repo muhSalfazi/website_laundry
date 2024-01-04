@@ -100,7 +100,6 @@ if (isset($_SESSION['id_register'])) {
     font-size: 18px;
     font-weight: bold;
     font-family: 'Pacifico', cursive;
-    /* Ganti 'Pacifico' dengan font yang diinginkan */
 }
 
 

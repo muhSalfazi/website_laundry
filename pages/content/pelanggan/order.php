@@ -99,6 +99,7 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>kategori laundry</label>
                                 <select class='form-select' name="nama_produk" id="nama_produk" required>
+                                    <option selected disabled>pilih jenis kategori dahulu</option>
                                     <!-- <option selected disabled>isi jenis Laundry dahulu</option> -->
                                     <!-- <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
                                     required> -->
