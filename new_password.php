@@ -22,6 +22,26 @@ function showAlert($icon, $title, $message, $redirect = null)
     </script>
     ";
 }
+function showAlert2($icon, $title, $message, $redirect = null)
+{
+    echo "
+        <script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: '$icon',
+                    title: '$title',
+                    html: '<p class=\"p-popup\">$message</p>',
+                    showConfirmButton: true, 
+                    confirmButtonText: 'OK',
+                  
+                }).then(() => {
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
+                });
+            });
+        </script>
+        ";
+}
+
 ?>
 
 <!--create-->
@@ -40,20 +60,20 @@ if (isset($_GET['gagal'])) {
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'password_pendek') {
-        showAlert('error', 'Gagal', ' Validasi panjang minimal password.');
+        showAlert2('error', 'Gagal', ' Validasi panjang minimal password.');
     }
 }
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'tidak_cocok') {
-        showAlert('error', 'Gagal', ' Konfirmasi password tidak cocok.');
+        showAlert2('error', 'Gagal', ' Konfirmasi password tidak cocok.');
     }
 }
 
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'add_gagal') {
-        showAlert('error', 'Gagal', ' verification code tidak cocok dalam database');
+        showAlert2('error', 'Gagal', ' verification code tidak cocok dalam database');
     }
 }
 
@@ -186,7 +206,7 @@ if (isset($_GET['berhasil'])) {
                                         </div>
                                     </form>
                                     <div class="col-12 mt-3">
-                                        <a href="./">Kembali ke halaman login!</a>
+                                        <a href="./login">Kembali ke halaman login!</a>
                                     </div>
                                 </div>
                             </div>

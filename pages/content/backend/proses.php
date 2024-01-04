@@ -19,7 +19,7 @@ class DataFetcher
 
     public function getListUser()
     {
-        $queryGetListUser = mysqli_query($this->db_connect, 'SELECT id_pelanggan,nama_lengkap, no_telp, alamat FROM pelanggan');
+        $queryGetListUser = mysqli_query($this->db_connect, 'SELECT id_pelanggan,nama_lengkap, no_telp, alamat,created_at FROM pelanggan');
 
         if (!$queryGetListUser) {
             $message = 'Kesalahan Terjadi Pada Proses Pengambilan Data User';
@@ -58,7 +58,7 @@ class DataFetcher
 $dataFetcher = new DataFetcher($db_connect);
 
 // Get List User
-$listUser = $dataFetcher->getListUser();
+$datapelanggan = $dataFetcher->getListUser();
 
 // Get Jenis Laundry
 

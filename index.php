@@ -238,7 +238,8 @@
                         <div class="info-box card">
                             <i class="bi bi-check2-all"></i>
                             <h3>Harga Terjangkau</h3>
-                            <p>Kami mengakui bahwa kebersihan pakaian dan karpet adalah kebutuhan penting.
+                            <p class="card-text">Kami mengakui bahwa kebersihan pakaian dan karpet adalah kebutuhan
+                                penting.
                                 Menawarkan harga yang bersaing dan terjangkau untuk semua layanan kami.
                                 <strong>Komitmen kami adalah membuat layanan laundry menjadi terjangkau tanpa
                                     mengorbankan
@@ -251,7 +252,8 @@
                         <div class="info-box card">
                             <i class="bi bi-tools"></i>
                             <h3>Jasa Penuh</h3>
-                            <p>Menyediakan layanan penuh mulai dari laundry kiloan hingga perawatan khusus karpet.
+                            <p class="card-text">Menyediakan layanan penuh mulai dari laundry kiloan hingga perawatan
+                                khusus karpet.
                                 Perhatian khusus untuk memastikan setiap item kembali bersih dan segar.
                                 Memberikan solusi lengkap untuk semua kebutuhan pembersihan Anda.</p>
                         </div>

@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $currentTime = date('Y-m-d H:i:s');
 
             if ($expiryTime >= $currentTime) {
-                $expiryTime = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
                 $updateQuery = $db_connect->prepare("UPDATE register SET password = ? WHERE verification_code = ?");
                 $updateQuery->bind_param("ss", $hashedPassword, $verificationCode);

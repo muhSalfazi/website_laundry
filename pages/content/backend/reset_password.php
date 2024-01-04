@@ -11,11 +11,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+//membuat code vertifikasi dengan angka
 function generateRandomCode($length = 6)
 {
-    return bin2hex(random_bytes($length / 2));
+    return rand(pow(10, $length - 1), pow(10, $length) - 1);
 }
-
+// end
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
@@ -43,39 +44,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Simpan kode verifikasi dan waktu kadaluwarsa di database
             $verificationCode = generateRandomCode(6);
-            $updateQuery = "UPDATE register SET verification_code = '$verificationCode', code_expiry = '$expiryTime' WHERE `email` = '$email'";
+            $updateQuery = "UPDATE register SET verification_code = '$verificationCode', code_expiry = '$expiryTime' WHERE `email` =
+'$email'";
             mysqli_query($db_connect, $updateQuery);
 
             // Kirim email reset password ke pengguna menggunakan PHPMailer
             $mail = new PHPMailer(true);
 
             try {
+                // Digunakan untuk menempatkan blok kode yang mungkin menghasilkan pengecualian.
                 // Konfigurasi SMTP untuk Gmail
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'salmanfauzi0512@gmail.com'; // Ganti dengan alamat email Anda
-                $mail->Password = 'wqqm inbf vjwb hkzk'; // Ganti dengan kata sandi email Anda
+                $mail->Username = 'salmanfauzi0512@gmail.com';
+                $mail->Password = 'wqqm inbf vjwb hkzk';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
                 // Pengaturan email
-                $mail->setFrom('salmanfauzi0512@gmail.com', 'DEUnguLaundry'); // Ganti dengan alamat email Anda
+                $mail->setFrom('salmanfauzi0512@gmail.com', 'DEUnguLaundry');
                 $mail->addAddress($email);
                 $mail->Subject = 'Reset Password';
-                $mail->Body = 'Anda telah mengajukan reset password. Silakan masukkan kode berikut untuk verifikasi: ' . $verificationCode . PHP_EOL .
-                PHP_EOL .
-
-                    'Kode verifikasi ini memiliki jangka waktu kadaluwarsa selama 1 hari sejak saat pembuatan.';
+                $mail->Body = 
+                 
+                    'Anda telah mengajukan reset password. Silakan masukkan kode berikut untuk verifikasi: ' . PHP_EOL .
+                     $verificationCode   . PHP_EOL .
+                    'Silakan login pada sistem dan jika terjadi kesalahan, harap laporkan ke admin.';
+                
 
                 // Kirim email
                 $mail->send();
-                echo "<script>window.location.href = '../../../new_password.php?berhasil=add_berhasil';</script>";
+                echo "<script>
+                window.location.href = '../../../new_password.php?berhasil=add_berhasil';
+                </script>";
             } catch (Exception $e) {
                 echo "Gagal mengirim email. Pesan error: {$mail->ErrorInfo}";
+                //    catch Digunakan untuk menangkap dan menangani pengecualian yang dihasilkan di dalam blok try.
             }
         } else {
-            echo "<script>window.location.href = '../../../lupa_password.php?gagal=add_gagal';</script>";
+            echo "<script>
+window.location.href = '../../../lupa_password.php?gagal=add_gagal';
+</script>";
         }
     } else {
         // Handle kesalahan eksekusi query

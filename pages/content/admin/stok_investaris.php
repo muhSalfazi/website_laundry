@@ -18,24 +18,26 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 <main id='main' class='main' class='main animated'>
     <?php
 
-    function showAlert($icon, $title, $message, $redirect = null)
-    {
-        echo "
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
         <script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', () => {
                 Swal.fire({
                     icon: '$icon',
                     title: '$title',
                     html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: false,
-                    timer: 2000
+                    showConfirmButton: true, 
+                    confirmButtonText: 'OK',
+                  
                 }).then(() => {
                     " . ($redirect ? "window.location.href = '$redirect';" : '') . "
                 });
             });
         </script>
         ";
-    }
+}
+
     ?>
     <!--create-->
 
@@ -96,13 +98,21 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                     <div class='card-body'>
                         <h5 class='card-title'>Stok Investaris</h5>
                         <a href='./add_barang' class="col-md-6">
-                            <i class=" bi bi-file-earmark-plus-fill"></i>
-                            Add Barang
+                            <button type="button" class="btn btn-primary btn-sm mt-2 ">
+                                <i class=" bi bi-file-earmark-plus-fill"></i>
+
+                                <span> Add Barang</span>
+                            </button>
+
                         </a>
 
-                        <a class="mt-2" href='../backend/download_pdf.php' lass="col-md-6">
-                            <i class='bi bi-file-earmark-pdf-fill' style='font-size: 16px;'></i>
-                            Download Data
+                        <a href='../backend/download_pdf.php'>
+
+                            <button type="button" class="btn btn-primary btn-sm mt-2">
+                                <i class='bi bi-file-earmark-pdf-fill' style='font-size: 16px;'></i>
+
+                                <span> Download Data</span>
+                            </button>
                         </a>
 
 
@@ -138,8 +148,8 @@ include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                    <td class="text-center"><aE
-                                            href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                    <td class="text-center">
+                                        <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
                                             target="_blank">Unduh</a>
                                     </td>
                                     <?php

@@ -11,25 +11,6 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-// Periksa apakah fungsi showAlert sudah ditentukan
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-}
 
 // Filter logic
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
@@ -51,6 +32,28 @@ switch ($filter) {
 
 $sql = "SELECT * FROM `order` WHERE $condition";
 $order = mysqli_query($db_connect, $sql);
+
+// Periksa apakah fungsi showAlert sudah ditentukan
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
+        <script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: '$icon',
+                    title: '$title',
+                    html: '<p class=\"p-popup\">$message</p>',
+                    showConfirmButton: true, // Set to true to show the OK button
+                    confirmButtonText: 'OK', // Customize the OK button text
+                    timer: 2000,
+                }).then(() => {
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
+                });
+            });
+        </script>
+        ";
+}
+
 
 if (isset($_GET['berhasil'])) {
     $berhasil = $_GET['berhasil'];
@@ -106,7 +109,7 @@ if (isset($_GET['hapus'])) {
                                 </option>
                             </select>
                             <div class="mt-2">
-                                <button cltype='submit' class='btn btn-primary'>Tampilkan Data</button>
+                                <button cltype='submit' class='btn btn-primary btn-sm'>Tampilkan Data</button>
                             </div>
                         </form>
                     </div>
@@ -243,8 +246,6 @@ if (isset($_GET['hapus'])) {
                                             echo '</div>';
                                         }
                                     }
-                                } else {
-                                    echo "<tr><td colspan='4'>No data available</td></tr>";
                                 }
                                 ?>
                             </tbody>

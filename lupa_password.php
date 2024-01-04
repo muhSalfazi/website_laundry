@@ -194,7 +194,7 @@ if (isset($_GET['gagal'])) {
                                         </div>
                                     </form>
                                     <div class="col-12 mt-3">
-                                        <a href="./">Kembali ke halaman login!</a>
+                                        <a href="./login">Kembali ke halaman login!</a>
                                     </div>
                                 </div>
                             </div>

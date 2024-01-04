@@ -1,38 +1,43 @@
 <?php
-session_start();
-if ($_SESSION['role'] != 'admin') {
-    header('Location:../../../');
-    exit(session_destroy());
-}
 
+session_start();
+
+if ($_SESSION['role'] != 'admin') {
+    header('Location: ../../../');
+    session_destroy();
+}
 function getDashboardData($filter = 'today')
 {
     global $db_connect;
 
-    $query = "SELECT 
-                SUM(jumlah_bayar) AS pendapatan,
-                COUNT(id_order) AS sales
-              FROM `order`
-              WHERE DATE(created_at) = CURDATE();";
-
-    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
+    $query = "SELECT
+SUM(jumlah_bayar) AS pendapatan,
+COUNT(id_order) AS sales
+FROM `order`
+WHERE DATE(created_at) = CURDATE();";
 
     if ($filter === 'this_month') {
-        $query = "SELECT 
-                    SUM(jumlah_bayar) AS pendapatan,
-                    COUNT(id_order) AS sales
-                  FROM `order`
-                  WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
-
-        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
+        $query = "SELECT
+SUM(jumlah_bayar) AS pendapatan,
+COUNT(id_order) AS sales
+FROM `order`
+WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
     } elseif ($filter === 'this_year') {
-        $query = "SELECT 
-                    SUM(jumlah_bayar) AS pendapatan,
-                    COUNT(id_order) AS sales
-                  FROM `order`
-                  WHERE YEAR(created_at) = YEAR(NOW());";
+        $query = "SELECT
+SUM(jumlah_bayar) AS pendapatan,
+COUNT(id_order) AS sales
+FROM `order`
+WHERE YEAR(created_at) = YEAR(NOW());";
+    }
 
-        $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan";
+    $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan WHERE ";
+
+    if ($filter === 'today') {
+        $query2 .= "DATE(created_at) = CURDATE();";
+    } elseif ($filter === 'this_month') {
+        $query2 .= "MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
+    } elseif ($filter === 'this_year') {
+        $query2 .= "YEAR(created_at) = YEAR(NOW());";
     }
 
     $result = mysqli_query($db_connect, $query);
@@ -60,6 +65,7 @@ function getDashboardData($filter = 'today')
     }
 }
 
+
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
@@ -76,7 +82,7 @@ $dashboardData = getDashboardData($filter);
         <h1>Dashboard</h1>
         <nav>
             <ol class='breadcrumb'>
-                <li class='breadcrumb-item'><a href='dashboard.php'>Home</a></li>
+                <li class='breadcrumb-item'><a href='dashboard-admin.php'>Home</a></li>
                 <li class='breadcrumb-item active'>Dashboard</li>
             </ol>
         </nav>
