@@ -3,6 +3,14 @@ session_start();
 require __DIR__ . DIRECTORY_SEPARATOR . '../../../vendor/autoload.php';
 include '../../core/connection.php';
 
+// Periksa apakah jenis layanan, jenis laundry, dan formulir telah diisi
+if (!isset($_POST['jenis_layanan']) || !isset($_POST['jenis_laundry']) || !isset($_POST['nama_produk'])) {
+    // echo "Mohon lengkapi jenis layanan, jenis laundry, dan formulir!";
+
+    echo "<script>window.location.href = '../pelanggan/order?add=tambah_gagal';</script>";
+    exit();
+}
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -52,6 +60,7 @@ class LaundryProduct
 
         // Output the generated PDF to Browser
         $outputFilename = __DIR__ . DIRECTORY_SEPARATOR . "path/to/save/Order_pesanan_De'UnguLaundry.pdf";
+        
         // Adjust the path accordingly
         $dompdf->stream($outputFilename);
     }
@@ -59,7 +68,7 @@ class LaundryProduct
     private function getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at)
     {
         ob_start();
-        ?>
+?>
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -140,7 +149,7 @@ class LaundryProduct
 <?php
         return ob_get_clean();
     }
-    
+
 
     public function addLaundry()
     {
@@ -170,7 +179,7 @@ class LaundryProduct
             $jenis = mysqli_stmt_execute($stmt);
 
             if ($jenis) {
-                // Generate receipt
+                // Hasilkan tanda terima
                 $this->generateReceipt($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,);
 
                 echo "<script>window.location.href = '../pelanggan/order?add=tambah_berhasil';</script>";

@@ -6,25 +6,58 @@ if ($_SESSION['role'] != 'pelanggan') {
     exit();
 }
 
+// Periksa apakah pengguna telah login
+if (!isset($_SESSION['alamat']) || !isset($_SESSION['nama_lengkap']) || !isset($_SESSION['no_telp'])) {
+    // Handle the case where session variables are not set
+    echo "Session variables are not set!";
+    exit();
+}
+
+
+
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SESSION['no_telp'])) {
-    $alamat = $_SESSION['alamat'];
-    $nama_lengkap = $_SESSION['nama_lengkap'];
-    $no_telp = $_SESSION['no_telp'];
-} else {
-    // Handle the case where session variables are not set
-    echo "Session variables are not set!";
+$alamat = $_SESSION['alamat'];
+$nama_lengkap = $_SESSION['nama_lengkap'];
+$no_telp = $_SESSION['no_telp'];
+
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
+        <script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: '$icon',
+                    title: '$title',
+                    html: '<p class=\"p-popup\">$message</p>',
+                    showConfirmButton: true, 
+                    confirmButtonText: 'OK',
+                  
+                }).then(() => {
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
+                });
+            });
+        </script>
+        ";
 }
 
-// Tampilkan data di dalam HTML
+if (isset($_GET['add'])) {
+    $berhasil = $_GET['add'];
+    if ($berhasil === 'tambah_gagal') {
+        showAlert('error', 'Gagal Di Proses', 'Mohon lengkapi jenis layanan, jenis laundry,& layanan antar!');
+    }
+}
+
+if (isset($_GET['add'])) {
+    $berhasil = $_GET['add'];
+    if ($berhasil === 'tambah_berhasil') {
+        showAlert('success', 'Berhasil', 'Pesanan Anda akan segera kami Proses');
+    }
+}
 ?>
-
-
 <main id='main' class='main'>
 
     <div class='pagetitle'>
@@ -58,40 +91,37 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                                 <input type='text' class='form-control' name='nama_pelanggan' value="  <?php echo $nama_lengkap;
                                                                                                         ?>" required
                                     readonly>
-                                <div class='invalid-feedback'>
-                                    Silakan pilih jenis bagian yang valid.
-                                </div>
+
                             </div>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>No Handphone</label>
                                 <input type='text' class='form-control' name='no_telp' value="<?php echo $no_telp; ?>"
                                     required readonly>
-                                <div class='invalid-feedback'>
 
-                                </div>
                             </div>
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Layanan</label>
                                 <select class='form-select' id="layanan" name='jenis_layanan' required>
-                                    <option selected disabled>pilih...</option>
+                                    <option selected disabled value="">pilih...</option>
                                     <option value='cuci+setrika'>cuci+setrika</option>
                                     <option value='cuci'>cuci</option>
                                     <option value='setrika'>setrika</option>
                                     <option value='karpet'>karpet</option>
                                 </select>
                                 <div class='invalid-feedback'>
-
+                                    Harap berikan pilih jenis layanan yang valid.
                                 </div>
+
                             </div>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom04' class='form-label'>Jenis Laundry</label>
                                 <select class='form-select' id="jenis" name='jenis_laundry' required>
-                                    <option selected disabled>pilih jenis layanan terlebih dahulu</option>
+                                    <option selected disabled value="">pilih jenis layanan terlebih dahulu</option>
                                 </select>
                                 <div class='invalid-feedback'>
-                                    isi jenis layanan terlebih dahulu
+                                    Harap berikan pilih jenis laundry yang valid.
                                 </div>
                             </div>
 
@@ -99,24 +129,26 @@ if (isset($_SESSION['alamat']) && isset($_SESSION['nama_lengkap']) && isset($_SE
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>kategori laundry</label>
                                 <select class='form-select' name="nama_produk" id="nama_produk" required>
-                                    <option selected disabled>pilih jenis kategori dahulu</option>
+                                    <option selected disabled value="">pilih jenis kategori dahulu</option>
                                     <!-- <option selected disabled>isi jenis Laundry dahulu</option> -->
                                     <!-- <input type='text' class='form-control' name='nama_produk' placeholder=' silahkan isi'
                                     required> -->
                                 </select>
                                 <div class='invalid-feedback'>
-                                    isi jenis Laundry dahulu
+                                    Harap berikan pilih jenis kategori yang valid.
                                 </div>
                             </div>
 
                             <div class=' col-md-4'>
                                 <label for='validationCustom04' class='form-label'>layanan antar</label>
                                 <select class='form-select' id="alamat_input" name='layanan_antar' required>
-                                    <option selected disabled>pilih...</option>
+                                    <option selected disabled value="">pilih...</option>
                                     <option value='antar jemput'>Antar Jemput</option>
                                     <option value='tidak'>tidak</option>
                                 </select>
-
+                                <div class='invalid-feedback'>
+                                    Harap berikan pilih jenis layanan antar yang valid.
+                                </div>
                             </div>
                             <!-- alamat -->
                             <div class='col-md-12 ' id="alamat_antar_fields">

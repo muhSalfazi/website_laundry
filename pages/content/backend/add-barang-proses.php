@@ -1,6 +1,7 @@
 <?php
 require '../../core/connection.php';
 
+
 class Barang
 {
     protected $db_connect;

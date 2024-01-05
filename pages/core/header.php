@@ -3,7 +3,7 @@
 require_once "connection.php";
 if (isset($_SESSION['id_register'])) {
     if ($_SESSION['role'] != 'admin' || $_SESSION['role'] != 'pelanggan') {
-        header('Location: ../../../');
+        header('Location: ../../../login');
         exit();
     }
 }

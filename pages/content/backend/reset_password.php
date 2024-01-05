@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  
                     'Anda telah mengajukan reset password. Silakan masukkan kode berikut untuk verifikasi: ' . PHP_EOL .
                      $verificationCode   . PHP_EOL .
-                    'Silakan login pada sistem dan jika terjadi kesalahan, harap laporkan ke admin.';
+                    'Kode verifikasi ini memiliki jangka waktu kadaluwarsa selama 1 hari sejak saat pembuatan.';
                 
 
                 // Kirim email
