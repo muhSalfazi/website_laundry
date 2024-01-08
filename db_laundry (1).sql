@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jan 2024 pada 15.02
+-- Waktu pembuatan: 08 Jan 2024 pada 10.18
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -68,23 +68,105 @@ CREATE TABLE `order` (
   `no_telp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `order`
---
+-- --------------------------------------------------------
 
-INSERT INTO `order` (`id_order`, `nama_pelanggan`, `jenis_laundry`, `jenis_layanan`, `layanan_antar`, `alamat`, `nama_produk`, `resi_pesanan`, `proses_laundry`, `status_pembayaran`, `jumlah_barang`, `total_harga`, `jumlah_bayar`, `created_at`, `jumlah_kilo`, `no_telp`) VALUES
-(12, '  salman', 'kiloan', 'cuci', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'KU.1704113841', 'menunggu', 'lunas', 0, 0, 0, '2024-01-02 13:43:04', 0, '89090123'),
-(13, '  salman', 'kiloan', 'cuci', 'antar jemput', 'perum puri kosambi 2', '4 hari', 'JW.1704114111', 'menunggu', 'belumbayar', 0, 0, 0, '2023-12-31 13:01:51', 0, '89090123'),
-(14, '  salman', 'kiloan', 'setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'UG.1704123293', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-01 15:34:53', 0, '89090123'),
-(15, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', '2 hari', 'VD.1704123387', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-01 15:36:27', 0, '89090123'),
-(16, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'BE.1704123454', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-01 15:37:34', 0, '89090123'),
-(17, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'RZ.1704123576', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-01 15:39:36', 0, '89090123'),
-(18, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'NH.1704123663', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-02 13:05:28', 0, '89090123'),
-(19, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'KU.1704344142', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-04 04:55:42', 0, '89090123'),
-(20, '  salman', '', '', '', '', '', 'YU.1704452686', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-05 11:04:46', 0, '8909012341'),
-(21, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'ZS.1704456655', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-05 12:10:55', 0, '8909012341'),
-(22, '  salman', 'kiloan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'Reguler', 'BH.1704456818', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-05 12:13:38', 0, '8909012341'),
-(23, '  salman', 'satuan', 'cuci+setrika', 'antar jemput', 'perum puri kosambi 2', 'sprey,selimut', 'EF.1704456833', 'menunggu', 'belumbayar', 0, 0, 0, '2024-01-05 12:13:53', 0, '8909012341');
+--
+-- Stand-in struktur untuk tampilan `order_view_all`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `order_view_all` (
+`id_order` int(11)
+,`nama_pelanggan` varchar(255)
+,`jenis_laundry` enum('kiloan','satuan','paketan','karpet')
+,`jenis_layanan` enum('cuci+setrika','setrika','karpet','cuci')
+,`layanan_antar` enum('antar jemput','tidak')
+,`alamat` varchar(255)
+,`nama_produk` varchar(255)
+,`resi_pesanan` varchar(255)
+,`proses_laundry` enum('menunggu','diproses','selesai')
+,`status_pembayaran` enum('belumbayar','DP','lunas')
+,`jumlah_barang` int(50)
+,`total_harga` int(50)
+,`jumlah_bayar` int(100)
+,`created_at` timestamp
+,`jumlah_kilo` int(100)
+,`no_telp` varchar(15)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `order_view_month`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `order_view_month` (
+`id_order` int(11)
+,`nama_pelanggan` varchar(255)
+,`jenis_laundry` enum('kiloan','satuan','paketan','karpet')
+,`jenis_layanan` enum('cuci+setrika','setrika','karpet','cuci')
+,`layanan_antar` enum('antar jemput','tidak')
+,`alamat` varchar(255)
+,`nama_produk` varchar(255)
+,`resi_pesanan` varchar(255)
+,`proses_laundry` enum('menunggu','diproses','selesai')
+,`status_pembayaran` enum('belumbayar','DP','lunas')
+,`jumlah_barang` int(50)
+,`total_harga` int(50)
+,`jumlah_bayar` int(100)
+,`created_at` timestamp
+,`jumlah_kilo` int(100)
+,`no_telp` varchar(15)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `order_view_today`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `order_view_today` (
+`id_order` int(11)
+,`nama_pelanggan` varchar(255)
+,`jenis_laundry` enum('kiloan','satuan','paketan','karpet')
+,`jenis_layanan` enum('cuci+setrika','setrika','karpet','cuci')
+,`layanan_antar` enum('antar jemput','tidak')
+,`alamat` varchar(255)
+,`nama_produk` varchar(255)
+,`resi_pesanan` varchar(255)
+,`proses_laundry` enum('menunggu','diproses','selesai')
+,`status_pembayaran` enum('belumbayar','DP','lunas')
+,`jumlah_barang` int(50)
+,`total_harga` int(50)
+,`jumlah_bayar` int(100)
+,`created_at` timestamp
+,`jumlah_kilo` int(100)
+,`no_telp` varchar(15)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `order_view_year`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `order_view_year` (
+`id_order` int(11)
+,`nama_pelanggan` varchar(255)
+,`jenis_laundry` enum('kiloan','satuan','paketan','karpet')
+,`jenis_layanan` enum('cuci+setrika','setrika','karpet','cuci')
+,`layanan_antar` enum('antar jemput','tidak')
+,`alamat` varchar(255)
+,`nama_produk` varchar(255)
+,`resi_pesanan` varchar(255)
+,`proses_laundry` enum('menunggu','diproses','selesai')
+,`status_pembayaran` enum('belumbayar','DP','lunas')
+,`jumlah_barang` int(50)
+,`total_harga` int(50)
+,`jumlah_bayar` int(100)
+,`created_at` timestamp
+,`jumlah_kilo` int(100)
+,`no_telp` varchar(15)
+);
 
 -- --------------------------------------------------------
 
@@ -96,7 +178,7 @@ CREATE TABLE `pelanggan` (
   `id_pelanggan` int(11) NOT NULL,
   `nama_lengkap` varchar(255) NOT NULL,
   `no_telp` varchar(15) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL DEFAULT '--',
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -109,8 +191,7 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_lengkap`, `no_telp`, `alamat`, `username`, `password`, `email`, `created_at`, `edit_at`) VALUES
-(36, 'salman', '8909012341', 'perum puri kosambi 2', 'salman', '$2y$10$RHjHjehhJp.5YF4w.1p8NOIJWIjV7XGUoG3E.t.Az/CYDYrQVeFQu', 'salmanfauzi5123@gmail.com', '2023-12-31 21:26:55', '2024-01-04 21:54:20'),
-(37, 'salman muhamaad', '0977898', 'perum puri kosambi 2', 'salfazi', '$2y$10$uPZUfSJPO72ey35u2pbuaOdIhFcohUcaJbF/ptcgEd6I/MQUJh7H.', 'if22.muhamadfauzi@mhs.ubpkarawang.ac.id', '2023-12-31 21:28:25', NULL);
+(45, 'salman muhamaad', '08129414', 'perum puri kosambi 2', 'salfazi', '$2y$10$t/qkwvIYYhkm4Z1E.PVOQu200gtX5qUXUwp2pWbd8gb4u8d0Kv9n2', 'if22.muhamadfauzi@mhs.ubpkarawang.ac.id', '2024-01-06 17:10:17', NULL);
 
 --
 -- Trigger `pelanggan`
@@ -145,6 +226,78 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `pelanggan_view_all`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pelanggan_view_all` (
+`id_pelanggan` int(11)
+,`nama_lengkap` varchar(255)
+,`no_telp` varchar(15)
+,`alamat` varchar(255)
+,`username` varchar(255)
+,`password` varchar(255)
+,`email` varchar(255)
+,`created_at` timestamp
+,`edit_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `pelanggan_view_month`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pelanggan_view_month` (
+`id_pelanggan` int(11)
+,`nama_lengkap` varchar(255)
+,`no_telp` varchar(15)
+,`alamat` varchar(255)
+,`username` varchar(255)
+,`password` varchar(255)
+,`email` varchar(255)
+,`created_at` timestamp
+,`edit_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `pelanggan_view_today`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pelanggan_view_today` (
+`id_pelanggan` int(11)
+,`nama_lengkap` varchar(255)
+,`no_telp` varchar(15)
+,`alamat` varchar(255)
+,`username` varchar(255)
+,`password` varchar(255)
+,`email` varchar(255)
+,`created_at` timestamp
+,`edit_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `pelanggan_view_year`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pelanggan_view_year` (
+`id_pelanggan` int(11)
+,`nama_lengkap` varchar(255)
+,`no_telp` varchar(15)
+,`alamat` varchar(255)
+,`username` varchar(255)
+,`password` varchar(255)
+,`email` varchar(255)
+,`created_at` timestamp
+,`edit_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `register`
 --
 
@@ -169,8 +322,7 @@ CREATE TABLE `register` (
 
 INSERT INTO `register` (`id_register`, `nama_lengkap`, `no_telp`, `alamat`, `username`, `password`, `email`, `role`, `created_at`, `id_pelanggan`, `code_expiry`, `verification_code`) VALUES
 (41, 'salman fauzi', '', '', 'fauzi', '$2y$10$.eRtgJCZ421cQ9YFCwwdretfxYwXAsMCNdmKfJVInZxs/Wm2CH2GS', '', 'admin', '2023-12-22 20:39:24', NULL, '0000-00-00 00:00:00', ''),
-(50, 'salman', '8909012341', 'perum puri kosambi 2', 'salman', '$2y$10$EEBEcHLzptcXv2M0bj.tqeuwcUaZ15f7yyY92pYGnbQrzg1R4r386', 'salmanfauzi5123@gmail.com', 'pelanggan', '2023-12-31 21:26:55', 36, '2024-01-05 22:51:30', '933056'),
-(51, 'salman muhamaad', '0977898', 'perum puri kosambi 2', 'salfazi', '$2y$10$EVXIDxaVddDU6PkAtpOnMOZCxJ3Ve4tMCfM2uywUOoZv9AfOA1mmO', 'if22.muhamadfauzi@mhs.ubpkarawang.ac.id', 'pelanggan', '2023-12-31 21:28:25', 37, '2024-01-05 05:29:58', '253f8c');
+(59, 'salman muhamaad', '08129414', 'perum puri kosambi 2', 'salfazi', '$2y$10$t/qkwvIYYhkm4Z1E.PVOQu200gtX5qUXUwp2pWbd8gb4u8d0Kv9n2', 'if22.muhamadfauzi@mhs.ubpkarawang.ac.id', 'pelanggan', '2024-01-06 17:10:17', 45, '2024-01-06 17:10:17', '');
 
 --
 -- Trigger `register`
@@ -233,6 +385,78 @@ INSERT INTO `stok_barang` (`id_stok_barang`, `nama_barang`, `kode_barang`, `tota
 (77, 'sabun', 'Barang_3492.VJH.1703930929', 12, 'upload/1703930929-7b7d3a95f906df31a7afc29906ca43e0-rinso.jpeg', '2023-12-30 10:08:49', NULL),
 (78, 'sabun', 'Barang_8108.VBA.1704405524', 12, 'upload/1704405524-86470e3c9a8dce4410511cd149f3927a-rinso.jpeg', '2024-01-04 21:58:44', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `order_view_all`
+--
+DROP TABLE IF EXISTS `order_view_all`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_view_all`  AS SELECT `order`.`id_order` AS `id_order`, `order`.`nama_pelanggan` AS `nama_pelanggan`, `order`.`jenis_laundry` AS `jenis_laundry`, `order`.`jenis_layanan` AS `jenis_layanan`, `order`.`layanan_antar` AS `layanan_antar`, `order`.`alamat` AS `alamat`, `order`.`nama_produk` AS `nama_produk`, `order`.`resi_pesanan` AS `resi_pesanan`, `order`.`proses_laundry` AS `proses_laundry`, `order`.`status_pembayaran` AS `status_pembayaran`, `order`.`jumlah_barang` AS `jumlah_barang`, `order`.`total_harga` AS `total_harga`, `order`.`jumlah_bayar` AS `jumlah_bayar`, `order`.`created_at` AS `created_at`, `order`.`jumlah_kilo` AS `jumlah_kilo`, `order`.`no_telp` AS `no_telp` FROM `order` ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `order_view_month`
+--
+DROP TABLE IF EXISTS `order_view_month`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_view_month`  AS SELECT `order`.`id_order` AS `id_order`, `order`.`nama_pelanggan` AS `nama_pelanggan`, `order`.`jenis_laundry` AS `jenis_laundry`, `order`.`jenis_layanan` AS `jenis_layanan`, `order`.`layanan_antar` AS `layanan_antar`, `order`.`alamat` AS `alamat`, `order`.`nama_produk` AS `nama_produk`, `order`.`resi_pesanan` AS `resi_pesanan`, `order`.`proses_laundry` AS `proses_laundry`, `order`.`status_pembayaran` AS `status_pembayaran`, `order`.`jumlah_barang` AS `jumlah_barang`, `order`.`total_harga` AS `total_harga`, `order`.`jumlah_bayar` AS `jumlah_bayar`, `order`.`created_at` AS `created_at`, `order`.`jumlah_kilo` AS `jumlah_kilo`, `order`.`no_telp` AS `no_telp` FROM `order` WHERE month(`order`.`created_at`) = month(curdate()) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `order_view_today`
+--
+DROP TABLE IF EXISTS `order_view_today`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_view_today`  AS SELECT `order`.`id_order` AS `id_order`, `order`.`nama_pelanggan` AS `nama_pelanggan`, `order`.`jenis_laundry` AS `jenis_laundry`, `order`.`jenis_layanan` AS `jenis_layanan`, `order`.`layanan_antar` AS `layanan_antar`, `order`.`alamat` AS `alamat`, `order`.`nama_produk` AS `nama_produk`, `order`.`resi_pesanan` AS `resi_pesanan`, `order`.`proses_laundry` AS `proses_laundry`, `order`.`status_pembayaran` AS `status_pembayaran`, `order`.`jumlah_barang` AS `jumlah_barang`, `order`.`total_harga` AS `total_harga`, `order`.`jumlah_bayar` AS `jumlah_bayar`, `order`.`created_at` AS `created_at`, `order`.`jumlah_kilo` AS `jumlah_kilo`, `order`.`no_telp` AS `no_telp` FROM `order` WHERE cast(`order`.`created_at` as date) = curdate() ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `order_view_year`
+--
+DROP TABLE IF EXISTS `order_view_year`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_view_year`  AS SELECT `order`.`id_order` AS `id_order`, `order`.`nama_pelanggan` AS `nama_pelanggan`, `order`.`jenis_laundry` AS `jenis_laundry`, `order`.`jenis_layanan` AS `jenis_layanan`, `order`.`layanan_antar` AS `layanan_antar`, `order`.`alamat` AS `alamat`, `order`.`nama_produk` AS `nama_produk`, `order`.`resi_pesanan` AS `resi_pesanan`, `order`.`proses_laundry` AS `proses_laundry`, `order`.`status_pembayaran` AS `status_pembayaran`, `order`.`jumlah_barang` AS `jumlah_barang`, `order`.`total_harga` AS `total_harga`, `order`.`jumlah_bayar` AS `jumlah_bayar`, `order`.`created_at` AS `created_at`, `order`.`jumlah_kilo` AS `jumlah_kilo`, `order`.`no_telp` AS `no_telp` FROM `order` WHERE year(`order`.`created_at`) = year(curdate()) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pelanggan_view_all`
+--
+DROP TABLE IF EXISTS `pelanggan_view_all`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pelanggan_view_all`  AS SELECT `pelanggan`.`id_pelanggan` AS `id_pelanggan`, `pelanggan`.`nama_lengkap` AS `nama_lengkap`, `pelanggan`.`no_telp` AS `no_telp`, `pelanggan`.`alamat` AS `alamat`, `pelanggan`.`username` AS `username`, `pelanggan`.`password` AS `password`, `pelanggan`.`email` AS `email`, `pelanggan`.`created_at` AS `created_at`, `pelanggan`.`edit_at` AS `edit_at` FROM `pelanggan` ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pelanggan_view_month`
+--
+DROP TABLE IF EXISTS `pelanggan_view_month`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pelanggan_view_month`  AS SELECT `pelanggan`.`id_pelanggan` AS `id_pelanggan`, `pelanggan`.`nama_lengkap` AS `nama_lengkap`, `pelanggan`.`no_telp` AS `no_telp`, `pelanggan`.`alamat` AS `alamat`, `pelanggan`.`username` AS `username`, `pelanggan`.`password` AS `password`, `pelanggan`.`email` AS `email`, `pelanggan`.`created_at` AS `created_at`, `pelanggan`.`edit_at` AS `edit_at` FROM `pelanggan` WHERE month(`pelanggan`.`created_at`) = month(curdate()) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pelanggan_view_today`
+--
+DROP TABLE IF EXISTS `pelanggan_view_today`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pelanggan_view_today`  AS SELECT `pelanggan`.`id_pelanggan` AS `id_pelanggan`, `pelanggan`.`nama_lengkap` AS `nama_lengkap`, `pelanggan`.`no_telp` AS `no_telp`, `pelanggan`.`alamat` AS `alamat`, `pelanggan`.`username` AS `username`, `pelanggan`.`password` AS `password`, `pelanggan`.`email` AS `email`, `pelanggan`.`created_at` AS `created_at`, `pelanggan`.`edit_at` AS `edit_at` FROM `pelanggan` WHERE cast(`pelanggan`.`created_at` as date) = curdate() ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pelanggan_view_year`
+--
+DROP TABLE IF EXISTS `pelanggan_view_year`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pelanggan_view_year`  AS SELECT `pelanggan`.`id_pelanggan` AS `id_pelanggan`, `pelanggan`.`nama_lengkap` AS `nama_lengkap`, `pelanggan`.`no_telp` AS `no_telp`, `pelanggan`.`alamat` AS `alamat`, `pelanggan`.`username` AS `username`, `pelanggan`.`password` AS `password`, `pelanggan`.`email` AS `email`, `pelanggan`.`created_at` AS `created_at`, `pelanggan`.`edit_at` AS `edit_at` FROM `pelanggan` WHERE year(`pelanggan`.`created_at`) = year(curdate()) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -283,19 +507,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `order`
 --
 ALTER TABLE `order`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `register`
 --
 ALTER TABLE `register`
-  MODIFY `id_register` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_register` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT untuk tabel `stok_barang`
