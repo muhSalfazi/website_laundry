@@ -11,28 +11,26 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-
 // Filter logic
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
 switch ($filter) {
     case 'today':
-        $condition = "DATE(created_at) = CURDATE()";
+        $viewName = 'order_view_today';
         break;
     case 'month':
-        $condition = "MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())";
+        $viewName = 'order_view_month';
         break;
     case 'year':
-        $condition = "YEAR(created_at) = YEAR(CURDATE())";
+        $viewName = 'order_view_year';
         break;
     default:
-        $condition = "1"; // Show all data
+        $viewName = 'order_view_all';
         break;
 }
 
-$sql = "SELECT * FROM `order` WHERE $condition";
+$sql = "SELECT * FROM `$viewName`";
 $order = mysqli_query($db_connect, $sql);
-
 // Periksa apakah fungsi showAlert sudah ditentukan
 function showAlert($icon, $title, $message, $redirect = null)
 {

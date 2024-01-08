@@ -19,14 +19,14 @@ class DataFetcher
 
     public function getListUser()
     {
-        $queryGetListUser = mysqli_query($this->db_connect, 'SELECT id_pelanggan,nama_lengkap, no_telp, alamat,created_at FROM pelanggan');
+        $datapelanggan = mysqli_query($this->db_connect, 'SELECT id_pelanggan,nama_lengkap, no_telp, alamat,created_at FROM pelanggan');
 
-        if (!$queryGetListUser) {
+        if (!$datapelanggan) {
             $message = 'Kesalahan Terjadi Pada Proses Pengambilan Data User';
             echo '<body>' . $message . '</body>';
         }
 
-        return $queryGetListUser;
+        return $datapelanggan;
     }
 
 
@@ -59,8 +59,6 @@ $dataFetcher = new DataFetcher($db_connect);
 
 // Get List User
 $datapelanggan = $dataFetcher->getListUser();
-
-// Get Jenis Laundry
 
 
 // Get Stok Barang

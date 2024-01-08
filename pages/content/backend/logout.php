@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Pastikan session_start() sudah dipanggil di halaman lain yang memulai sesi
 
 // Hancurkan semua variabel sesi
 session_unset();

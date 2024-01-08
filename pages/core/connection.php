@@ -7,7 +7,7 @@ $DBUSER = 'root';
 $DBPASSWORD = '';
 $DBNAME = 'db_laundry';
 
-$db_connect = mysqli_connect($DBHOST, $DBUSER, $DBPASSWORD, $DBNAME);
+$db_connect = mysqli_connect($DBHOST, $DBUSER, $DBPASSWORD, $DBNAME); //mysqli_connect(untuk connect to database)
 
 if (!$db_connect) {
     // Menggunakan mysqli_connect_errno() untuk mendapatkan kode kesalahan koneksi

@@ -6,6 +6,7 @@ class Barang
 {
     protected $db_connect;
 
+    //implementasi construct
     public function __construct($db_connect)
     {
         $this->db_connect = $db_connect;

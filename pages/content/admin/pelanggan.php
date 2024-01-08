@@ -17,21 +17,21 @@ $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
 switch ($filter) {
     case 'today':
-        $condition = "DATE(created_at) = CURDATE()";
+        $viewName = 'pelanggan_view_today';
         break;
     case 'month':
-        $condition = "MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())";
+        $viewName = 'pelanggan_view_month';
         break;
     case 'year':
-        $condition = "YEAR(created_at) = YEAR(CURDATE())";
+        $viewName = 'pelanggan_view_year';
         break;
     default:
-        $condition = "1"; // Show all data
+        $viewName = 'pelanggan_view_all';
         break;
 }
 
-$sql = "SELECT * FROM `pelanggan` WHERE $condition";
-$result = mysqli_query($db_connect, $sql);
+$sql = "SELECT * FROM `$viewName`";
+$data_pelanggan = mysqli_query($db_connect, $sql);
 
 // Function to show alerts using SweetAlert
 if (!function_exists('showAlert')) {
@@ -136,66 +136,68 @@ if (isset($_GET['hapus'])) {
                                     <tbody>
                                         <?php
                                         $no = 0;
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            $no++;
-                                            echo "<tr>";
-                                            echo "<th scope='row'>" . $no . "</th>";
-                                            echo "<td>" . $row['nama_lengkap'] . "</td>";
-                                            echo "<td>" . $row['no_telp'] . "</td>";
-                                            echo "<td>" . $row['alamat'] . "</td>";
-                                            echo "<td class='text-center'>";
-                                            echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#smallModal" . $no . "'>
+                                        if ($data_pelanggan) {
+                                            while ($row = mysqli_fetch_assoc($data_pelanggan)) {
+                                                $no++;
+                                                echo "<tr>";
+                                                echo "<th scope='row'>" . $no . "</th>";
+                                                echo "<td>" . $row['nama_lengkap'] . "</td>";
+                                                echo "<td>" . $row['no_telp'] . "</td>";
+                                                echo "<td>" . $row['alamat'] . "</td>";
+                                                echo "<td class='text-center'>";
+                                                echo "<a class='btn btn-warning btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#smallModal" . $no . "'>
                                                 <i class='bi bi-pencil-fill'></i>
                                                 </a>";
-                                            echo "<a class='btn btn-danger btn-sm delete-btn ml-2' title='Delete' onclick='deleteConfirmation(" . $row['id_pelanggan'] . ", \"pelanggan\")'>
+                                                echo "<a class='btn btn-danger btn-sm delete-btn ml-2' title='Delete' onclick='deleteConfirmation(" . $row['id_pelanggan'] . ", \"pelanggan\")'>
                                                 <i class='bi bi-trash-fill'></i>
                                                 </a>";
-                                            echo "</td>";
-                                            echo "</tr>";
-                                            // Modal Edit untuk setiap data
-                                            echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
-                                            echo "<div class='modal-dialog modal-sm'>";
-                                            echo "<div class='modal-content'>";
-                                            echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title'>Edit Pelanggan</h5>";
-                                            echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                                            echo "</div>";
-                                            // Ambil data pelanggan berdasarkan ID
-                                            $id_pelanggan = $row['id_pelanggan'];
-                                            $result_edit = mysqli_query($db_connect, "SELECT * FROM pelanggan WHERE id_pelanggan = $id_pelanggan");
-                                            if ($result_edit) {
-                                                $pelanggan = mysqli_fetch_assoc($result_edit);
-                                                // Formulir Edit
-                                                echo "<div class='modal-body'>";
-                                                echo "<form action='../backend/edit_pelanggan.php' method='POST'>";
-                                                echo "<input type='hidden' name='id_pelanggan' value='" . $pelanggan['id_pelanggan'] . "'>";
-                                                echo "<div class='mb-3'>";
-                                                echo "<label for='nama_lengkap' class='form-label'>Nama Lengkap</label>";
-                                                echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $pelanggan['nama_lengkap'] . "' required>";
+                                                echo "</td>";
+                                                echo "</tr>";
+                                                // Modal Edit untuk setiap data
+                                                echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
+                                                echo "<div class='modal-dialog modal-sm'>";
+                                                echo "<div class='modal-content'>";
+                                                echo "<div class='modal-header'>";
+                                                echo "<h5 class='modal-title'>Edit Pelanggan</h5>";
+                                                echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
                                                 echo "</div>";
-                                                echo "<div class='mb-3'>";
-                                                echo "<label for='no_telp' class='form-label'>No Handphone</label>";
-                                                echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $pelanggan['no_telp'] . "' required>";
+                                                // Ambil data pelanggan berdasarkan ID
+                                                $id_pelanggan = $row['id_pelanggan'];
+                                                $result_edit = mysqli_query($db_connect, "SELECT * FROM pelanggan WHERE id_pelanggan = $id_pelanggan");
+                                                if ($result_edit) {
+                                                    $pelanggan = mysqli_fetch_assoc($result_edit);
+                                                    // Formulir Edit
+                                                    echo "<div class='modal-body'>";
+                                                    echo "<form action='../backend/edit_pelanggan.php' method='POST'>";
+                                                    echo "<input type='hidden' name='id_pelanggan' value='" . $pelanggan['id_pelanggan'] . "'>";
+                                                    echo "<div class='mb-3'>";
+                                                    echo "<label for='nama_lengkap' class='form-label'>Nama Lengkap</label>";
+                                                    echo "<input type='text' class='form-control' id='nama_lengkap' name='nama_lengkap' value='" . $pelanggan['nama_lengkap'] . "' required>";
+                                                    echo "</div>";
+                                                    echo "<div class='mb-3'>";
+                                                    echo "<label for='no_telp' class='form-label'>No Handphone</label>";
+                                                    echo "<input type='number' class='form-control' id='no_telp' name='no_telp' value='" . $pelanggan['no_telp'] . "' required>";
+                                                    echo "</div>";
+                                                    echo "<div class='mb-3'>";
+                                                    echo "<label for='alamat' class='form-label'>Alamat</label>";
+                                                    echo "<input type='text' class='form-control' id='alamat' name='alamat' value='" . $pelanggan['alamat'] . "' required>";
+                                                    echo "</div>";
+                                                    // Footer Modal Edit
+                                                    echo "<div class='modal-footer'>";
+                                                    echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+                                                    echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
+                                                    echo "</div>";
+                                                    // Akhir Formulir Edit
+                                                    echo "</form>";
+                                                    echo "</div>";
+                                                } else {
+                                                    echo "Error mengambil data pelanggan.";
+                                                }
                                                 echo "</div>";
-                                                echo "<div class='mb-3'>";
-                                                echo "<label for='alamat' class='form-label'>Alamat</label>";
-                                                echo "<input type='text' class='form-control' id='alamat' name='alamat' value='" . $pelanggan['alamat'] . "' required>";
                                                 echo "</div>";
-                                                // Footer Modal Edit
-                                                echo "<div class='modal-footer'>";
-                                                echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
-                                                echo "<button name='submit' type='submit' class='btn btn-primary'>Save changes</button>";
                                                 echo "</div>";
-                                                // Akhir Formulir Edit
-                                                echo "</form>";
                                                 echo "</div>";
-                                            } else {
-                                                echo "Error mengambil data pelanggan.";
                                             }
-                                            echo "</div>";
-                                            echo "</div>";
-                                            echo "</div>";
-                                            echo "</div>";
                                         }
                                         ?>
                                     </tbody>

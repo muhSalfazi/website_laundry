@@ -52,16 +52,16 @@ class LaundryProduct
         $dompdf = new Dompdf($pdfOptions);
         $dompdf->loadHtml($this->getReceiptHTML($nama_pelanggan, $jenis_laundry, $nama_produk, $kode_produk, $jenis_layanan, $layanan_antar, $created_at,));
 
-        // ( Optional ) Setup the paper size and orientation
+        // (Opsional) Atur ukuran dan orientasi kertas
         $dompdf->setPaper('A4', 'portrait');
 
-        // Render the HTML as PDF
+        // Render HTML sebagai PDF
         $dompdf->render();
 
-        // Output the generated PDF to Browser
+        //Keluarkan PDF yang dihasilkan ke Browser
         $outputFilename = __DIR__ . DIRECTORY_SEPARATOR . "path/to/save/Order_pesanan_De'UnguLaundry.pdf";
         
-        // Adjust the path accordingly
+        // Sesuaikan jalurnya
         $dompdf->stream($outputFilename);
     }
 
