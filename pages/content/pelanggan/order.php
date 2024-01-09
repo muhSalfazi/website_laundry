@@ -286,6 +286,3 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-<!-- antarjemput -->
