@@ -5,18 +5,13 @@ if ($_SESSION['role'] != 'admin') {
     header('Location:../../../');
     exit(session_destroy());
 }
-?>
-<?php
+
 require_once '../../core/config.php';
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-?>
-
-<main id='main' class='main' class='main animated'>
-    <?php
 
 function showAlert($icon, $title, $message, $redirect = null)
 {
@@ -29,7 +24,6 @@ function showAlert($icon, $title, $message, $redirect = null)
                     html: '<p class=\"p-popup\">$message</p>',
                     showConfirmButton: true, 
                     confirmButtonText: 'OK',
-                  
                 }).then(() => {
                     " . ($redirect ? "window.location.href = '$redirect';" : '') . "
                 });
@@ -37,45 +31,43 @@ function showAlert($icon, $title, $message, $redirect = null)
         </script>
         ";
 }
-
-    ?>
-    <!--create-->
-
-    <?php
-
-    // mengecek di tambahkan
-    if (isset($_GET['berhasil'])) {
-        $berhasil = $_GET['berhasil'];
-        if ($berhasil === 'add_berhasil') {
-            showAlert('success', 'Berhasil', ' data barang berhasil di ditambahkan.');
-        }
+// mengecek di tambahkan
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'add_berhasil') {
+        showAlert('success', 'Berhasil', ' data barang berhasil di ditambahkan.');
     }
-    ?>
-    <?php
-    // mengecek di tambahkan
-    if (isset($_GET['berhasil'])) {
-        $berhasil = $_GET['berhasil'];
-        if ($berhasil === 'edit_berhasil') {
-            showAlert('success', 'Berhasil', ' data barang berhasil di update beserta gambar.');
-        }
-    }
+}
 
-    // mengecek di tambahkan
-    if (isset($_GET['sukses'])) {
-        $berhasil = $_GET['sukses'];
-        if ($berhasil === 'edit_berhasil') {
-            showAlert('success', 'Berhasil', ' data barang berhasil di UPDATE .');
-        }
+// mengecek di tambahkan
+if (isset($_GET['berhasil'])) {
+    $berhasil = $_GET['berhasil'];
+    if ($berhasil === 'edit_berhasil') {
+        showAlert('success', 'Berhasil', ' data barang berhasil di update beserta gambar.');
     }
+}
 
-    // mengecek di hapus
-    if (isset($_GET['hapus'])) {
-        $berhasil = $_GET['hapus'];
-        if ($berhasil === 'berhasil_dihapus') {
-            showAlert('success', 'Berhasil', ' data barang berhasil di HAPUS .');
-        }
+// mengecek di tambahkan
+if (isset($_GET['sukses'])) {
+    $berhasil = $_GET['sukses'];
+    if ($berhasil === 'edit_berhasil') {
+        showAlert('success', 'Berhasil', ' data barang berhasil di UPDATE .');
     }
-    ?>
+}
+
+// mengecek di hapus
+if (isset($_GET['hapus'])) {
+    $berhasil = $_GET['hapus'];
+    if ($berhasil === 'berhasil_dihapus') {
+        showAlert('success', 'Berhasil', ' data barang berhasil di HAPUS .');
+    }
+}
+?>
+
+
+<main id='main' class='main' class='main animated'>
+
+
 
     <div class='pagetitle'>
         <h1>Data Investaris</h1>
@@ -148,11 +140,10 @@ function showAlert($icon, $title, $message, $redirect = null)
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                    <td class="text-center">
-                                        <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
-                                            target="_blank">Unduh</a>
-                                    </td>
-                                    <?php
+                                            <td class="text-center">
+                                                <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>" target="_blank">Unduh</a>
+                                            </td>
+                                            <?php
                                             // Kolom aksi dengan ikon edit dan delete
                                             echo "<td class='text-center'>";
 
@@ -163,18 +154,17 @@ function showAlert($icon, $title, $message, $redirect = null)
                                         </a>";
                                             ?>
 
-                                    <!-- delete -->
-                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
-                                        onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </a>
+                                            <!-- delete -->
+                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
 
                                     <?php
                                             echo "</td>";
 
                                             echo "</tr>";
 
-                                            // ...
+
 
                                             // Modal Edit untuk setiap data
                                             echo "<div class='modal fade' id='smallModal" . $no . "' tabindex='-1'>";
@@ -232,9 +222,6 @@ function showAlert($icon, $title, $message, $redirect = null)
                                             echo "</div>";
                                             echo "</div>";
                                             echo "</div>";
-
-                                            // ...
-
                                         }
                                     } else {
                                         echo "<tr><td colspan='4'>No data available</td></tr>";

@@ -72,6 +72,14 @@ class StokBarang extends Barang
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Periksa apakah file gambar telah diunggah
+    if (empty($_FILES['image']['name'])) {
+
+        echo "<script>window.location.href = '../admin/add_barang.php?add=tambah_gagal';</script>";
+        exit();
+    }
+}
 $stokBarangObj = new StokBarang($db_connect);
 
 if (isset($_POST['submit'])) {

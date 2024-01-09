@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_order'])) {
 
     // Update data pesanan di database
     $query = "UPDATE `order` SET total_harga = '$total_harga', proses_laundry = '$proses_laundry', status_pembayaran = '$status_pembayaran', jumlah_bayar = '$jumlah_bayar' WHERE id_order = $id_order";
-    $query = "UPDATE `jenis_laundry` SET jenis_laundry = '$' WHERE id_jenis = $id_order";
 
     if (mysqli_query($db_connect, $query)) {
         // Redirect ke halaman data pesanan dengan pesan berhasil

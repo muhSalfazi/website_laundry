@@ -5,13 +5,39 @@ if ($_SESSION['role'] != 'admin') {
     header('Location:../../../');
     exit(session_destroy());
 }
-?><?php
-    $ds = DIRECTORY_SEPARATOR;
-    $base_dir = realpath(dirname(__FILE__)  . $ds . '../../../') . $ds;
-    require_once("{$base_dir}pages{$ds}core{$ds}header.php");
-    require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-    ?>
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__)  . $ds . '../../../') . $ds;
+require_once("{$base_dir}pages{$ds}core{$ds}header.php");
+require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
+
+function showAlert($icon, $title, $message, $redirect = null)
+{
+    echo "
+        <script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    icon: '$icon',
+                    title: '$title',
+                    html: '<p class=\"p-popup\">$message</p>',
+                    showConfirmButton: true, 
+                    confirmButtonText: 'OK',
+                  
+                }).then(() => {
+                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
+                });
+            });
+        </script>
+        ";
+}
+
+if (isset($_GET['add'])) {
+    $berhasil = $_GET['add'];
+    if ($berhasil === 'tambah_gagal') {
+        showAlert('error', 'Gagal Di ', 'Gambar belum di Inputkan');
+    }
+}
+?>
 
 <main id='main' class='main' class='main animated'>
 
@@ -39,28 +65,28 @@ if ($_SESSION['role'] != 'admin') {
                         <h5 class='card-title'>Tambah Stok Barang</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Nama Barang</label>
-                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi'
-                                    required>
+                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan nama Lengkap yang valid.
                                 </div>
                             </div>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Total Barang</label>
-                                <input type='number' class='form-control' name='total_barang'
-                                    placeholder=' silahkan isi' required>
+                                <input type='number' class='form-control' name='total_barang' placeholder=' silahkan isi' value="" required>
                                 <div class='invalid-feedback'>
-                                    Harap berikan Email yang valid.
+                                    Harap isi total barang
                                 </div>
                             </div>
                             <div class='col-md-12'>
                                 <label for='image' class='col-sm-2 col-form-label'>Gambar Produk</label>
                                 <div class='col-sm-10'>
-                                    <input class='form-control' type='file' name='image'>
+                                    <input class='form-control' type='file' value="" name='image' required>
+                                </div>
+                                <div class='invalid-feedback'>
+                                    harap Inputkan gambar Inventaris
                                 </div>
                             </div>
                             <div class='col-12'>

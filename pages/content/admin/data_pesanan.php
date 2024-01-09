@@ -1,36 +1,18 @@
 <?php
+
 session_start();
+require_once "../../core/connection.php";
 
 if ($_SESSION['role'] != 'admin') {
     header('Location: ../../../');
-    session_destroy();
+    exit(session_destroy());
 }
 
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
-require_once("{$base_dir}pages{$ds}core{$ds}header.php");
-require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
-
-// Filter logic
-$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
-
-switch ($filter) {
-    case 'today':
-        $viewName = 'order_view_today';
-        break;
-    case 'month':
-        $viewName = 'order_view_month';
-        break;
-    case 'year':
-        $viewName = 'order_view_year';
-        break;
-    default:
-        $viewName = 'order_view_all';
-        break;
-}
-
-$sql = "SELECT * FROM `$viewName`";
-$order = mysqli_query($db_connect, $sql);
+require_once "{$base_dir}pages{$ds}core{$ds}header.php";
+require_once "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php";
+require_once "../backend/filter_pesanan.php";
 // Periksa apakah fungsi showAlert sudah ditentukan
 function showAlert($icon, $title, $message, $redirect = null)
 {

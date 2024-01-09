@@ -8,12 +8,9 @@ if ($_SESSION['role'] != 'pelanggan') {
 
 // Periksa apakah pengguna telah login
 if (!isset($_SESSION['alamat']) || !isset($_SESSION['nama_lengkap']) || !isset($_SESSION['no_telp'])) {
-    // Handle the case where session variables are not set
-    echo "Session variables are not set!";
+    echo "Variabel sesi tidak disetel!";
     exit();
 }
-
-
 
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
@@ -83,21 +80,18 @@ if (isset($_GET['add'])) {
                         <h5 class='card-title'>Order layanan Setrika</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/order' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/order' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>Nama Pelanggan</label>
                                 <input type='text' class='form-control' name='nama_pelanggan' value="  <?php echo $nama_lengkap;
-                                                                                                        ?>" required
-                                    readonly>
+                                                                                                        ?>" required readonly>
 
                             </div>
 
                             <div class='col-md-4'>
                                 <label for='validationCustom02' class='form-label'>No Handphone</label>
-                                <input type='text' class='form-control' name='no_telp' value="<?php echo $no_telp; ?>"
-                                    required readonly>
+                                <input type='text' class='form-control' name='no_telp' value="<?php echo $no_telp; ?>" required readonly>
 
                             </div>
                             <div class='col-md-4'>
@@ -153,8 +147,7 @@ if (isset($_GET['add'])) {
                             <!-- alamat -->
                             <div class='col-md-12 ' id="alamat_antar_fields">
                                 <label for='validationCustom02' class='form-label'>Alamat</label>
-                                <input type='text' class='form-control' name='alamat'
-                                    placeholder="isi layanan antar dahulu" required readonly>
+                                <input type='text' class='form-control' name='alamat' placeholder="isi layanan antar dahulu" required readonly>
 
                             </div>
 
@@ -194,95 +187,95 @@ require_once("{$base_dir}pages{$ds}core{$ds}footer.php");
 <!-- modal -->
 <!-- pilih layanan -->
 <script>
-$(document).ready(function() {
-    // Fungsi untuk mereset jenis kategori dan kategori laundry
-    function resetJenisKategori() {
-        $("#jenis").val(null);
-        $("#nama_produk").val(null);
-    }
-
-    // Fungsi untuk memperbarui opsi-opsi jenis kategori berdasarkan jenis layanan
-    function updateJenisKategoriOptions(jenis) {
-
-        var options = "<option selected disabled>pilih...</option>";
-
-        // Logika penentuan opsi-opsi untuk jenis kategori
-        if (jenis == 'cuci+setrika') {
-            options += "<option value='kiloan'>Kiloan</option>";
-            options += "<option value='satuan'>SATUAN</option>";
-        } else if (jenis == 'setrika') {
-            options += "<option value='kiloan'>Kiloan</option>";
-            options += "<option value='paketan'>Paketan</option>";
-        } else if (jenis == 'cuci') {
-            options += "<option value='kiloan'>Kiloan</option>";
-            options += "<option value='satuan'>SATUAN</option>";
-        } else if (jenis == 'karpet') {
-
-            options += "<option value='karpet'>karpet</option>";
+    $(document).ready(function() {
+        // Fungsi untuk mereset jenis kategori dan kategori laundry
+        function resetJenisKategori() {
+            $("#jenis").val(null);
+            $("#nama_produk").val(null);
         }
 
-        // Hapus opsi yang tidak diperlukan
-        $("#jenis").html(options);
-        $("#nama_produk").html("<option selected disabled>isi jenis Laundry dahulu</option>");
+        // Fungsi untuk memperbarui opsi-opsi jenis kategori berdasarkan jenis layanan
+        function updateJenisKategoriOptions(jenis) {
 
-    }
+            var options = "<option selected disabled>pilih...</option>";
 
-    // Event handler untuk perubahan jenis layanan
-    $("#layanan").on('change', function() {
-        var jenis = $(this).val();
+            // Logika penentuan opsi-opsi untuk jenis kategori
+            if (jenis == 'cuci+setrika') {
+                options += "<option value='kiloan'>Kiloan</option>";
+                options += "<option value='satuan'>SATUAN</option>";
+            } else if (jenis == 'setrika') {
+                options += "<option value='kiloan'>Kiloan</option>";
+                options += "<option value='paketan'>Paketan</option>";
+            } else if (jenis == 'cuci') {
+                options += "<option value='kiloan'>Kiloan</option>";
+                options += "<option value='satuan'>SATUAN</option>";
+            } else if (jenis == 'karpet') {
 
-        // Reset dan update opsi-opsi berdasarkan jenis layanan
-        resetJenisKategori();
-        updateJenisKategoriOptions(jenis);
+                options += "<option value='karpet'>karpet</option>";
+            }
 
+            // Hapus opsi yang tidak diperlukan
+            $("#jenis").html(options);
+            $("#nama_produk").html("<option selected disabled>isi jenis Laundry dahulu</option>");
 
-    });
-
-    // Event handler untuk perubahan jenis kategori
-    $("#jenis").on('change', function() {
-        var jenis = $(this).val();
-
-
-
-        // Logika untuk memperbarui opsi-opsi kategori laundry berdasarkan jenis kategori
-        var kategoriOptions = "<option selected disabled>pilih...</option>";
-
-        if (jenis == 'kiloan') {
-            kategoriOptions += "<option value='Reguler'>Reguler</option>";
-            kategoriOptions += "<option value='2 hari'>2 hari</option>";
-            kategoriOptions += "<option value='3 hari'>1 hari</option>";
-            kategoriOptions += "<option value='4 hari'>8 jam</option>";
-            kategoriOptions += "<option value='3 jam'>3 jam</option>";
-        } else if (jenis == 'satuan') {
-            kategoriOptions += "<option value='sprey,selimut'>sprey,selimut</option>";
-            kategoriOptions += "<option value='bed cover'>bed cover</option>";
-            kategoriOptions += "<option value='jas'>jas</option>";
-            kategoriOptions += "<option value='jas 1 stel'>jas 1 stel</option>";
-        } else if (jenis == 'paketan') {
-            kategoriOptions += "<option value='paket setrika'>Paket Setika</option>";
-        } else if (jenis == 'karpet') {
-            kategoriOptions += "<option value='karpet kecil'>karpet kecil</option>";
-            kategoriOptions += "<option value='karpet sedang'>karpet sedang</option>";
-            kategoriOptions += "<option value='karpet jumbo'>karpet jumbo</option>";
         }
 
-        // Update opsi-opsi kategori laundry
-        $("#nama_produk").html(kategoriOptions);
+        // Event handler untuk perubahan jenis layanan
+        $("#layanan").on('change', function() {
+            var jenis = $(this).val();
+
+            // Reset dan update opsi-opsi berdasarkan jenis layanan
+            resetJenisKategori();
+            updateJenisKategoriOptions(jenis);
+
+
+        });
+
+        // Event handler untuk perubahan jenis kategori
+        $("#jenis").on('change', function() {
+            var jenis = $(this).val();
+
+
+
+            // Logika untuk memperbarui opsi-opsi kategori laundry berdasarkan jenis kategori
+            var kategoriOptions = "<option selected disabled>pilih...</option>";
+
+            if (jenis == 'kiloan') {
+                kategoriOptions += "<option value='Reguler'>Reguler</option>";
+                kategoriOptions += "<option value='2 hari'>2 hari</option>";
+                kategoriOptions += "<option value='3 hari'>1 hari</option>";
+                kategoriOptions += "<option value='4 hari'>8 jam</option>";
+                kategoriOptions += "<option value='3 jam'>3 jam</option>";
+            } else if (jenis == 'satuan') {
+                kategoriOptions += "<option value='sprey,selimut'>sprey,selimut</option>";
+                kategoriOptions += "<option value='bed cover'>bed cover</option>";
+                kategoriOptions += "<option value='jas'>jas</option>";
+                kategoriOptions += "<option value='jas 1 stel'>jas 1 stel</option>";
+            } else if (jenis == 'paketan') {
+                kategoriOptions += "<option value='paket setrika'>Paket Setika</option>";
+            } else if (jenis == 'karpet') {
+                kategoriOptions += "<option value='karpet kecil'>karpet kecil</option>";
+                kategoriOptions += "<option value='karpet sedang'>karpet sedang</option>";
+                kategoriOptions += "<option value='karpet jumbo'>karpet jumbo</option>";
+            }
+
+            // Update opsi-opsi kategori laundry
+            $("#nama_produk").html(kategoriOptions);
+        });
+
+        // Event handler untuk perubahan layanan antar
+        $("#alamat_input").on('change', function() {
+            var layanan = $(this).val();
+
+
+            // Logika untuk memperbarui input alamat berdasarkan layanan antar
+            var alamatField = "<label for='validationCustom02' class='form-label'>Alamat</label>" +
+                "<input type='text' class='form-control' name='alamat' value='" + (layanan ==
+                    'antar jemput' ? '<?php echo $alamat; ?>' : '--') + "' required readonly>" +
+                "</div>";
+
+            // Update input alamat
+            $("#alamat_antar_fields").html(alamatField);
+        });
     });
-
-    // Event handler untuk perubahan layanan antar
-    $("#alamat_input").on('change', function() {
-        var layanan = $(this).val();
-
-
-        // Logika untuk memperbarui input alamat berdasarkan layanan antar
-        var alamatField = "<label for='validationCustom02' class='form-label'>Alamat</label>" +
-            "<input type='text' class='form-control' name='alamat' value='" + (layanan ==
-                'antar jemput' ? '<?php echo $alamat; ?>' : '--') + "' required readonly>" +
-            "</div>";
-
-        // Update input alamat
-        $("#alamat_antar_fields").html(alamatField);
-    });
-});
 </script>

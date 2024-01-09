@@ -11,30 +11,7 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-// Inisialisasi variabel $order
-$order = array();
-
-
-if (isset($_POST['cek_order'])) {
-    $resi_pesanan = $_POST['resi_pesanan'];
-
-    $query = "SELECT * FROM `order` WHERE resi_pesanan = ?";
-    $stmt = $db_connect->prepare($query);
-    $stmt->bind_param('s', $resi_pesanan);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-
-    if ($result->num_rows > 0) {
-
-        $order = $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-
-        $error_message = "Resi Pesanan tidak terdaftar.";
-    }
-}
-
-
+require_once "../backend/cek_resi.php";
 ?>
 
 <main id='main' class='main'>
@@ -61,13 +38,11 @@ if (isset($_POST['cek_order'])) {
                         <h5 class='card-title'>CEK ORDER</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation'
-                            novalidate>
+                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
 
                             <div class='col-md-12'>
                                 <label for='validationCustom02' class='form-label'>Resi Pesanan</label>
-                                <input type='text' class='form-control' name='resi_pesanan'
-                                    placeholder="masukan resi anda" required>
+                                <input type='text' class='form-control' name='resi_pesanan' placeholder="masukan resi anda" required>
                                 <div class='invalid-feedback'>
                                     Harap Berikan Resi Pesanan Yang Valid
                                 </div>

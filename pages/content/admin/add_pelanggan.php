@@ -5,15 +5,11 @@ if ($_SESSION['role'] != 'admin') {
     header('Location:../../../');
     exit(session_destroy());
 }
-?>
-<?php
+
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
-
-?>
-<?php
 
 function showAlert($icon, $title, $message, $redirect = null)
 {
@@ -33,9 +29,6 @@ Swal.fire({
 </script>
 ";
 }
-?>
-
-<?php
 
 // mengecek di edit
 if (isset($_GET['gagal'])) {

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once "../../core/connection.php";
 
@@ -11,27 +12,7 @@ $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once "{$base_dir}pages{$ds}core{$ds}header.php";
 require_once "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php";
-
-// Filter logic
-$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
-
-switch ($filter) {
-    case 'today':
-        $viewName = 'pelanggan_view_today';
-        break;
-    case 'month':
-        $viewName = 'pelanggan_view_month';
-        break;
-    case 'year':
-        $viewName = 'pelanggan_view_year';
-        break;
-    default:
-        $viewName = 'pelanggan_view_all';
-        break;
-}
-
-$sql = "SELECT * FROM `$viewName`";
-$data_pelanggan = mysqli_query($db_connect, $sql);
+require_once "../backend/filter_pelanggan.php";
 
 // Function to show alerts using SweetAlert
 if (!function_exists('showAlert')) {
