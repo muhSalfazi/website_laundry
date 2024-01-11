@@ -4,7 +4,7 @@ session_start();
 require_once "../../core/connection.php";
 
 if ($_SESSION['role'] != 'admin') {
-    header('Location: ../../../');
+    header('Location: ../../../login');
     exit(session_destroy());
 }
 

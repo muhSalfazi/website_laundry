@@ -1,33 +1,30 @@
 <?php
 
-session_start();
+// Check if the 'filter' parameter is set in the URL, otherwise default to 'today'
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'today';
 
-if ($_SESSION['role'] != 'admin') {
-    header('Location: ../../../');
-    session_destroy();
-}
 function getDashboardData($filter = 'today')
 {
     global $db_connect;
 
     $query = "SELECT
-SUM(jumlah_bayar) AS pendapatan,
-COUNT(id_order) AS sales
-FROM `order`
-WHERE DATE(created_at) = CURDATE();";
+    SUM(jumlah_bayar) AS pendapatan,
+    COUNT(id_order) AS sales
+    FROM `order`
+    WHERE DATE(created_at) = CURDATE();";
 
     if ($filter === 'this_month') {
         $query = "SELECT
-SUM(jumlah_bayar) AS pendapatan,
-COUNT(id_order) AS sales
-FROM `order`
-WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
+        SUM(jumlah_bayar) AS pendapatan,
+        COUNT(id_order) AS sales
+        FROM `order`
+        WHERE MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW());";
     } elseif ($filter === 'this_year') {
         $query = "SELECT
-SUM(jumlah_bayar) AS pendapatan,
-COUNT(id_order) AS sales
-FROM `order`
-WHERE YEAR(created_at) = YEAR(NOW());";
+        SUM(jumlah_bayar) AS pendapatan,
+        COUNT(id_order) AS sales
+        FROM `order`
+        WHERE YEAR(created_at) = YEAR(NOW());";
     }
 
     $query2 = "SELECT COUNT(DISTINCT id_pelanggan) AS pelanggan FROM pelanggan WHERE ";

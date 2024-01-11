@@ -89,4 +89,7 @@ if (isset($_POST['submit'])) {
     $kode_barang = $_POST['kode_barang'];
 
     $stokBarangObj->addBarang($nama, $total, $image, $kode_barang);
+} else {
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }

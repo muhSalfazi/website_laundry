@@ -91,4 +91,7 @@ window.location.href = '../../../lupa_password.php?gagal=add_gagal';
         // Handle kesalahan eksekusi query
         echo "Error: " . mysqli_error($db_connect);
     }
+}else {
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }

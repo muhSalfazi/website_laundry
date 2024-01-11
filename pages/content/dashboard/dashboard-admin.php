@@ -1,12 +1,18 @@
 <?php
 
-require_once "../backend/laporan.php";
+session_start();
+
+if ($_SESSION['role'] != 'admin') {
+    header('Location:../../../login');
+    exit(session_destroy());
+}
 
 
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
+require_once "../backend/laporan.php";
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'today';
 $dashboardData = getDashboardData($filter);
 ?>

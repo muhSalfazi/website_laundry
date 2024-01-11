@@ -1,5 +1,11 @@
 <?php
 session_start();
+if ($_SESSION['role'] != 'admin') {
+  
+        header('Location: ../../../pages-error-404.html');
+        exit();
+}
+
 require __DIR__ . DIRECTORY_SEPARATOR . '../../../vendor/autoload.php';
 include '../../core/connection.php';
 
@@ -58,7 +64,7 @@ if ($result) {
         $html .= '<td>' . $row['kode_barang'] . '</td>';
         $html .= '<td>' . $row['total_barang'] . '</td>';
         // Menambahkan tag img untuk menampilkan gambar
-       
+
         $html .= '</tr>';
     }
 

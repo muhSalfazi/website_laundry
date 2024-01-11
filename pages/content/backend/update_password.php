@@ -2,9 +2,9 @@
 include '../../core/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $verificationCode = $_POST['verification_code'];
-    $password = trim($_POST['password']);
-    $confirmPassword = trim($_POST['confirm_password']);
+    $verificationCode = htmlspecialchars($_POST['verification_code']);
+    $password = trim(htmlspecialchars($_POST['password']));
+    $confirmPassword = trim(htmlspecialchars($_POST['confirm_password']));
 
     // Validasi apakah password cocok
     if ($password !== $confirmPassword) {
@@ -47,6 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>window.location.href = '../../../new_password.php?gagal=add_gagal';</script>";
         }
     } else {
-        die("Query error: " . mysqli_error($db_connect));
+        die("Query error: " . htmlspecialchars(mysqli_error($db_connect)));
     }
+}else {
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }
+?>

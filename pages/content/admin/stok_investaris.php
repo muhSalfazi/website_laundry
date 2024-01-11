@@ -2,7 +2,7 @@
 session_start();
 if ($_SESSION['role'] != 'admin') {
 
-    header('Location:../../../');
+    header('Location:../../../login');
     exit(session_destroy());
 }
 
@@ -140,10 +140,15 @@ if (isset($_GET['hapus'])) {
                                             echo "<td class='tex-center'  scope='row'>" . $row['kode_barang'] . "</td>";
                                             echo "<td class='tex-center'  scope='row'>" . $row['total_barang'] . "</td>";
                                     ?>
-                                            <td class="text-center">
-                                                <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>" target="_blank">Unduh</a>
-                                            </td>
-                                            <?php
+                                    <td class="text-center">
+                                        <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                            target="_blank">Unduh</a>
+
+                                        <!-- <img src="<?php
+                                        //  BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                        alt="Gambar" /> -->
+                                    </td>
+                                    <?php
                                             // Kolom aksi dengan ikon edit dan delete
                                             echo "<td class='text-center'>";
 
@@ -154,10 +159,11 @@ if (isset($_GET['hapus'])) {
                                         </a>";
                                             ?>
 
-                                            <!-- delete -->
-                                            <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete" onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </a>
+                                    <!-- delete -->
+                                    <a class="btn btn-danger btn-sm delete-btn ml-2" title="Delete"
+                                        onclick="deleteConfirmation(<?= $row['id_stok_barang'] ?>, 'stok_barang')">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
 
                                     <?php
                                             echo "</td>";

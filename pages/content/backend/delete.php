@@ -76,5 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pelanggan'])) {
         header('Location: ../../../pages-error-404.html');
     }
 } else {
-    echo "Invalid request.";
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }
