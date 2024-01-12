@@ -21,7 +21,4 @@ if (isset($_POST['cek_order'])) {
 
         $error_message = "Resi Pesanan tidak terdaftar.";
     }
-} else {
-    header('Location: ../../../pages-error-404.html');
-    exit();
-}
+} 
