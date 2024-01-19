@@ -80,7 +80,7 @@ if (isset($_GET['hapus'])) {
 
                         </a>
 
-                        <a href='../backend/download_pdf.php' target="_blank" class="col-md-6">
+                        <a href='../backend/download_pdf' target="_blank" class="col-md-6">
 
                             <button type="button" class="btn btn-primary btn-sm mt-2">
                                 <i class='bi bi-file-earmark-pdf-fill'></i>
@@ -125,11 +125,6 @@ if (isset($_GET['hapus'])) {
                                     <td class="text-center">
                                         <a href="<?= BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
                                             target="_blank">Unduh</a>
-
-                                        <!-- <img src="<?php
-                                                                //  BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; 
-                                                                ?>"
-                                        alt="Gambar" /> -->
                                     </td>
                                     <?php
                                             // Kolom aksi dengan ikon edit dan delete

@@ -1,11 +1,17 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'admin') {
+
+// Cek apakah pengguna memiliki hak akses admin
+if ($_SESSION['role'] !== 'admin') {
     header('Location: ../../../pages-error-404.html');
     exit();
 }
 
+// Memuat konfigurasi dan vendor/autoload
+require_once '../../core/config.php';
 require __DIR__ . DIRECTORY_SEPARATOR . '../../../vendor/autoload.php';
+
+// Memuat koneksi database
 include '../../core/connection.php';
 
 use Dompdf\Dompdf;
@@ -20,7 +26,8 @@ if ($result) {
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
     $options->set('isPhpEnabled', true);
-
+    //mengatur image
+    $options->set('isRemoteEnabled', true);
     $dompdf = new Dompdf($options);
 
     // HTML content untuk PDF
@@ -37,36 +44,39 @@ if ($result) {
                     text-align: left;
                     padding: 8px;
                 }
-                img {
-                    max-width: 100px; /* Sesuaikan ukuran gambar */
-                    height: auto;
-                }
             </style>
         </head>
         <body>
-            <h2>Data Stok Barang</h2>
+            <h2>Data Stok Inventaris</h2>
             <table>
                 <thead>
-                    <tr>
-                        <th>Nama Barang</th>
-                        <th>Kode Barang</th>
-                        <th>Total Barang</th>
+                    <tr >
+                        <th  class="text-center">Nama Barang</th>
+                        <th  class="text-center">Kode Barang</th>
+                        <th  class="text-center">Gambar Produk</th>
+                        <th  class="text-center">Jumlah barang</th>
                     </tr>
                 </thead>
                 <tbody>';
 
     // Menambahkan data stok barang ke HTML
     while ($row = mysqli_fetch_assoc($result)) {
-        $html .= '<tr>';
-        $html .= '<td>' . $row['nama_barang'] . '</td>';
-        $html .= '<td><img src="http://localhost/coding_web/project_smstr3/pages/content/' . $row['image'] . '.jpg"></td>';
+        // Menghasilkan path gambar secara dinamis
+        $imagePath = BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image'];
 
-        $html .= '<td>' . $row['total_barang'] . '</td>';
+        $html .= '<tr>';
+        $html .= '<td  class="text-center">' . $row['nama_barang'] . '</td>';
+        $html .= '<td  class="text-center">' . $row['kode_barang'] . '</td>';
+        $html .= '<td  class="text-center"><img src="' . $imagePath . '" alt="Gambar" style="max-width: 100px; height: auto;"></td>';
+        $html .= '<td  class="text-center">' . $row['total_barang'] . '</td>';
         $html .= '</tr>';
     }
 
     // Menutup HTML
-    $html .= '</tbody></table></body></html>';
+    $html .= '</tbody>
+            </table>
+        </body>
+        </html>';
 
     // Memuat HTML ke DOMPDF
     $dompdf->loadHtml($html);
@@ -85,8 +95,6 @@ if ($result) {
 
     exit();
 } else {
-    echo "Error mengambil data stok barang: " . mysqli_error($db_connect);
-    // Menutup koneksi database
-    mysqli_close($db_connect);
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }
-?>
