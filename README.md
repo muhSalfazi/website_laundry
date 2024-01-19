@@ -1,5 +1,11 @@
 # Website Laundry
 
+Demo website:
+- Admin username: fauzi
+- Admin password: salman
+
+admin diharapkan untuk mendaftarkan akun pelanggan terlebih dahulu sebelum menggunakan layanan.
+
 ## Tampilan Halaman Sebelum Login
 
 ![Halaman Sebelum Login](https://github.com/salfazi/website_laundry/assets/121502387/3355ead6-4e2e-48d0-a478-f84594994de8)
