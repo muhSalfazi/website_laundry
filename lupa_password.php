@@ -1,27 +1,5 @@
 <?php
-
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-    <script type='text/javascript'>
-        document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire({
-                icon: '$icon',
-                title: '$title',
-                html: '<p class=\"p-popup\">$message</p>',
-                showConfirmButton: false,
-                timer: 2500
-            }).then(() => {
-                " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-            });
-        });
-    </script>
-    ";
-}
-?>
-<!--create-->
-
-<?php
+require_once "sweetalert.php";
 
 // mengecek di tambahkan
 
@@ -66,6 +44,7 @@ if (isset($_GET['gagal'])) {
     <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
     <!-- Template Main CSS File -->
@@ -135,6 +114,25 @@ if (isset($_GET['gagal'])) {
         100% {
             transform: rotate(360deg);
         }
+    }
+
+    /* Menyesuaikan ukuran SweetAlert */
+    .swal2-popup {
+        font-size: 1rem;
+
+        width: auto !important;
+        max-width: 300px;
+
+    }
+
+    .swal2-title {
+        font-size: 1.3rem;
+
+    }
+
+    .swal2-content {
+        font-size: 1rem;
+
     }
     </style>
 

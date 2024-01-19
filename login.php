@@ -28,13 +28,20 @@
     <link href='assets/vendor/remixicon/remixicon.css' rel='stylesheet'>
     <link href='assets/vendor/simple-datatables/style.css' rel='stylesheet'>
 
+    <!-- animate css libarry -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- Template Main CSS File -->
     <link href='assets/css/style.css' rel='stylesheet'>
+    <!-- sweetalert2 -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
     <!-- Include SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <!-- ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  =
@@ -101,65 +108,65 @@
 .animated {
     animation: fadeIn 1s ease-in-out;
 }
+
+
+/* Menyesuaikan ukuran SweetAlert */
+.swal2-popup {
+    font-size: 1rem;
+
+    width: auto !important;
+    max-width: 300px;
+
+}
+
+.swal2-title {
+    font-size: 1.3rem;
+
+}
+
+.swal2-content {
+    font-size: 1rem;
+
+}
 </style>
 
 <body>
     <?php
-session_start();
 
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: true, 
-                    confirmButtonText: 'OK',
-                  
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-}
+    require_once "sweetalert.php";
+    if (isset($_GET['gagal'])) {
+        $berhasil = $_GET['gagal'];
 
-if (isset($_GET['gagal'])) {
-    $berhasil = $_GET['gagal'];
+        if ($berhasil === 'gagal_login') {
+            $_SESSION['showAlert'] = true;
+            $_SESSION['alertType'] = 'error';
+            $_SESSION['alertTitle'] = 'GAGAL';
+            $_SESSION['alertMessage'] = 'Username atau Password anda <strong>SALAH.</strong>';
+        }
 
-    if ($berhasil === 'gagal_login') {
-        $_SESSION['showAlert'] = true;
-        $_SESSION['alertType'] = 'error';
-        $_SESSION['alertTitle'] = 'GAGAL';
-        $_SESSION['alertMessage'] = 'Username atau Password anda <strong>SALAH.</strong>';
+        if ($berhasil === 'gagal_masalah') {
+            $_SESSION['showAlert'] = true;
+            $_SESSION['alertType'] = 'warning';
+            $_SESSION['alertTitle'] = 'GAGAL';
+            $_SESSION['alertMessage'] = 'Terjadi kesalahan DataBase. Silakan coba lagi.';
+        }
     }
 
-    if ($berhasil === 'gagal_masalah') {
-        $_SESSION['showAlert'] = true;
-        $_SESSION['alertType'] = 'warning';
-        $_SESSION['alertTitle'] = 'GAGAL';
-        $_SESSION['alertMessage'] = 'Terjadi kesalahan DataBase. Silakan coba lagi.';
+    // Tambahkan kondisi ini untuk menampilkan pesan hanya sekali setelah redirect atau saat pertama kali akses halaman
+    if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
+        showAlert($_SESSION['alertType'], $_SESSION['alertTitle'], $_SESSION['alertMessage']);
+        $_SESSION['showAlert'] = false; // Setelah menampilkan pesan, set session menjadi false
     }
-}
 
-// Tambahkan kondisi ini untuk menampilkan pesan hanya sekali setelah redirect atau saat pertama kali akses halaman
-if (isset($_SESSION['showAlert']) && $_SESSION['showAlert']) {
-    showAlert($_SESSION['alertType'], $_SESSION['alertTitle'], $_SESSION['alertMessage']);
-    $_SESSION['showAlert'] = false; // Setelah menampilkan pesan, set session menjadi false
-}
-
-if (isset($_GET['berhasil'])) {
-    $berhasil = $_GET['berhasil'];
-    if ($berhasil === 'ubah_password') {
-        showAlert('success', 'Berhasil', ' Password berhasil direset.');
+    if (isset($_GET['berhasil'])) {
+        $berhasil = $_GET['berhasil'];
+        if ($berhasil === 'ubah_password') {
+            showAlert('success', 'Berhasil', ' Password berhasil direset.');
+        }
     }
-}
 
-session_write_close(); // Tutup session
-?>
+    session_write_close(); // Tutup session
+    ?>
 
     <main>
         <div class="loading-overlay" id="loading-overlay" class='main animated'>
@@ -245,6 +252,7 @@ session_write_close(); // Tutup session
     </script>
     <script src='assets/vendor/tinymce/tinymce.min.js'></script>
     <script src='assets/vendor/php-email-form/validate.js'></script>
+
     <!-- spinners -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -267,6 +275,8 @@ session_write_close(); // Tutup session
 
     <!-- Template Main JS File -->
     <script src='assets/js/main.js'></script>
+
+
 
 </body>
 

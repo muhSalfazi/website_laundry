@@ -13,31 +13,7 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once "{$base_dir}pages{$ds}core{$ds}header.php";
 require_once "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php";
 require_once "../backend/filter_pelanggan.php";
-
-// Function to show alerts using SweetAlert
-if (!function_exists('showAlert')) {
-    function showAlert($icon, $title, $message, $redirect = null)
-    {
-        echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-    }
-}
-?>
-
-<?php
+require_once "sweetalert.php";
 // mengecek di edit
 if (isset($_GET['berhasil'])) {
     $berhasil = $_GET['berhasil'];

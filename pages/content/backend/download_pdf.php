@@ -1,9 +1,8 @@
 <?php
 session_start();
 if ($_SESSION['role'] != 'admin') {
-  
-        header('Location: ../../../pages-error-404.html');
-        exit();
+    header('Location: ../../../pages-error-404.html');
+    exit();
 }
 
 require __DIR__ . DIRECTORY_SEPARATOR . '../../../vendor/autoload.php';
@@ -52,7 +51,6 @@ if ($result) {
                         <th>Nama Barang</th>
                         <th>Kode Barang</th>
                         <th>Total Barang</th>
-                       
                     </tr>
                 </thead>
                 <tbody>';
@@ -61,10 +59,9 @@ if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $html .= '<tr>';
         $html .= '<td>' . $row['nama_barang'] . '</td>';
-        $html .= '<td>' . $row['kode_barang'] . '</td>';
-        $html .= '<td>' . $row['total_barang'] . '</td>';
-        // Menambahkan tag img untuk menampilkan gambar
+        $html .= '<td><img src="http://localhost/coding_web/project_smstr3/pages/content/' . $row['image'] . '.jpg"></td>';
 
+        $html .= '<td>' . $row['total_barang'] . '</td>';
         $html .= '</tr>';
     }
 
@@ -83,7 +80,13 @@ if ($result) {
     // Mengirimkan hasil ke browser untuk di-download
     $dompdf->stream('stok_barang.pdf', array('Attachment' => 0));
 
+    // Menutup koneksi database
+    mysqli_close($db_connect);
+
     exit();
 } else {
-    echo "Error mengambil data stok barang.";
+    echo "Error mengambil data stok barang: " . mysqli_error($db_connect);
+    // Menutup koneksi database
+    mysqli_close($db_connect);
 }
+?>

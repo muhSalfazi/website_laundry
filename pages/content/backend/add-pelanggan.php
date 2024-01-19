@@ -31,11 +31,12 @@ if (isset($_POST['submit'])) {
     $created_at = filter(date('Y-m-d H:i:s', time()));
     // Mengecek apakah email sudah diinput atau belum
     $usedEmail = mysqli_query($db_connect, "SELECT email FROM pelanggan WHERE email = '$email'");
+$usedUsername = mysqli_query($db_connect, "SELECT username FROM pelanggan WHERE username = '$username'");
 
-    if (mysqli_num_rows($usedEmail) > 0) {
-        echo "<script>window.location.href = '../admin/add_pelanggan.php?gagal=gagal_sudahada';</script>";
-        die;
-    }
+if (mysqli_num_rows($usedEmail) > 0 || mysqli_num_rows($usedUsername) > 0) {
+    echo "<script>window.location.href = '../admin/add_pelanggan.php?gagal=gagal_sudahada';</script>";
+    die;
+}
 
     // Menyimpan data user ke tabel users
     $insertUserQuery = "INSERT INTO pelanggan (nama_lengkap, email, password, username, alamat, no_telp, created_at) VALUES ('$nama_lengkap', '$email', '$hashedPassword', '$username', '$alamat', '$No_telp', '$created_at')";
@@ -91,7 +92,7 @@ if (isset($_POST['submit'])) {
         header('Location: ../../core/pages-error-404.html');
         exit();
     }
-}else {
+} else {
     header('Location: ../../../pages-error-404.html');
     exit();
 };

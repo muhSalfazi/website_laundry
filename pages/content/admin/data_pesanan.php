@@ -14,26 +14,7 @@ require_once "{$base_dir}pages{$ds}core{$ds}header.php";
 require_once "{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php";
 require_once "../backend/filter_pesanan.php";
 // Periksa apakah fungsi showAlert sudah ditentukan
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: true, // Set to true to show the OK button
-                    confirmButtonText: 'OK', // Customize the OK button text
-                    timer: 2000,
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-}
-
+require_once "sweetalert.php";
 
 if (isset($_GET['berhasil'])) {
     $berhasil = $_GET['berhasil'];

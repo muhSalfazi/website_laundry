@@ -11,30 +11,12 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-<script type='text/javascript'>
-document.addEventListener('DOMContentLoaded', () => {
-Swal.fire({
-    icon: '$icon',
-    title: '$title',
-    html: '<p class=\"p-popup\">$message</p>',
-    showConfirmButton: false,
-    timer: 2000
-}).then(() => {
-    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-});
-});
-</script>
-";
-}
-
+require_once "sweetalert.php";
 // mengecek di edit
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'gagal_sudahada') {
-        showAlert('error', 'GAGAL', 'Email sudah di PAKAI.');
+        showAlert('error', 'GAGAL', 'Email atau Username sudah di PAKAI.');
     }
 }
 //berhasil di tambahkan

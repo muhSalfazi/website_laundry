@@ -1,52 +1,9 @@
 <?php
 //new_password
 // Pastikan untuk memulai sesi di awal skrip
-session_start();
+require_once "sweetalert.php";
 
 
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-    <script type='text/javascript'>
-        document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire({
-                icon: '$icon',
-                title: '$title',
-                html: '<p class=\"p-popup\">$message</p>',
-                showConfirmButton: false,
-                timer: 2000
-            }).then(() => {
-                " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-            });
-        });
-    </script>
-    ";
-}
-function showAlert2($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: true, 
-                    confirmButtonText: 'OK',
-                  
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-}
-
-?>
-
-<!--create-->
-
-<?php
 
 // mengecek di tambahkan
 
@@ -60,20 +17,20 @@ if (isset($_GET['gagal'])) {
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'password_pendek') {
-        showAlert2('error', 'Gagal', ' Validasi panjang minimal password.');
+        showAlert('error', 'Gagal', ' Validasi panjang minimal password.');
     }
 }
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'tidak_cocok') {
-        showAlert2('error', 'Gagal', ' Konfirmasi password tidak cocok.');
+        showAlert('error', 'Gagal', ' Konfirmasi password tidak cocok.');
     }
 }
 
 if (isset($_GET['gagal'])) {
     $berhasil = $_GET['gagal'];
     if ($berhasil === 'add_gagal') {
-        showAlert2('error', 'Gagal', ' verification code tidak cocok dalam database');
+        showAlert('error', 'Gagal', ' verification code tidak cocok dalam database');
     }
 }
 
@@ -133,6 +90,26 @@ if (isset($_GET['berhasil'])) {
     * License: https://bootstrapmade.com/license/
     ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  ===  == -->
 </head>
+<style>
+/* Menyesuaikan ukuran SweetAlert */
+.swal2-popup {
+    font-size: 1rem;
+
+    width: auto !important;
+    max-width: 300px;
+
+}
+
+.swal2-title {
+    font-size: 1.3rem;
+
+}
+
+.swal2-content {
+    font-size: 1rem;
+
+}
+</style>
 
 <body>
     <main>
@@ -217,9 +194,6 @@ if (isset($_GET['berhasil'])) {
         </section>
         </div>
     </main>
-    <!-- End #main -->
-
-    <?php echo $message; ?>
 
 </body>
 

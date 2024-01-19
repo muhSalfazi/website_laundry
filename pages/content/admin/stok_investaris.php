@@ -11,26 +11,8 @@ $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '../../../') . $ds;
 require_once("{$base_dir}pages{$ds}core{$ds}header.php");
 include("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
+require_once "sweetalert.php";
 
-
-function showAlert($icon, $title, $message, $redirect = null)
-{
-    echo "
-        <script type='text/javascript'>
-            document.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    icon: '$icon',
-                    title: '$title',
-                    html: '<p class=\"p-popup\">$message</p>',
-                    showConfirmButton: true, 
-                    confirmButtonText: 'OK',
-                }).then(() => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : '') . "
-                });
-            });
-        </script>
-        ";
-}
 // mengecek di tambahkan
 if (isset($_GET['berhasil'])) {
     $berhasil = $_GET['berhasil'];
@@ -98,10 +80,10 @@ if (isset($_GET['hapus'])) {
 
                         </a>
 
-                        <a href='../backend/download_pdf.php'>
+                        <a href='../backend/download_pdf.php' target="_blank" class="col-md-6">
 
                             <button type="button" class="btn btn-primary btn-sm mt-2">
-                                <i class='bi bi-file-earmark-pdf-fill' style='font-size: 16px;'></i>
+                                <i class='bi bi-file-earmark-pdf-fill'></i>
 
                                 <span> Download Data</span>
                             </button>
@@ -145,7 +127,8 @@ if (isset($_GET['hapus'])) {
                                             target="_blank">Unduh</a>
 
                                         <!-- <img src="<?php
-                                        //  BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; ?>"
+                                                                //  BASEURL . '/coding_web/project_smstr3/pages/content/' . $row['image']; 
+                                                                ?>"
                                         alt="Gambar" /> -->
                                     </td>
                                     <?php
@@ -229,8 +212,6 @@ if (isset($_GET['hapus'])) {
                                             echo "</div>";
                                             echo "</div>";
                                         }
-                                    } else {
-                                        echo "<tr><td colspan='4'>No data available</td></tr>";
                                     }
 
                                     ?>

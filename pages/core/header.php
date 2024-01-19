@@ -40,8 +40,15 @@ if (isset($_SESSION['id_register'])) {
     <!-- Include SweetAlert CSS -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10"> -->
 
+    <!-- animate css libarry -->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
+    <!-- Include SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Template Main CSS File -->
     <link href="../../../assets/css/style.css" rel="stylesheet">
 
@@ -49,6 +56,7 @@ if (isset($_SESSION['id_register'])) {
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap">
+
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -116,10 +124,26 @@ if (isset($_SESSION['id_register'])) {
 .animated {
     animation: slideInUp 1s ease-in-out;
 }
-</style>
 
+/* sweet_alert  */
+.swal2-popup {
+    font-size: 1rem;
 
-<style>
+    width: auto !important;
+    max-width: 300px;
+
+}
+
+.swal2-title {
+    font-size: 1.3rem;
+
+}
+
+.swal2-content {
+    font-size: 1rem;
+
+}
+
 .hidden {
     display: none;
 }

@@ -32,10 +32,10 @@ if (isset($_POST['submit'])) {
 
             // Redirect pengguna setelah login berhasil
             if ($_SESSION['role'] == 'admin') {
-                header('Location: ../dashboard/dashboard-admin.php');
+                header('Location: ../dashboard/dashboard-admin');
                 exit();
             } else if ($_SESSION['role'] == 'pelanggan') {
-                header('Location: ../dashboard/dashboard.php');
+                header('Location: ../dashboard/dashboard');
                 exit();
             }
         } else {
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 
     mysqli_stmt_close($stmt);
     mysqli_close($db_connect);
-}else {
+} else {
     header('Location: ../../../pages-error-404.html');
     exit();
 }
