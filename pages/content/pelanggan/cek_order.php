@@ -14,7 +14,7 @@ require_once("{$base_dir}pages{$ds}content{$ds}backend{$ds}proses.php");
 require_once "../backend/cek_resi.php";
 ?>
 
-<main id='main' class='main'>
+<main id='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Cek Order Pesanan</h1>
@@ -38,11 +38,13 @@ require_once "../backend/cek_resi.php";
                         <h5 class='card-title'>CEK ORDER</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='' method='post' enctype='multipart/form-data' class='row g-3 needs-validation'
+                            novalidate>
 
                             <div class='col-md-12'>
                                 <label for='validationCustom02' class='form-label'>Resi Pesanan</label>
-                                <input type='text' class='form-control' name='resi_pesanan' placeholder="masukan resi anda" required>
+                                <input type='text' class='form-control' name='resi_pesanan'
+                                    placeholder="masukan resi anda" required>
                                 <div class='invalid-feedback'>
                                     Harap Berikan Resi Pesanan Yang Valid
                                 </div>

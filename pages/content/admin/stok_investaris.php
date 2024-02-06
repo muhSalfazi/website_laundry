@@ -47,7 +47,7 @@ if (isset($_GET['hapus'])) {
 ?>
 
 
-<main id='main' class='main' class='main animated'>
+<main id='main' class='main animated'>
 
 
 

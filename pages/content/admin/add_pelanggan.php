@@ -28,7 +28,7 @@ if (isset($_GET['gagal'])) {
 }
 ?>
 
-<main id='main' class='main' class='main animated'>
+<main id='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Add Pelanggan</h1>
@@ -53,10 +53,12 @@ if (isset($_GET['gagal'])) {
                         <h5 class='card-title'>Form Register</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add-pelanggan.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add-pelanggan.php' method='post' enctype='multipart/form-data'
+                            class='row g-3 needs-validation' novalidate>
                             <div class='col-md-3'>
                                 <label for='validationCustom02' class='form-label'>Nama Lengkap</label>
-                                <input type='text' class='form-control' name='nama_lengkap' placeholder='silahkan isi' required>
+                                <input type='text' class='form-control' name='nama_lengkap' placeholder='silahkan isi'
+                                    required>
                                 <div class='invalid-feedback'>
                                     Harap berikan nama Lengkap yang valid.
                                 </div>
@@ -64,7 +66,8 @@ if (isset($_GET['gagal'])) {
 
                             <div class='col-md-3'>
                                 <label for='validationCustom02' class='form-label'>Email</label>
-                                <input type='text' class='form-control' name='email' placeholder='silahkan isi' required>
+                                <input type='email' class='form-control' name='email' placeholder='silahkan isi'
+                                    required>
                                 <div class='invalid-feedback'>
                                     Harap berikan Email yang valid.
                                 </div>
@@ -74,7 +77,8 @@ if (isset($_GET['gagal'])) {
                                 <label for='validationCustomUsername' class='form-label'>Username</label>
                                 <div class='input-group has-validation'>
                                     <span class='input-group-text' id='inputGroupPrepend'>@</span>
-                                    <input type='text' class='form-control' name='username' aria-describedby='inputGroupPrepend' required>
+                                    <input type='text' class='form-control' name='username'
+                                        aria-describedby='inputGroupPrepend' required>
                                     <div class='invalid-feedback'>
                                         Silakan pilih nama pengguna.
                                     </div>

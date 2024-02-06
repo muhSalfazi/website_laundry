@@ -55,7 +55,7 @@ if (isset($_GET['add'])) {
     }
 }
 ?>
-<main id='main' class='main'>
+<main id='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Order Pesanan</h1>

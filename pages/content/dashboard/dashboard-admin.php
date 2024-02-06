@@ -18,7 +18,7 @@ $dashboardData = getDashboardData($filter);
 
 
 
-<main id='main' class='main' class='main animated'>
+<main id='main' class='main animated'>
 
     <div class='pagetitle'>
         <h1>Dashboard</h1>
