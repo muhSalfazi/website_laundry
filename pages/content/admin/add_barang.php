@@ -39,7 +39,7 @@ if (isset($_GET['add'])) {
 }
 ?>
 
-<main id='main' class='main animated'>
+<main id='main'  class='main animated'>
 
     <div class='pagetitle'>
         <h1>Stok Barang</h1>
@@ -65,33 +65,30 @@ if (isset($_GET['add'])) {
                         <h5 class='card-title'>Tambah Stok Barang</h5>
 
                         <!-- Custom Styled Validation -->
-                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data'
-                            class='row g-3 needs-validation' novalidate>
+                        <form action='../backend/add-barang-proses.php' method='post' enctype='multipart/form-data' class='row g-3 needs-validation' novalidate>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Nama Barang</label>
-                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi'
-                                    required>
+                                <input type='text' class='form-control' name='nama_barang' placeholder=' silahkan isi' required>
                                 <div class='invalid-feedback'>
                                     Harap berikan nama Lengkap yang valid.
                                 </div>
                             </div>
                             <div class='col-md-6'>
                                 <label for='validationCustom02' class='form-label'>Total Barang</label>
-                                <input type='number' class='form-control' name='total_barang'
-                                    placeholder=' silahkan isi' value="" required>
+                                <input type='number' class='form-control' name='total_barang' placeholder=' silahkan isi' value="" required>
                                 <div class='invalid-feedback'>
                                     Harap isi total barang
                                 </div>
                             </div>
                             <div class='col-md-12'>
-                                <label for='image' class='col-sm-2 col-form-label'>Gambar Produk</label>
-                                <div class='col-sm-10'>
-                                    <input class='form-control' type='file' value="" name='image' required>
-                                </div>
-                                <div class='invalid-feedback'>
-                                    harap Inputkan gambar Inventaris
-                                </div>
-                            </div>
+    <label for='image' class='col-sm-2 col-form-label'>Gambar Produk</label>
+    <div class='col-sm-10'>
+        <input class='form-control' type='file' accept='image/*' name='image' title="upload gambar" required>
+    </div>
+    <div class='invalid-feedback'>
+        Harap inputkan gambar Inventaris.
+    </div>
+</div>
                             <div class='col-12'>
                                 <div class='form-check'>
                                     <input class='form-check-input' type='checkbox' value='' id='invalidCheck' required>
