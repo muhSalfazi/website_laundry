@@ -60,10 +60,10 @@ if (isset($_POST['submit'])) {
       
     $phpMailer = new PHPMailer;
     $phpMailer->isSMTP();
-    $phpMailer->Host = 'smtp.gmail.com';
+    $phpMailer->Host = '[masukan email smtp gmail/yahoo dll]';
     $phpMailer->Username = $email_pengirim;
     $phpMailer->Password = '[ganti password yang benar]'; 
-    $phpMailer->Port = 465;
+    $phpMailer->Port = [masukan port nya];
     $phpMailer->SMTPAuth = true;
     $phpMailer->SMTPSecure = 'ssl';
     $phpMailer->SMTPDebug = 2;
