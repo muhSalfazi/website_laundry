@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Digunakan untuk menempatkan blok kode yang mungkin menghasilkan pengecualian.
                 // Konfigurasi SMTP untuk Gmail
                 $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
+                $mail->Host = '[pilih smtp email yang ada ingin kan gmail ,yahoo dll]';
                 $mail->SMTPAuth = true;
                 $mail->Username = '[masukan email anda]';
                 $mail->Password = '[ganti dengan password email]';
