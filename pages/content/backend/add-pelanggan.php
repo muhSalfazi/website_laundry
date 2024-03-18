@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Mengirim email ketika registrasi berhasil
-    $email_pengirim = 'salmanfauzi0512@gmail.com';
+    $email_pengirim = '[masukan email untuk pengirim]';
     $nama_pengirim = 'DeUngu_Laundry';
     $email_penerima = $email;
     $subjek = 'Registrasi Pengguna Baru DeUngu Laundry';
@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
     $phpMailer->isSMTP();
     $phpMailer->Host = 'smtp.gmail.com';
     $phpMailer->Username = $email_pengirim;
-    $phpMailer->Password = 'wqqm inbf vjwb hkzk'; // Ganti dengan password yang benar
+    $phpMailer->Password = '[ganti password yang benar]'; 
     $phpMailer->Port = 465;
     $phpMailer->SMTPAuth = true;
     $phpMailer->SMTPSecure = 'ssl';
