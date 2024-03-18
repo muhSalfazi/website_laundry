@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->Port = 587;
 
                 // Pengaturan email
-                $mail->setFrom('salmanfauzi0512@gmail.com', 'DEUnguLaundry');
+                $mail->setFrom('[panggil email anda]', '[buat title pengirim]');
                 $mail->addAddress($email);
                 $mail->Subject = 'Reset Password';
                 $mail->Body = 
