@@ -57,13 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'salmanfauzi0512@gmail.com';
-                $mail->Password = 'wqqm inbf vjwb hkzk';
+                $mail->Username = '[email pengirim]';
+                $mail->Password = '[password]';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
                 // Pengaturan email
-                $mail->setFrom('salmanfauzi0512@gmail.com', 'DEUnguLaundry');
+                $mail->setFrom('[nama email]', '[title pengirim]');
                 $mail->addAddress($email);
                 $mail->Subject = 'Reset Password';
                 $mail->Body = 
